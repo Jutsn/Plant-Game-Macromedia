@@ -17,7 +17,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
 		mainPlantScript = mainPlant.GetComponent<MainPlant>();
 
 		navMeshAgent = GetComponent<NavMeshAgent>();
-		StartCoroutine(SetDestinationCoroutine());
+		if (GameManager.Instance != null) //verhindert Missing Object-Reference Bug beim ersten OnEnable-Call durch Poolerstellung
+		{
+			StartCoroutine(SetDestinationCoroutine());
+		}
+		
 	}
 
 	protected void OnDisable()
@@ -27,7 +31,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
 	protected IEnumerator SetDestinationCoroutine() //Jede Sekunde Ziel neu ermitteln und hinlaufen
 	{
-		if (!GameManager.Instance.gameOver)
+		while (!GameManager.Instance.gameOver)
 		{
 			if (mainPlant.transform != null)
 			{
