@@ -8,7 +8,7 @@ public class BigEnemy : EnemyBehaviour
 	{
 		base.DoDamage(damage); //Basis-DoDamage-Funktion des Eltern-Skripts ausführen
 		PoisonPlant(); // persönliche PoisonPlant-Funktion durchführen
-		Destroy(gameObject); //Zerstöre großen Gegner
+		gameObject.SetActive(false); //Setze große Gegner inaktiv für Object-Pooling
 	}
 	protected override void PoisonPlant() //Basis PoisonPlant-Funktion des Elternskripts wird hier überschrieben
 	{
@@ -17,10 +17,14 @@ public class BigEnemy : EnemyBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject == mainPlant) //mainPlant wurde bereits im Eltern-Skript Enemy Behaviour befüllt
+		if (!GameManager.Instance.gameOver)
 		{
-			DoDamage(damage); //Basis DoDamage-Funktion von Eltern-Skript mit persönlichem Damage-Wert des Kindes ausführen
+			if (collision.gameObject == mainPlant) //mainPlant wurde bereits im Eltern-Skript Enemy Behaviour befüllt
+			{
+				DoDamage(damage); //Basis DoDamage-Funktion von Eltern-Skript mit persönlichem Damage-Wert des Kindes ausführen
+			}
 		}
+		
 	}
 	
 }

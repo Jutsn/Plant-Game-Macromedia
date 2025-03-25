@@ -6,14 +6,17 @@ public class SmallEnemy : EnemyBehaviour
 	protected override void DoDamage(int damage) //Hier kann man die Basis Do-Damage-Funktion des Eltern-Skripts überschreiben
 	{
 		base.DoDamage(damage); //Basis-Funktion des Eltern-Skripts ausführen
-		Destroy(gameObject); //Kleine Einheiten zerstören
+		gameObject.SetActive(false); ////Setze kleine Gegner inaktiv für Object-Pooling
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if(collision.gameObject == mainPlant) //mainPlant wurde bereits im Eltern-Skript Enemy Behaviour befüllt
+		if (!GameManager.Instance.gameOver)
 		{
-			DoDamage(damage); //Basis DoDamage-Funktion von Eltern-Skript mit persönlichem Damage-Wert des Kindes ausführen
+			if (collision.gameObject == mainPlant) //mainPlant wurde bereits im Eltern-Skript Enemy Behaviour befüllt
+			{
+				DoDamage(damage); //DoDamage-Funktion des Kindes mit persönlichem Damage-Wert des Kindes ausführen
+			}
 		}
 	}
 

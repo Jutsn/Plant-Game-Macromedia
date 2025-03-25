@@ -9,25 +9,33 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	protected NavMeshAgent navMeshAgent;
 	protected MainPlant mainPlantScript;
 	//protected Collider enemyCollider; //Man könnte einen größeren Collider um die Gegner herum ziehen, um Spielerannäherung zu erkennen und hn statt der Main Plant anzugreifen
-	
 
-	protected void Start()
+	
+	protected void OnEnable()
 	{
 		mainPlant = GameObject.Find("Great Plant");
 		mainPlantScript = mainPlant.GetComponent<MainPlant>();
 
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		StartCoroutine(SetDestinationCoroutine());
-		
 	}
 
-	protected IEnumerator SetDestinationCoroutine() //Jede Sekunde Ziel neu ermitteln
+	protected void OnDisable()
 	{
-		if (mainPlant.transform != null)
+		StopCoroutine(SetDestinationCoroutine());
+	}
+
+	protected IEnumerator SetDestinationCoroutine() //Jede Sekunde Ziel neu ermitteln und hinlaufen
+	{
+		if (!GameManager.Instance.gameOver)
 		{
-			navMeshAgent.SetDestination(mainPlant.transform.position);
+			if (mainPlant.transform != null)
+			{
+				navMeshAgent.SetDestination(mainPlant.transform.position);
+			}
+			yield return new WaitForSeconds(1);
 		}
-		yield return new WaitForSeconds(1);
+		
 	}
 
 	protected virtual void DoDamage(int damage) //Höhe des Damages wird aber in den Kinder-Skripten festgelegt 
