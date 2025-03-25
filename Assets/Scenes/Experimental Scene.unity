@@ -798,6 +798,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2960662899981771115, guid: c0e23e472df6c0245b368ee8d57eee3c, type: 3}
+      propertyPath: health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960662899981771115, guid: c0e23e472df6c0245b368ee8d57eee3c, type: 3}
+      propertyPath: healthRegen
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3605367296733249113, guid: c0e23e472df6c0245b368ee8d57eee3c, type: 3}
       propertyPath: m_Name
       value: Great Plant

@@ -39,7 +39,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 			}
 			yield return new WaitForSeconds(1);
 		}
-		
+
 	}
 
 	protected virtual void DoDamage(int damage) //Höhe des Damages wird aber in den Kinder-Skripten festgelegt 

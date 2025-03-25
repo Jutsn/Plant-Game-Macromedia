@@ -37,6 +37,11 @@ public class SpawnManager : MonoBehaviour
 					smallEnemy.transform.rotation = spawnPoints[0].transform.rotation;
 					smallEnemy.SetActive(true);
 				}
+
+				if (GameManager.Instance.gameOver)
+				{
+					yield break; //für sofortigen SpawnStopp bei GameOver 
+				}
 				yield return new WaitForSeconds(spawnRatePointA);
 			}
 
@@ -49,6 +54,11 @@ public class SpawnManager : MonoBehaviour
 					bigEnemy.transform.position = spawnPoints[0].transform.position;
 					bigEnemy.transform.rotation = spawnPoints[0].transform.rotation;
 					bigEnemy.SetActive(true);
+				}
+
+				if (GameManager.Instance.gameOver)
+				{
+					yield break; //für sofortigen SpawnStopp bei GameOver
 				}
 				yield return new WaitForSeconds(spawnRatePointA);
 			}
@@ -71,6 +81,11 @@ public class SpawnManager : MonoBehaviour
 					smallEnemy.transform.rotation = spawnPoints[1].transform.rotation;
 					smallEnemy.SetActive(true);
 				}
+
+				if (GameManager.Instance.gameOver)
+				{
+					yield break; //für sofortigen SpawnStopp bei GameOver
+				}
 				yield return new WaitForSeconds(spawnRatePointB);
 			}
 
@@ -83,6 +98,11 @@ public class SpawnManager : MonoBehaviour
 					bigEnemy.transform.position = spawnPoints[1].transform.position;
 					bigEnemy.transform.rotation = spawnPoints[1].transform.rotation;
 					bigEnemy.SetActive(true);
+				}
+
+				if (GameManager.Instance.gameOver)
+				{
+					yield break; //für sofortigen SpawnStopp bei GameOver
 				}
 				yield return new WaitForSeconds(spawnRatePointB);
 			}
