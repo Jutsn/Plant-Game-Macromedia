@@ -3,26 +3,22 @@ using System.Collections.Generic;
 
 public class SmallEnemyPool : MonoBehaviour
 {
-	public static SmallEnemyPool Instance;
-	public List<GameObject> pooledObjects;
-	public GameObject objectToPool;
-	public int amountToPool;
+	public static SmallEnemyPool Instance { get; private set; }
+
+	[SerializeField] private List<GameObject> pooledObjects;
+	[SerializeField] public GameObject objectToPool;
+	[SerializeField] private int amountToPool;
 
 	void Awake()
 	{
 		if (Instance == null)
 		{
 			Instance = this;
-			DontDestroyOnLoad(gameObject);
 		}
 		else
 		{
 			Destroy(gameObject);
-		}	
-	}
-
-	void Start()
-	{
+		}
 		pooledObjects = new List<GameObject>();
 		GameObject smallEnemy;
 		for (int i = 0; i < amountToPool; i++)

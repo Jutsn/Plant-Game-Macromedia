@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BigEnemyPool : MonoBehaviour
 {
-	public static BigEnemyPool Instance;
+	public static BigEnemyPool Instance { get; private set; }
 
 	[SerializeField] private List<GameObject> pooledObjects;
 	[SerializeField] public GameObject objectToPool;
@@ -14,16 +14,11 @@ public class BigEnemyPool : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
-			DontDestroyOnLoad(gameObject);
 		}
 		else
 		{
 			Destroy(gameObject);
 		}
-	}
-
-	void Start()
-	{
 		pooledObjects = new List<GameObject>();
 		GameObject bigEnemy;
 		for (int i = 0; i < amountToPool; i++)
