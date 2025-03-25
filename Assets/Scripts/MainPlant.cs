@@ -81,4 +81,8 @@ public class MainPlant : MonoBehaviour
 			yield return new WaitForSeconds(healthRegenRate); //Warte vor nächster Wiederholung für ...Sekunden
 		}
     }
+	public void GetActiveDamage(int damage)
+	{
+		health -= damage;
+	}
 }
