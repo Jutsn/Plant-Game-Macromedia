@@ -1,25 +1,36 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed;
+    [SerializeField] private float moveSpeed;
+    
+    [SerializeField] private float groundDrag;
+    
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpCooldown;
+    [SerializeField] private float airMultiplier;
+                     private bool readyToJump = true;
 
-    public float groundDrag;
+    [Header("Knockback")]
+    [SerializeField] private int knockbackForce;
+    [SerializeField] private float upwardModifier;
+    [SerializeField] private float maxVerticalKnockback;
+    [SerializeField] private float knockbackDuration;
+    private float knockbackTime;
+    private Vector3 finalKnockback;
+    private bool isKnockbacked;
 
-    public float jumpForce;
-    public float jumpCooldown;
-    public float airMultiplier;
-    bool readyToJump = true;
 
-    [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
+	[Header("Keybinds")]
+	[SerializeField] private KeyCode jumpKey = KeyCode.Space;
 
     [Header("Ground Check")]
-    public float playerHeight;
-    public LayerMask whatIsGround;
-    bool grounded;
+	[SerializeField] private float playerHeight;
+	[SerializeField] private LayerMask whatIsGround;
+                     private bool grounded;
 
     public Transform playerOrientation;
 
@@ -56,13 +67,26 @@ public class PlayerMovement : MonoBehaviour
 	}
 	private void FixedUpdate()
 	{
-        MovePlayer();
+        if (isKnockbacked)
+        {
+			knockbackTime -= Time.deltaTime;
+			
+            if (knockbackTime < 0)
+            {
+                isKnockbacked = false;
+            }
+		}
+        else if (!isKnockbacked)
+        {
+			MovePlayer();
+		}
+		
 	}
 	private void MyInput()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
+		horizontalInput = Input.GetAxisRaw("Horizontal");
+		verticalInput = Input.GetAxisRaw("Vertical");
+		
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
@@ -106,4 +130,22 @@ public class PlayerMovement : MonoBehaviour
     {
         readyToJump = true;
     }
+
+	private void OnCollisionEnter(Collision collision)
+	{
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+			Vector3 knockbackDirection = (transform.position - collision.transform.position).normalized;
+
+            // Begrenze die Y-Komponente des Knockbacks
+			knockbackDirection.y = Mathf.Clamp(knockbackDirection.y + upwardModifier, 0, maxVerticalKnockback);
+
+			// Stelle sicher, dass der Knockback nicht zu stark vertikal ausfällt
+			Vector3 finalKnockback = new Vector3(knockbackDirection.x, knockbackDirection.y, knockbackDirection.z);
+            knockbackTime = knockbackDuration;
+			isKnockbacked = true;
+			playerRb.AddForce(finalKnockback * knockbackForce, ForceMode.Impulse);
+		}
+	}
+	
 }

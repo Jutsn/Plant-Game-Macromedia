@@ -844,6 +844,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: jumpForce
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: knockbackForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: upwardModifier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: knockbackDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: maxVerticalKnockback
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
