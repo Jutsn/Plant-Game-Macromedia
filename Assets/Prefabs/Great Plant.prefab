@@ -124,10 +124,10 @@ MonoBehaviour:
   mainPlantState: 0
   health: 50
   plantWater: 50
-  waterLoss: 2
+  waterLoss: 1
   waterLossRate: 1
   noWaterDamage: 1
   poisonDamage: 1
   passiveHealthLossRate: 1
-  healthRegen: 1
+  healthRegen: 2
   healthRegenRate: 1
