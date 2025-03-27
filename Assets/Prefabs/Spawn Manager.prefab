@@ -114,8 +114,8 @@ MonoBehaviour:
   bigEnemyAmountA: 2
   smallEnemyAmountB: 3
   bigEnemyAmountB: 2
-  spawnRatePointA: 2
-  spawnRatePointB: 2
+  spawnRatePointA: 3
+  spawnRatePointB: 3
 --- !u!1 &8527177403840182816
 GameObject:
   m_ObjectHideFlags: 0

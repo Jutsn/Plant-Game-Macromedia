@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +7,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	protected GameObject mainPlant;
 	protected NavMeshAgent navMeshAgent;
 	protected MainPlant mainPlantScript;
+	protected int damageMade;
+	protected Rigidbody rb;
 	//protected Collider enemyCollider; //Man könnte einen größeren Collider um die Gegner herum ziehen, um Spielerannäherung zu erkennen und hn statt der Main Plant anzugreifen
 
 	
@@ -17,37 +18,36 @@ public abstract class EnemyBehaviour : MonoBehaviour
 		mainPlantScript = mainPlant.GetComponent<MainPlant>();
 
 		navMeshAgent = GetComponent<NavMeshAgent>();
-		if (GameManager.Instance != null) //verhindert Missing Object-Reference Bug beim ersten OnEnable-Call durch Poolerstellung
+		if (GameManager.Instance != null && !GameManager.Instance.gameOver && mainPlant.transform != null) //verhindert Missing Object-Reference Bug beim ersten OnEnable-Call durch Poolerstellung
 		{
-			StartCoroutine(SetDestinationCoroutine());
+			navMeshAgent.SetDestination(mainPlant.transform.position);
 		}
-		
+		rb = GetComponent<Rigidbody>();
+		rb.linearDamping = 4;
 	}
 
-	protected void OnDisable()
+	protected virtual void OnCollisionEnter(Collision collision)
 	{
-		StopCoroutine(SetDestinationCoroutine());
-	}
-
-	protected IEnumerator SetDestinationCoroutine() //Jede Sekunde Ziel neu ermitteln und hinlaufen
-	{
-		while (!GameManager.Instance.gameOver)
+		if (!GameManager.Instance.gameOver)
 		{
-			if (mainPlant.transform != null)
+			if (collision.gameObject == mainPlant) //mainPlant wurde bereits im Eltern-Skript Enemy Behaviour befüllt
+			{
+				DoDamage(); //DoDamage-Funktion des Kindes mit persönlichem Damage-Wert des Kindes ausführen
+			}
+			else
 			{
 				navMeshAgent.SetDestination(mainPlant.transform.position);
 			}
-			yield return new WaitForSeconds(1);
 		}
-
 	}
 
-	protected virtual void DoDamage(int damage) //Höhe des Damages wird aber in den Kinder-Skripten festgelegt 
+	protected virtual void DoDamage() //Höhe des Damages wird aber in den Kinder-Skripten festgelegt 
 	{
-		mainPlantScript.GetActiveDamage(damage); //Leitet den Damage an das MainPlant-Skript weiter,
+		mainPlantScript.GetActiveDamage(damageMade); //Leitet den Damage an das MainPlant-Skript weiter,
 	}
 	protected virtual void PoisonPlant() 
 	{
 		//ist hier erstmal leer gelassen, kann aber in den erbenden Kinder-Skripten überschrieben werden (siehe BigEnemy-Skript)
 	}
+	
 }

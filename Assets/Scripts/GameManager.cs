@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+		Application.targetFrameRate = 60;
 	}
 	void Start()
     {
