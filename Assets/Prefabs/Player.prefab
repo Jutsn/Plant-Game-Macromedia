@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 731996283393670327}
   - component: {fileID: 6350128715902382549}
   - component: {fileID: 8911973546329279295}
+  - component: {fileID: 5230031931400481954}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -80,12 +81,30 @@ MonoBehaviour:
   jumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
+  knockbackForce: 10
+  upwardModifier: 1
+  maxVerticalKnockback: 1.5
+  knockbackDuration: 1
   jumpKey: 32
   playerHeight: 3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
   playerOrientation: {fileID: 4804422954149465266}
+  weaponBehaviourSkript: {fileID: 0}
+--- !u!114 &5230031931400481954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819791068682283380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d745511df1eee64ca82a4d441741b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterLevel: 50
 --- !u!1 &2408528719080181242
 GameObject:
   m_ObjectHideFlags: 0

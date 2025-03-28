@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
 	[Header("Keybinds")]
 	[SerializeField] private KeyCode jumpKey = KeyCode.Space;
+	
 
     [Header("Ground Check")]
 	[SerializeField] private float playerHeight;
@@ -40,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody playerRb;
+    
 
 	private void Start()
 	{
@@ -51,8 +53,8 @@ public class PlayerMovement : MonoBehaviour
 	{
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
-        MyInput();
+        
+		MyInput(); 
         SpeedControl();
 
         //handle drag
@@ -87,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 		horizontalInput = Input.GetAxisRaw("Horizontal");
 		verticalInput = Input.GetAxisRaw("Vertical");
 		
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded && !GameManager.Instance.gameOver)
         {
             readyToJump = false;
 
@@ -102,9 +104,9 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = playerOrientation.forward * verticalInput + playerOrientation.right * horizontalInput;
 
         //on ground
-        if (grounded)
+        if (grounded && !GameManager.Instance.gameOver)
             playerRb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        else if (!grounded)
+        else if (!grounded && !GameManager.Instance.gameOver)
 			playerRb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
 	}
     private void SpeedControl()
@@ -135,17 +137,21 @@ public class PlayerMovement : MonoBehaviour
 	{
         if (collision.gameObject.CompareTag("Enemy"))
         {
-			Vector3 knockbackDirection = (transform.position - collision.transform.position).normalized;
-
-            // Begrenze die Y-Komponente des Knockbacks
-			knockbackDirection.y = Mathf.Clamp(knockbackDirection.y + upwardModifier, 0, maxVerticalKnockback);
-
-			// Stelle sicher, dass der Knockback nicht zu stark vertikal ausfällt
-			Vector3 finalKnockback = new Vector3(knockbackDirection.x, knockbackDirection.y, knockbackDirection.z);
-            knockbackTime = knockbackDuration;
-			isKnockbacked = true;
-			playerRb.AddForce(finalKnockback * knockbackForce, ForceMode.Impulse);
+            Knockback(collision);
 		}
+	}
+    private void Knockback(Collision collision)
+    {
+		Vector3 knockbackDirection = (transform.position - collision.transform.position).normalized;
+
+		// Begrenze die Y-Komponente des Knockbacks
+		knockbackDirection.y = Mathf.Clamp(knockbackDirection.y + upwardModifier, 0, maxVerticalKnockback);
+
+		// Stelle sicher, dass der Knockback nicht zu stark vertikal ausfällt
+		Vector3 finalKnockback = new Vector3(knockbackDirection.x, knockbackDirection.y, knockbackDirection.z);
+		knockbackTime = knockbackDuration;
+		isKnockbacked = true;
+		playerRb.AddForce(finalKnockback * knockbackForce, ForceMode.Impulse);
 	}
 	
 }
