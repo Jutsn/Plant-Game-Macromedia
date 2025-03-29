@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class ParticleDamage : MonoBehaviour
 {
-	[SerializeField] private float waterPerParticle = 0.1f;  // Schaden pro Partikel
+	[SerializeField] private float waterPerParticle = 0.1f;  // Wasserregeneration pro Partikel
+	[SerializeField] private float damagePerParticle = 0.1f;  // Schaden pro Partikel
+
 
 	private ParticleSystem beamParticles;
 	private void Awake()
@@ -18,6 +20,15 @@ public class ParticleDamage : MonoBehaviour
 			if (mainPlantSkript != null)
 			{
 				mainPlantSkript.GetWater(waterPerParticle);
+			}
+		}
+
+		if (other.gameObject.CompareTag("Enemy"))
+		{
+			EnemyBehaviour enemyBehaviourScript = other.GetComponent<EnemyBehaviour>();
+			if (enemyBehaviourScript != null)
+			{
+				enemyBehaviourScript.GetDamage(damagePerParticle);
 			}
 		}
 	}

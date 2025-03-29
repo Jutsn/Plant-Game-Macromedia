@@ -123,7 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7e5e69eeccd094aa3f87d2548e2880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damageOnPlant: 2
+  health: 5
 --- !u!195 &6465483698892055392
 NavMeshAgent:
   m_ObjectHideFlags: 0

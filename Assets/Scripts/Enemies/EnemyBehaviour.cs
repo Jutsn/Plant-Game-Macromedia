@@ -9,10 +9,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	protected MainPlant mainPlantScript;
 	protected int damageMade;
 	protected Rigidbody rb;
+	protected float enemyHealth;
 	//protected Collider enemyCollider; //Man könnte einen größeren Collider um die Gegner herum ziehen, um Spielerannäherung zu erkennen und hn statt der Main Plant anzugreifen
 
 	
-	protected void OnEnable()
+	protected virtual void OnEnable()
 	{
 		mainPlant = GameObject.Find("Great Plant");
 		mainPlantScript = mainPlant.GetComponent<MainPlant>();
@@ -54,4 +55,14 @@ public abstract class EnemyBehaviour : MonoBehaviour
 		//ist hier erstmal leer gelassen, kann aber in den erbenden Kinder-Skripten überschrieben werden (siehe BigEnemy-Skript)
 	}
 	
+	public virtual void GetDamage(float damageOfAmmo)
+	{
+		enemyHealth -= damageOfAmmo;
+		if (enemyHealth < 0)
+		{
+			gameObject.SetActive(false);
+		}
+		
+	}
+ 
 }

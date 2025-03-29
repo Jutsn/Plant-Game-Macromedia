@@ -37,6 +37,11 @@ public class WeaponBehaviour : MonoBehaviour
 		while (isFiring)
 		{
 			WaterTank.Instance.waterLevel -= waterConsumption;
+			if (WaterTank.Instance.waterLevel < 0)
+			{
+				isFiring = false;
+				beamParticles.Stop();
+			}
 			yield return new WaitForSeconds(waterConsumptionRate);
 		}
 		

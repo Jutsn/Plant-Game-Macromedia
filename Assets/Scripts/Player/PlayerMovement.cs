@@ -33,7 +33,12 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private LayerMask whatIsGround;
                      private bool grounded;
 
-    public Transform playerOrientation;
+    [Header("Water Check")]
+    [SerializeField] private LayerMask whatIsWater;
+    [SerializeField] private int standingInWaterTankFillRate;
+
+
+	public Transform playerOrientation;
 
     float horizontalInput;
     float verticalInput;
@@ -153,5 +158,18 @@ public class PlayerMovement : MonoBehaviour
 		isKnockbacked = true;
 		playerRb.AddForce(finalKnockback * knockbackForce, ForceMode.Impulse);
 	}
-	
+
+	private void OnTriggerStay(Collider other)
+	{
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffüllen, wenn im Wasser stehend
+        {
+            FillWaterTank(standingInWaterTankFillRate); //Timer einbauen
+            
+        }
+	}
+
+    private void FillWaterTank(int tankFillRate) //Falls Powrups Tank auch auffüllen können, einfach Funktion callen und Wert durchgeben
+    {
+       WaterTank.Instance.FillTank(tankFillRate);
+    }
 }

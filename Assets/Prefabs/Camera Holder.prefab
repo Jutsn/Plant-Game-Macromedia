@@ -271,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6975497155788886916, guid: 67f716418f7ba2146a845739c7782755, type: 3}
       propertyPath: m_Name
-      value: AKM
+      value: Weapon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -330,6 +330,70 @@ PrefabInstance:
     - target: {fileID: 4043993458088332593, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739851715812481898, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 4739851715812481898, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: m_RenderAlignment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 0.1691491
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 0.1691491
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 0.16914909
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.donutRadius
+      value: 0.13036671
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: -0.18918358
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.m_Position.z
+      value: 0.09289305
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: 80.71342
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.m_Rotation.y
+      value: 206.15617
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.m_Rotation.z
+      value: 180.00002
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1.2081094
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067781503612043031, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.5118174
       objectReference: {fileID: 0}
     - target: {fileID: 6636664110025629987, guid: 311d10220eb1bd64897b0074951d5cfd, type: 3}
       propertyPath: m_Name
