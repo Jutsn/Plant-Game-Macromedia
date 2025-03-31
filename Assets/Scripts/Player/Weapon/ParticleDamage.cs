@@ -15,7 +15,7 @@ public class ParticleDamage : MonoBehaviour
 		if (gameObject.name == "Water Beam")
 		{
 			beamParticles = GetComponent<ParticleSystem>();
-			beamParticles.Stop();
+			//beamParticles.Stop();
 		}	
 		else
 			shotgunParticles = GetComponent<ParticleSystem>();
