@@ -10,7 +10,7 @@ public class WeaponBehaviour : MonoBehaviour
 	[SerializeField] private int waterConsumptionBeam;
 	[SerializeField] private float waterConsumptionRateBeam = 1;
 	[SerializeField] private int waterConsumptionShotgun = 3;
-	[SerializeField] private float cooldownTimeShotgun = 1.5f;
+	[SerializeField] private float cooldownTimeShotgun = 0.5f;
 	private bool isFiringBeam;
 	private bool isFiringShotgun;
 
@@ -19,7 +19,7 @@ public class WeaponBehaviour : MonoBehaviour
 
 	private void Start()
 	{
-		standardWeaponMode = StandardWeaponMode.shotgun;
+		standardWeaponMode = StandardWeaponMode.beam;
 	}
 	void Update()
 	{

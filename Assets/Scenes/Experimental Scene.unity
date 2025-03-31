@@ -285,11 +285,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &124855620 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3727307004215228911, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-  m_PrefabInstance: {fileID: 543085791}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &248348085
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,67 +393,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!1001 &543085791
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1702883611}
-    m_Modifications:
-    - target: {fileID: 574404718423662971, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_Name
-      value: Water Bullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 574404718423662971, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727307004215228911, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727307004215228911, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.342
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727307004215228911, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.886
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727307004215228911, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727307004215228911, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727307004215228911, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727307004215228911, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727307004215228911, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727307004215228911, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727307004215228911, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 52d3e5da0491e2b46aeeed00168e2eba, type: 3}
 --- !u!1 &805973718
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,11 +916,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5439196321412220861, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
   m_PrefabInstance: {fileID: 830327236650676295}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1702883611 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8042686214364989096, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-  m_PrefabInstance: {fileID: 5585340338665774367}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1898162976 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4804422954149465266, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
@@ -1046,7 +975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
       propertyPath: weaponModeChangeKey
-      value: 282
+      value: 49
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1126,6 +1055,10 @@ PrefabInstance:
       propertyPath: muzzle
       value: 
       objectReference: {fileID: 955695866}
+    - target: {fileID: 3388505504596069455, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: cooldownTimeShotgun
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3959667384746871499, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
       propertyPath: waterPerParticleShotgun
       value: 1
@@ -1185,10 +1118,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1495139455798389768, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8042686214364989096, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 124855620}
+    - {fileID: 7169681030268006680, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
 --- !u!1001 &8617709887915918613
