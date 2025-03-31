@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6067781503612043031}
   - component: {fileID: 4739851715812481898}
   m_Layer: 1
-  m_Name: SubEmitter0
+  m_Name: SubEmitter(0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4902,9 +4902,9 @@ GameObject:
   - component: {fileID: 4043993458088332593}
   - component: {fileID: 6606291485617176390}
   - component: {fileID: 1349077304583858681}
-  - component: {fileID: 7503504193058777789}
+  - component: {fileID: 4768598623095303543}
   m_Layer: 1
-  m_Name: WaterStream
+  m_Name: Water Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9726,7 +9726,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &7503504193058777789
+--- !u!114 &4768598623095303543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9738,4 +9738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729bffc0d492c88459cbfafb1903f6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterPerParticle: 0.1
+  waterPerParticleWaterBeam: 0.1
+  damagePerParticleWaterBeam: 0.1
+  waterPerParticleShotgun: 1
+  damagePerParticleShotgun: 0.8

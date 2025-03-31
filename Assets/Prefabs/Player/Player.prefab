@@ -81,17 +81,23 @@ MonoBehaviour:
   jumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
+  playerOrientation: {fileID: 4804422954149465266}
+  mouseWheelInput: 0
   knockbackForce: 10
   upwardModifier: 1
   maxVerticalKnockback: 1.5
   knockbackDuration: 1
   jumpKey: 32
+  weaponModeChangeKey: 99
   playerHeight: 3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
-  playerOrientation: {fileID: 4804422954149465266}
-  weaponBehaviourSkript: {fileID: 0}
+  whatIsWater:
+    serializedVersion: 2
+    m_Bits: 16
+  standingInWaterTankFillAmount: 2
+  generalTankFillRate: 0.2
 --- !u!114 &5230031931400481954
 MonoBehaviour:
   m_ObjectHideFlags: 0
