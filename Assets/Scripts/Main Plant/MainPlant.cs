@@ -6,7 +6,7 @@ public class MainPlant : MonoBehaviour
 {
     public MainPlantState mainPlantState;
 
-    [SerializeField]private int health = 50;
+    [SerializeField]public int health = 50;
     [SerializeField] private float plantWater = 50;
 	private float maxPlantWater;
 	[SerializeField] private float waterLoss = 2; 
@@ -20,7 +20,7 @@ public class MainPlant : MonoBehaviour
     void Start()
     {
 		maxPlantWater = plantWater; 
-        int maxHealth = health; //maxHealth befüllen
+        int maxHealth = health; //maxHealth befï¿½llen
         mainPlantState = MainPlantState.normal; //MainPlantState(Enum) auf normal setzen
         StartCoroutine(PassiveWaterLossCoroutine()); 
         StartCoroutine(PassiveHealthLossCoroutine()); //Verdurstung + Vergiftung
@@ -31,15 +31,16 @@ public class MainPlant : MonoBehaviour
     {
 		while (!GameManager.Instance.gameOver) // Wiederhole, solange Spiel nicht GameOver ist
 		{
-			if (plantWater > 0) //Wenn Wasserstand über null
+			if (plantWater > 0) //Wenn Wasserstand ueber null
 			{
 				plantWater -= waterLoss; //Wasserverlust
+				UIManager.Instance.UpdatePlantWaterBar(plantWater);
 			}
 			if (plantWater < 0) //Wenn Wasserstand unter 0
 			{
 				plantWater = 0; //Verhindere Negativwasserstand
 			}
-			yield return new WaitForSeconds(waterLossRate); //Warte vor nächster Wiederholung für ...Sekunden
+			yield return new WaitForSeconds(waterLossRate); //Warte vor nï¿½chster Wiederholung fï¿½r ...Sekunden
 		}
 	}
 
@@ -50,10 +51,12 @@ public class MainPlant : MonoBehaviour
 			if (plantWater == 0 && health > 0) // Wenn kein Wasser mehr vorhanden
 			{
 				health -= noWaterDamage; //Lebensverlust
+				UIManager.Instance.UpdatePlantHealthBar(health);
 			}
 			if (mainPlantState == MainPlantState.poisened && health > 0) //Wenn vergiftet
 			{
 				health -= poisonDamage; //Lebensverlust
+				UIManager.Instance.UpdatePlantHealthBar(health);
 			}
 			if (health < 0) //Wenn Lebenszahl negativ
 			{
@@ -64,7 +67,7 @@ public class MainPlant : MonoBehaviour
 				GameManager.Instance.gameOver = true; //gameOver-Variable in GameManager true setzen und Schleife nicht nochmal wiederholen
 				GameManager.Instance.GameOver(); //GameOver-Methode in GameManager callen 
 			}
-			yield return new WaitForSeconds(passiveHealthLossRate); //Warte vor nächster Wiederholung für ...Sekunden
+			yield return new WaitForSeconds(passiveHealthLossRate); //Warte vor nï¿½chster Wiederholung fï¿½r ...Sekunden
 		}
 	}
 
@@ -72,20 +75,23 @@ public class MainPlant : MonoBehaviour
     {
 		while (!GameManager.Instance.gameOver) // Wiederhole, solange Spiel nicht GameOver ist
 		{
-			if (plantWater > 0 && health < maxHealth) //Wenn Wasser vorhanden und maxHealth nicht überschritten
+			if (plantWater > 0 && health < maxHealth) //Wenn Wasser vorhanden und maxHealth nicht ï¿½berschritten
 			{
 				health += healthRegen; // Heile Leben
+				UIManager.Instance.UpdatePlantHealthBar(health);
 			}
 			if (health > maxHealth)
 			{
 				health = maxHealth;
+				UIManager.Instance.UpdatePlantHealthBar(health);
 			}
-			yield return new WaitForSeconds(healthRegenRate); //Warte vor nächster Wiederholung für ...Sekunden
+			yield return new WaitForSeconds(healthRegenRate); //Warte vor nï¿½chster Wiederholung fï¿½r ...Sekunden
 		}
     }
 	public void GetActiveDamage(int damage)
 	{
 		health -= damage;
+		UIManager.Instance.UpdatePlantHealthBar(health);
 	}
 
 	public void GetWater(float waterInAmmunation)
@@ -93,6 +99,7 @@ public class MainPlant : MonoBehaviour
 		if (plantWater < maxPlantWater)
 		{
 			plantWater += waterInAmmunation;
+			UIManager.Instance.UpdatePlantWaterBar(plantWater);
 		}
 		else if(plantWater > maxPlantWater)
 		{
@@ -100,4 +107,6 @@ public class MainPlant : MonoBehaviour
 		}
 		
 	}
+
+	
 }

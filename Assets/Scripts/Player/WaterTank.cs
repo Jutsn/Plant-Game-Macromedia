@@ -18,6 +18,8 @@ public class WaterTank : MonoBehaviour
             waterLevel = 0;
         if (waterLevel > maxWaterLevel)
             waterLevel = maxWaterLevel;
+
+        UIManager.Instance.UpdateWaterTankBar(waterLevel, maxWaterLevel); // gibt wasserstand an UI Manager durch
 	}
 
     public void FillTank(int tankFillRate)
