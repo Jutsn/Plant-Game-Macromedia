@@ -23,7 +23,7 @@ public class WeaponBehaviour : MonoBehaviour
 	}
 	void Update()
 	{
-		if (Input.GetButtonDown("Fire1") && standardWeaponMode == StandardWeaponMode.beam && WaterTank.Instance.waterLevel > 0 && !GameManager.Instance.gameOver) // Schießen solange Maustaste gedrückt
+		if (Input.GetButtonDown("Fire1") && standardWeaponMode == StandardWeaponMode.beam && WaterTank.Instance.waterLevel > 0 && !GameManager.Instance.gameOver) // Schieï¿½en solange Maustaste gedrï¿½ckt
 		{
 			beamParticles.Play();
 			isFiringBeam = true;
