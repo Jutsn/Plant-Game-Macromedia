@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public bool gameOver;
+    public float missionTimer = 120f;
 
 	private void Awake()
 	{
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        missionTimer -= Time.deltaTime;
     }
     public void GameOver()
     {

@@ -57,6 +57,7 @@ public class MainPlant : MonoBehaviour
 			{
 				health -= poisonDamage; //Lebensverlust
 				UIManager.Instance.UpdatePlantHealthBar(health);
+				UIManager.Instance.ChangeHealthBarColor(Color.magenta);
 			}
 			if (health < 0) //Wenn Lebenszahl negativ
 			{
