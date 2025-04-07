@@ -128,7 +128,7 @@ MonoBehaviour:
   waterLoss: 1
   waterLossRate: 1
   noWaterDamage: 1
-  poisonDamage: 1
+  poisonDamage: 3
   passiveHealthLossRate: 1
   healthRegen: 2
   healthRegenRate: 1

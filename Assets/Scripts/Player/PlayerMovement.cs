@@ -53,8 +53,9 @@ public class PlayerMovement : MonoBehaviour
     private bool fillWater;
 
     WeaponBehaviour weaponBehaviourSkript;
+    MainPlant mainPlantSkript;
 
-
+    public bool hasAntitoxin;
 
 
 
@@ -64,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         playerRb.freezeRotation = true;
 		weaponBehaviourSkript = GameObject.Find("Weapon").GetComponent<WeaponBehaviour>();
+		mainPlantSkript = GameObject.Find("Great Plant").GetComponent<MainPlant>();
+
 	}
 
     private void Update()
@@ -84,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
             playerRb.linearDamping = 0;
         }
     }
+
     private void FixedUpdate()
     {
         if (isKnockbacked)
@@ -99,8 +103,8 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
         }
-
     }
+
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -115,22 +119,22 @@ public class PlayerMovement : MonoBehaviour
 
             Invoke("ResetJump", jumpCooldown);
         }
-       
-        if (mouseWheelInput != 0)
-        {
-            isMouseWheelScrolled = true;
-        }
-        else
-        {
-            isMouseWheelScrolled = false;
-        }
+
+        GetMouseInput();
 
         if (Input.GetKeyDown(weaponModeChangeKey) || isMouseWheelScrolled)
         {
             weaponBehaviourSkript.SwitchWeaponMode();
-
 		}
+
+        if (Input.GetKeyDown(KeyCode.E) && hasAntitoxin) //Pflanze entgiften
+        {
+            hasAntitoxin = false;
+            mainPlantSkript.DetoxPlant();
+		}
+
     }
+
     private void MovePlayer()
     {
         // calculate movement direction
@@ -166,7 +170,19 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
+	private void GetMouseInput()
+	{
+		if (mouseWheelInput != 0)
+		{
+			isMouseWheelScrolled = true;
+		}
+		else
+		{
+			isMouseWheelScrolled = false;
+		}
+	}
+
+	private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -193,8 +209,9 @@ public class PlayerMovement : MonoBehaviour
         {
 			fillWater = true;
 			StartCoroutine(FillWaterTankCoroutine(standingInWaterTankFillAmount)); //Timer einbauen
-
         }
+
+        CheckPickUpType(other);
     }
     private void OnTriggerExit(Collider other)
     {
@@ -212,4 +229,13 @@ public class PlayerMovement : MonoBehaviour
 			yield return new WaitForSeconds(generalTankFillRate);
 		}
     }
+
+    void CheckPickUpType(Collider other)
+    {
+		if (other.gameObject.GetComponent<PickUp>().pickUpType == PickUpType.antitoxin) //Antitoxin-Check
+		{
+			hasAntitoxin = true;
+            Destroy(other.gameObject);
+		}
+	}
 }

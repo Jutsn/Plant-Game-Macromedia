@@ -106,8 +106,15 @@ public class MainPlant : MonoBehaviour
 		{
 			plantWater = maxPlantWater;
 		}
-		
 	}
+
+	public void DetoxPlant()
+	{
+		mainPlantState = MainPlantState.normal;
+		UIManager.Instance.UpdatePlantHealthBar(health);
+		UIManager.Instance.ChangeHealthBarColor(Color.green);
+	}
+
 
 	
 }
