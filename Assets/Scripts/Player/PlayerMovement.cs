@@ -210,8 +210,11 @@ public class PlayerMovement : MonoBehaviour
 			fillWater = true;
 			StartCoroutine(FillWaterTankCoroutine(standingInWaterTankFillAmount)); //Timer einbauen
         }
-
-        CheckPickUpType(other);
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+			CheckPickUpType(other);
+		}
+        
     }
     private void OnTriggerExit(Collider other)
     {

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class UIManager : MonoBehaviour
     public Slider plantWaterBar;
     public Slider waterTankBar;
     public Image plantFill;
+    public Image hitMarker;
     public TextMeshProUGUI waterTankPercentage;
 
+    private bool isHitmarkerShown;
 
-    private void Awake()
+
+	private void Awake()
 	{
 		if (Instance == null)
         {
@@ -24,14 +28,14 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-		Application.targetFrameRate = 60;
 	}
 
     private void Start()
     {
-        
         plantFill = plantHealthBar.fillRect.GetComponent<Image>();
-    }
+		hitMarker.gameObject.SetActive(false);
+		isHitmarkerShown = false;
+	}
     
 
     public void UpdatePlantHealthBar(int health) // funktion zum verändern des Sliders, bekommt werte von anderem Script
@@ -54,4 +58,23 @@ public class UIManager : MonoBehaviour
     {
         plantFill.color = color;   
     }
+
+    public void ShowHitmarker(float rate)
+    {
+        StartCoroutine(ShowHitmarkerCoroutine(rate));
+    }
+
+    public IEnumerator ShowHitmarkerCoroutine(float rate)
+    {
+        
+        if (isHitmarkerShown == false)
+        {
+			isHitmarkerShown = true;
+			hitMarker.gameObject.SetActive(true);
+			yield return new WaitForSeconds(rate);
+            hitMarker.gameObject.SetActive(false);
+		}
+        isHitmarkerShown = false;
+        
+	}
 }
