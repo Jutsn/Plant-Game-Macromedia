@@ -24,11 +24,11 @@ public class SoundManager : MonoBehaviour
         audioSource = GetComponents<AudioSource>();
 	}
 
-	public void PlaySplashSound(float rate, float distanceToCollisionPoint)
+	public void PlaySplashSound(float rate, Vector3 collisionPoint)
     {
-		StartCoroutine(PlaySplashSoundCoroutine(rate, distanceToCollisionPoint));
+		StartCoroutine(PlaySplashSoundCoroutine(rate, collisionPoint));
     }
-    private IEnumerator PlaySplashSoundCoroutine(float rate, float distanceToCollisionPoint)
+    private IEnumerator PlaySplashSoundCoroutine(float rate, Vector3 collisionPoint)
 	{
 		if (!isSplashPlaying)
 		{
@@ -38,7 +38,8 @@ public class SoundManager : MonoBehaviour
 				if (!audioSource[i].isPlaying)
 				{
 					audioSource[i].clip = hitMarkerSound;
-					audioSource[i].volume = Mathf.Lerp(0.55f,0.01f,distanceToCollisionPoint);
+					audioSource[i].transform.position = collisionPoint;
+					//audioSource[i].volume = Mathf.Lerp(0.55f,0.01f,distanceToCollisionPoint);
 					Debug.Log(audioSource[i].volume);
 					audioSource[i].Play();
 					Debug.Log("AudioSource" + i + "is playing.");

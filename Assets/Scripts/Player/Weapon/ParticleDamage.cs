@@ -19,7 +19,7 @@ public class ParticleDamage : MonoBehaviour
 
 	[SerializeField] private float impactSplashPlayRateBeam = 0.3f;
 	[SerializeField] private float impactSplashPlayRateShotgun = 0.1f;
-	[SerializeField] private float impactSplashHearingDistance = 15f;
+	//[SerializeField] private float impactSplashHearingDistance = 15f;
 
 	private GameObject playerCam;
 
@@ -99,13 +99,13 @@ public class ParticleDamage : MonoBehaviour
 			for (int i = 0; i < numCollisionEventsBeam; i++)
 			{
 				Vector3 collisionPoint = collisionEventsBeam[i].intersection;
-				float distanceToBeamCollision = (collisionPoint - playerCam.transform.position).magnitude;
+				//float distanceToBeamCollision = (collisionPoint - playerCam.transform.position).magnitude;
 
-				if (distanceToBeamCollision < impactSplashHearingDistance) //Wenn näher dran als maximale Hördistanz
-				{
-					float impactSoundPlayRate = impactSplashPlayRateBeam;
-					SoundManager.Instance.PlaySplashSound(impactSoundPlayRate, distanceToBeamCollision); //Play Splash Sound in einer bestimmten Rate
-				}
+				//if (distanceToBeamCollision < impactSplashHearingDistance) //Wenn näher dran als maximale Hördistanz
+				
+				float impactSoundPlayRate = impactSplashPlayRateBeam;
+				SoundManager.Instance.PlaySplashSound(impactSoundPlayRate, collisionPoint); //Play Splash Sound in einer bestimmten Rate
+				
 			}
 		}
 
@@ -116,13 +116,13 @@ public class ParticleDamage : MonoBehaviour
 			for (int i = 0; i < numCollisionEventsShotgun; i++)
 			{
 				Vector3 collisionPoint = collisionEventsShotgun[i].intersection;
-				float distanceToShotgunCollision = (collisionPoint - playerCam.transform.position).magnitude;
+				//float distanceToShotgunCollision = (collisionPoint - playerCam.transform.position).magnitude;
 
-				if (distanceToShotgunCollision < impactSplashHearingDistance) //Wenn näher dran als maximale Hördistanz
-				{
-					float impactSoundPlayRate = impactSplashPlayRateShotgun;
-					SoundManager.Instance.PlaySplashSound(impactSoundPlayRate, distanceToShotgunCollision); //Play Splash Sound in einer bestimmten Rate
-				}
+				//if (distanceToShotgunCollision < impactSplashHearingDistance) //Wenn näher dran als maximale Hördistanz
+				
+				float impactSoundPlayRate = impactSplashPlayRateShotgun;
+				SoundManager.Instance.PlaySplashSound(impactSoundPlayRate, collisionPoint); //Play Splash Sound in einer bestimmten Rate
+				
 			}
 		}
 	}
