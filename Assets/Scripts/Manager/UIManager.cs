@@ -7,12 +7,15 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    
     public Slider plantHealthBar;
     public Slider plantWaterBar;
     public Slider waterTankBar;
     public Image plantFill;
     public Image hitMarker;
     public TextMeshProUGUI waterTankPercentage;
+    
+    public GameObject upgradeUIPanel;
 
     private bool isHitmarkerShown;
 
@@ -36,6 +39,20 @@ public class UIManager : MonoBehaviour
 		hitMarker.gameObject.SetActive(false);
 		isHitmarkerShown = false;
 	}
+
+            #region UpgradeUI
+        public void ShowUpgradeUI()
+        {
+            upgradeUIPanel.SetActive(true);
+        }
+
+        public void HideUpgradeUI()
+        {
+            upgradeUIPanel.SetActive(false);
+        }
+
+
+            #endregion
     
 
     public void UpdatePlantHealthBar(int health) // funktion zum verändern des Sliders, bekommt werte von anderem Script

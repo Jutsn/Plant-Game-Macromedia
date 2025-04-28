@@ -43,7 +43,7 @@ public class WeaponBehaviour : MonoBehaviour
 		}
 	}
 	IEnumerator WaterConsumptionCoroutine(int waterConsumption)
-	{
+	{	
 		while (isFiringBeam && standardWeaponMode == StandardWeaponMode.beam)
 		{
 			WaterTank.Instance.waterLevel -= waterConsumption;
