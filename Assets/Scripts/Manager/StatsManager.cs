@@ -4,9 +4,10 @@ using TMPro;
 public class StatsManager : MonoBehaviour
 {
     public static StatsManager Instance;
+    public StatsSO stats;
     public TMP_Text healthText;
     [Header("Movement Stats")]
-    public int movementSpeed;
+    public int moveSpeed;
     public int jumpForce;
     void Awake()
     {
@@ -17,8 +18,8 @@ public class StatsManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void UpdateSpeedStat(int amount)
+    public void UpdateSpeedStat(int amount)
     {
-        movementSpeed += amount;
+        stats.moveSpeed += amount;
     }
 }

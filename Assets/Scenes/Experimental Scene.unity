@@ -619,6 +619,7 @@ GameObject:
   - component: {fileID: 111594450}
   - component: {fileID: 111594454}
   - component: {fileID: 111594453}
+  - component: {fileID: 111594455}
   m_Layer: 0
   m_Name: SkillCanvas
   m_TagString: Untagged
@@ -739,6 +740,18 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &111594455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111594448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4986420bf5c3a8c4e9d573923ad8c941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &157309021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,6 +1993,54 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
+--- !u!1 &1199776369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1199776371}
+  - component: {fileID: 1199776370}
+  m_Layer: 0
+  m_Name: StatsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1199776370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199776369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad648a38620804b419774f2484cd29ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: d93ae459512da654babdbacace04991e, type: 2}
+  healthText: {fileID: 0}
+  moveSpeed: 0
+  jumpForce: 0
+--- !u!4 &1199776371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199776369}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1009.6225, y: 589.6231, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1251573361
 GameObject:
   m_ObjectHideFlags: 0
@@ -3947,10 +4008,10 @@ MonoBehaviour:
   plantHealthBar: {fileID: 157309024}
   plantWaterBar: {fileID: 74883902}
   waterTankBar: {fileID: 1463860671}
-  plantFill: {fileID: 0}
+  plantFill: {fileID: 2080722904}
   hitMarker: {fileID: 1605358739}
   waterTankPercentage: {fileID: 510857632}
-  upgradeUIPanel: {fileID: 111594448}
+  upgradeUIPanel: {fileID: 20453123}
 --- !u!1 &2014997786
 GameObject:
   m_ObjectHideFlags: 0
@@ -4704,9 +4765,10 @@ SceneRoots:
   - {fileID: 830327236650676295}
   - {fileID: 1251573365}
   - {fileID: 1099316310}
-  - {fileID: 1947957574}
-  - {fileID: 88036189}
-  - {fileID: 2546260854569245335}
-  - {fileID: 1353720995}
   - {fileID: 1118107205}
   - {fileID: 2060943958}
+  - {fileID: 1353720995}
+  - {fileID: 2546260854569245335}
+  - {fileID: 88036189}
+  - {fileID: 1947957574}
+  - {fileID: 1199776371}
