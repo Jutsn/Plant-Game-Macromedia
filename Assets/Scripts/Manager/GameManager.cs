@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
             ResumeGame();
             UIManager.Instance.HideUpgradeUI();
         }
+
     }
     }
     public void GameOver()

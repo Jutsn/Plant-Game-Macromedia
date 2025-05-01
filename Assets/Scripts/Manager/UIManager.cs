@@ -38,6 +38,10 @@ public class UIManager : MonoBehaviour
         plantFill = plantHealthBar.fillRect.GetComponent<Image>();
 		hitMarker.gameObject.SetActive(false);
 		isHitmarkerShown = false;
+        plantHealthBar.maxValue = StatsManager.Instance.stats.plantMaxHealth;
+        plantHealthBar.value = StatsManager.Instance.stats.health;
+        plantWaterBar.maxValue = StatsManager.Instance.stats.maxPlantWater;
+        plantWaterBar.value = StatsManager.Instance.stats.plantWater;
 	}
 
             #region UpgradeUI

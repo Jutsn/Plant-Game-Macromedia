@@ -22,6 +22,12 @@ public class SkillManager : MonoBehaviour
             case "Speed Up":
                 StatsManager.Instance.UpdateSpeedStat(2);
                 break;
+            case "Water Loss Down":
+                StatsManager.Instance.UpdateWaterLossStat(0.25f);
+                break;
+            case "Plant Health Boost":
+                StatsManager.Instance.UpdateMaxHealthStat(25);
+                break;
 
                 default:
                     Debug.LogWarning("Unknown Skill: " + skillName);

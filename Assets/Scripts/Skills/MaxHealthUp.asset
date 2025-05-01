@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05e3fb83746079745ae43716290f0026, type: 3}
-  m_Name: more Speed
+  m_Name: MaxHealthUp
   m_EditorClassIdentifier: 
-  skillName: Speed Up
-  maxLevel: 5
-  skillIcon: {fileID: 21300000, guid: bcef3bb3e863a0b47bc29230664c187c, type: 3}
+  skillName: Plant Health Boost
+  maxLevel: 4
+  skillIcon: {fileID: 21300000, guid: 1b573a7cc2a543d4facee730b87782ee, type: 3}

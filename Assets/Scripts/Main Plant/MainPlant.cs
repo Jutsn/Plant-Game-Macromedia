@@ -6,41 +6,30 @@ public class MainPlant : MonoBehaviour
 {
     public MainPlantState mainPlantState;
 
-    [SerializeField]public int health = 50;
-    [SerializeField] private float plantWater = 50;
-	private float maxPlantWater;
-	[SerializeField] private float waterLoss = 2; 
-    [SerializeField] private float waterLossRate = 1;
-    [SerializeField] private int noWaterDamage = 1; 
-	[SerializeField] private int poisonDamage = 1; 
-	[SerializeField] private float passiveHealthLossRate = 1;
-	[SerializeField] private int healthRegen = 1; 
-	[SerializeField] private float healthRegenRate = 3;
 
     void Start()
     {
-		maxPlantWater = plantWater; 
-        int maxHealth = health; //maxHealth bef�llen
+
         mainPlantState = MainPlantState.normal; //MainPlantState(Enum) auf normal setzen
         StartCoroutine(PassiveWaterLossCoroutine()); 
         StartCoroutine(PassiveHealthLossCoroutine()); //Verdurstung + Vergiftung
-        StartCoroutine(PassiveHealthRegeneration(maxHealth)); //maxHealth durchgeben
+        //StartCoroutine(PassiveHealthRegeneration(StatsManager.Instance.stats.plantMaxHealth)); //maxHealth durchgeben
     }
 
     IEnumerator PassiveWaterLossCoroutine()
     {
 		while (!GameManager.Instance.gameOver) // Wiederhole, solange Spiel nicht GameOver ist
 		{
-			if (plantWater > 0) //Wenn Wasserstand ueber null
+			if (StatsManager.Instance.stats.plantWater > 0) //Wenn Wasserstand ueber null
 			{
-				plantWater -= waterLoss; //Wasserverlust
-				UIManager.Instance.UpdatePlantWaterBar(plantWater);
+				StatsManager.Instance.stats.plantWater -= StatsManager.Instance.stats.waterLoss; //Wasserverlust
+				UIManager.Instance.UpdatePlantWaterBar(StatsManager.Instance.stats.plantWater);
 			}
-			if (plantWater < 0) //Wenn Wasserstand unter 0
+			if (StatsManager.Instance.stats.plantWater < 0) //Wenn Wasserstand unter 0
 			{
-				plantWater = 0; //Verhindere Negativwasserstand
+				StatsManager.Instance.stats.plantWater = 0; //Verhindere Negativwasserstand
 			}
-			yield return new WaitForSeconds(waterLossRate); //Warte vor n�chster Wiederholung f�r ...Sekunden
+			yield return new WaitForSeconds(StatsManager.Instance.stats.waterLossRate); //Warte vor n�chster Wiederholung f�r ...Sekunden
 		}
 	}
 
@@ -48,70 +37,70 @@ public class MainPlant : MonoBehaviour
     {
         while (!GameManager.Instance.gameOver) // Wiederhole, solange Spiel nicht GameOver ist
 		{
-			if (plantWater == 0 && health > 0) // Wenn kein Wasser mehr vorhanden
+			if (StatsManager.Instance.stats.plantWater == 0 && StatsManager.Instance.stats.health > 0) // Wenn kein Wasser mehr vorhanden
 			{
-				health -= noWaterDamage; //Lebensverlust
-				UIManager.Instance.UpdatePlantHealthBar(health);
+				StatsManager.Instance.stats.health -= StatsManager.Instance.stats.noWaterDamage; //Lebensverlust
+				UIManager.Instance.UpdatePlantHealthBar(StatsManager.Instance.stats.health);
 			}
-			if (mainPlantState == MainPlantState.poisened && health > 0) //Wenn vergiftet
+			if (mainPlantState == MainPlantState.poisened && StatsManager.Instance.stats.health > 0) //Wenn vergiftet
 			{
-				health -= poisonDamage; //Lebensverlust
-				UIManager.Instance.UpdatePlantHealthBar(health);
+				StatsManager.Instance.stats.health -= StatsManager.Instance.stats.poisonDamage; //Lebensverlust
+				UIManager.Instance.UpdatePlantHealthBar(StatsManager.Instance.stats.health);
 				UIManager.Instance.ChangeHealthBarColor(Color.magenta);
 			}
-			if (health < 0) //Wenn Lebenszahl negativ
+			if (StatsManager.Instance.stats.health < 0) //Wenn Lebenszahl negativ
 			{
-				health = 0; //Verhindere Negativleben 
+				StatsManager.Instance.stats.health = 0; //Verhindere Negativleben 
 			}
-			if (health == 0) //Wenn keine Leben
+			if (StatsManager.Instance.stats.health == 0) //Wenn keine Leben
 			{
 				GameManager.Instance.gameOver = true; //gameOver-Variable in GameManager true setzen und Schleife nicht nochmal wiederholen
 				GameManager.Instance.GameOver(); //GameOver-Methode in GameManager callen 
 			}
-			yield return new WaitForSeconds(passiveHealthLossRate); //Warte vor n�chster Wiederholung f�r ...Sekunden
+			yield return new WaitForSeconds(StatsManager.Instance.stats.passiveHealthLossRate); //Warte vor n�chster Wiederholung f�r ...Sekunden
 		}
 	}
 
-    IEnumerator PassiveHealthRegeneration(int maxHealth) 
+    IEnumerator PassiveHealthRegeneration() 
     {
 		while (!GameManager.Instance.gameOver) // Wiederhole, solange Spiel nicht GameOver ist
 		{
-			if (plantWater > 0 && health < maxHealth) //Wenn Wasser vorhanden und maxHealth nicht �berschritten
+			if (StatsManager.Instance.stats.plantWater > 0 && StatsManager.Instance.stats.health < StatsManager.Instance.stats.plantMaxHealth) //Wenn Wasser vorhanden und maxHealth nicht �berschritten
 			{
-				health += healthRegen; // Heile Leben
-				UIManager.Instance.UpdatePlantHealthBar(health);
+				StatsManager.Instance.stats.health += StatsManager.Instance.stats.healthRegen; // Heile Leben
+				UIManager.Instance.UpdatePlantHealthBar(StatsManager.Instance.stats.health);
 			}
-			if (health > maxHealth)
+			if (StatsManager.Instance.stats.health >  StatsManager.Instance.stats.plantMaxHealth)
 			{
-				health = maxHealth;
-				UIManager.Instance.UpdatePlantHealthBar(health);
+				StatsManager.Instance.stats.health =  StatsManager.Instance.stats.plantMaxHealth;
+				UIManager.Instance.UpdatePlantHealthBar(StatsManager.Instance.stats.health);
 			}
-			yield return new WaitForSeconds(healthRegenRate); //Warte vor n�chster Wiederholung f�r ...Sekunden
+			yield return new WaitForSeconds(StatsManager.Instance.stats.healthRegenRate); //Warte vor n�chster Wiederholung f�r ...Sekunden
 		}
     }
 	public void GetActiveDamage(int damage)
 	{
-		health -= damage;
-		UIManager.Instance.UpdatePlantHealthBar(health);
+		StatsManager.Instance.stats.health -= damage;
+		UIManager.Instance.UpdatePlantHealthBar(StatsManager.Instance.stats.health);
 	}
 
 	public void GetWater(float waterInAmmunation)
 	{
-		if (plantWater < maxPlantWater)
+		if (StatsManager.Instance.stats.plantWater < StatsManager.Instance.stats.maxPlantWater)
 		{
-			plantWater += waterInAmmunation;
-			UIManager.Instance.UpdatePlantWaterBar(plantWater);
+			StatsManager.Instance.stats.plantWater += waterInAmmunation;
+			UIManager.Instance.UpdatePlantWaterBar(StatsManager.Instance.stats.plantWater);
 		}
-		else if(plantWater > maxPlantWater)
+		else if(StatsManager.Instance.stats.plantWater > StatsManager.Instance.stats.maxPlantWater)
 		{
-			plantWater = maxPlantWater;
+			StatsManager.Instance.stats.plantWater = StatsManager.Instance.stats.maxPlantWater;
 		}
 	}
 
 	public void DetoxPlant()
 	{
 		mainPlantState = MainPlantState.normal;
-		UIManager.Instance.UpdatePlantHealthBar(health);
+		UIManager.Instance.UpdatePlantHealthBar(StatsManager.Instance.stats.health);
 		UIManager.Instance.ChangeHealthBarColor(Color.green);
 	}
 
