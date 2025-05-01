@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
@@ -6,7 +7,6 @@ using UnityEngine.InputSystem.XR;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float moveSpeed;
 
     [SerializeField] private float groundDrag;
 
@@ -53,13 +53,21 @@ public class PlayerMovement : MonoBehaviour
     private bool fillWater;
 
     WeaponBehaviour weaponBehaviourSkript;
+<<<<<<< Updated upstream
+=======
+    MainPlant mainPlantSkript;
+    
+>>>>>>> Stashed changes
 
 
 
+    private void Awake()
+    {
+        //stats = GameObject.Find("StatsManager").GetComponent<Stats>();
+    }
 
 
-
-	private void Start()
+    private void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.freezeRotation = true;
@@ -77,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         //handle drag
         if (grounded)
         {
-            playerRb.linearDamping = groundDrag;
+            playerRb.linearDamping = StatsManager.Instance.stats.groundDrag;
         }
         else
         {
@@ -113,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
 
             Jump();
 
-            Invoke("ResetJump", jumpCooldown);
+            Invoke("ResetJump", StatsManager.Instance.stats.jumpCooldown);
         }
        
         if (mouseWheelInput != 0)
@@ -138,18 +146,18 @@ public class PlayerMovement : MonoBehaviour
 
         //on ground
         if (grounded && !GameManager.Instance.gameOver)
-            playerRb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            playerRb.AddForce(moveDirection.normalized * StatsManager.Instance.stats.moveSpeed * 10f, ForceMode.Force);
         else if (!grounded && !GameManager.Instance.gameOver)
-            playerRb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            playerRb.AddForce(moveDirection.normalized * StatsManager.Instance.stats.moveSpeed * 10f * StatsManager.Instance.stats.airMultiplier, ForceMode.Force);
     }
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(playerRb.linearVelocity.x, 0f, playerRb.linearVelocity.z);
 
         //limit move velocity if needed
-        if (flatVel.magnitude > moveSpeed)
+        if (flatVel.magnitude > StatsManager.Instance.stats.moveSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            Vector3 limitedVel = flatVel.normalized * StatsManager.Instance.stats.moveSpeed;
             playerRb.linearVelocity = new Vector3(limitedVel.x, playerRb.linearVelocity.y, limitedVel.z);
         }
     }
@@ -158,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
         //reset y velocity
         playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, 0f, playerRb.linearVelocity.z);
 
-        playerRb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        playerRb.AddForce(transform.up * StatsManager.Instance.stats.jumpForce, ForceMode.Impulse);
     }
 
     private void ResetJump()
@@ -180,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
         // Begrenze die Y-Komponente des Knockbacks
         knockbackDirection.y = Mathf.Clamp(knockbackDirection.y + upwardModifier, 0, maxVerticalKnockback);
 
-        // Stelle sicher, dass der Knockback nicht zu stark vertikal ausfällt
+        // Stelle sicher, dass der Knockback nicht zu stark vertikal ausfï¿½llt
         Vector3 finalKnockback = new Vector3(knockbackDirection.x, knockbackDirection.y, knockbackDirection.z);
         knockbackTime = knockbackDuration;
         isKnockbacked = true;
@@ -189,27 +197,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffüllen, wenn im Wasser stehend
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffï¿½llen, wenn im Wasser stehend
         {
 			fillWater = true;
+<<<<<<< Updated upstream
 			StartCoroutine(FillWaterTankCoroutine(standingInWaterTankFillAmount)); //Timer einbauen
 
+=======
+			StartCoroutine(FillWaterTankCoroutine(StatsManager.Instance.stats.standingInWaterTankFillAmount)); //Timer einbauen
+>>>>>>> Stashed changes
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffüllen, wenn im Wasser stehend
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffï¿½llen, wenn im Wasser stehend
         {
             fillWater = false;
         }
     }
 
-    IEnumerator FillWaterTankCoroutine(int tankFillAmount) //Falls Powerups Tank auch auffüllen können, einfach Coroutine callen und Wert durchgeben
+    IEnumerator FillWaterTankCoroutine(int tankFillAmount) //Falls Powerups Tank auch auffï¿½llen kï¿½nnen, einfach Coroutine callen und Wert durchgeben
     {
         while (fillWater)
         {
 			WaterTank.Instance.FillTank(tankFillAmount);
-			yield return new WaitForSeconds(generalTankFillRate);
+			yield return new WaitForSeconds(StatsManager.Instance.stats.generalTankFillRate);
 		}
     }
 }

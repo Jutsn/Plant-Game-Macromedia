@@ -31,7 +31,7 @@ public class MainPlant : MonoBehaviour
     {
 		while (!GameManager.Instance.gameOver) // Wiederhole, solange Spiel nicht GameOver ist
 		{
-			if (plantWater > 0) //Wenn Wasserstand ueber null
+			if (StatsManager.Instance.stats.currentPlantWater > 0) //Wenn Wasserstand ueber null
 			{
 				plantWater -= waterLoss; //Wasserverlust
 				UIManager.Instance.UpdatePlantWaterBar(plantWater);
