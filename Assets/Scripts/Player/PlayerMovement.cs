@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpCooldown;
     [SerializeField] private float airMultiplier;
     private bool readyToJump = true;
+	[SerializeField] private int jumpCount;
+	[SerializeField] private int jumpsLeft;
 
 	public Transform playerOrientation;
 
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Keybinds")]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
     [SerializeField] private KeyCode weaponModeChangeKey = KeyCode.C;
+    [SerializeField] private KeyCode InteractionKey = KeyCode.E;
 
 
     [Header("Ground Check")]
@@ -49,13 +52,15 @@ public class PlayerMovement : MonoBehaviour
     [Header("Water Check")]
     [SerializeField] private LayerMask whatIsWater;
     [SerializeField] private int standingInWaterTankFillAmount;
-    [SerializeField] private float generalTankFillRate;
+    [SerializeField] private float TankFillRateInSeconds;
     private bool fillWater;
 
     WeaponBehaviour weaponBehaviourSkript;
     MainPlant mainPlantSkript;
 
     public bool hasAntitoxin;
+    public bool inInteractionRangeWithPlant;
+    public float interactionRange;
 
 
 
@@ -73,8 +78,10 @@ public class PlayerMovement : MonoBehaviour
     {
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
-        MyInput();
+        // is MainPlant in Range for Interaction
+        inInteractionRangeWithPlant = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactionRange) && hit.collider.CompareTag("Plant");
+        
+		MyInput();
         SpeedControl();
 
         //handle drag
@@ -111,24 +118,32 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
         mouseWheelInput = Input.GetAxis("Mouse ScrollWheel");
 
-        if (Input.GetKey(jumpKey) && readyToJump && grounded && !GameManager.Instance.gameOver)
+        
+
+        if (Input.GetKey(jumpKey) && readyToJump && jumpsLeft > 0 && !GameManager.Instance.gameOver)
         {
-            readyToJump = false;
+            readyToJump = false; // verhindert durchgängiges Anwenden von Kraft und sorgt für kontrollierten Impuls
+            jumpsLeft -= 1;
 
             Jump();
 
             Invoke("ResetJump", jumpCooldown);
         }
 
-        GetMouseInput();
+		if (readyToJump && grounded) // reset jumpCount, wenn auf Boden
+		{
+			jumpsLeft = jumpCount;
+		}
+
+		GetMouseInput();
 
         if (Input.GetKeyDown(weaponModeChangeKey) || isMouseWheelScrolled)
         {
             weaponBehaviourSkript.SwitchWeaponMode();
 		}
 
-        if (Input.GetKeyDown(KeyCode.E) && hasAntitoxin) //Pflanze entgiften
-        {
+        if (Input.GetKeyDown(InteractionKey) && inInteractionRangeWithPlant && hasAntitoxin) //Pflanze entgiften
+		{
             hasAntitoxin = false;
             mainPlantSkript.DetoxPlant();
 		}
@@ -229,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
         while (fillWater)
         {
 			WaterTank.Instance.FillTank(tankFillAmount);
-			yield return new WaitForSeconds(generalTankFillRate);
+			yield return new WaitForSeconds(TankFillRateInSeconds);
 		}
     }
 

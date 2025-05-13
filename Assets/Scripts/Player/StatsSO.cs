@@ -22,9 +22,14 @@ public class StatsSO : ScriptableObject
     public float jumpForce = 12;
     public float jumpCooldown = 0.25f;
     public float airMultiplier = 0.4f;
-    public bool readyToJump = true;
 
     [Header("WaterStats")]
     public int standingInWaterTankFillAmount;
-    public float generalTankFillRate;
+    public float TankFillRateInSeconds;
+
+    [Header("JetpackStats")]
+    public bool hasIceSkating;
+    public int jumpCount = 1;
+    public bool hasFlying;
+	public bool hasDash;
 }
