@@ -4558,15 +4558,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
       propertyPath: jumpCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 1681320952}
     - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: jumpCooldown
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
       propertyPath: hasDoubleJump
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: extraJumpForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: normalJumpForce
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
       propertyPath: interactionRange
@@ -4575,6 +4587,10 @@ PrefabInstance:
     - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
       propertyPath: weaponModeChangeKey
       value: 49
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: waterConsumptionExtraJump
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

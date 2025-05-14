@@ -10,12 +10,11 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float groundDrag;
 
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float normalJumpForce;
     [SerializeField] private float jumpCooldown;
     [SerializeField] private float airMultiplier;
     private bool readyToJump = true;
-	[SerializeField] private int jumpCount;
-	[SerializeField] private int jumpsLeft;
+	
 
 	public Transform playerOrientation;
 
@@ -27,6 +26,12 @@ public class PlayerMovement : MonoBehaviour
 	Vector3 moveDirection;
 
 	Rigidbody playerRb;
+
+	[Header("Movement Skills")]
+	[SerializeField] private int jumpCount;
+	[SerializeField] private float extraJumpForce;
+	private int jumpsLeft;
+	[SerializeField] private int waterConsumptionExtraJump;
 
 	[Header("Knockback")]
     [SerializeField] private int knockbackForce;
@@ -49,16 +54,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
     private bool grounded;
 
-    [Header("Water Check")]
+    [Header("Standing in Water Check/Refill")]
     [SerializeField] private LayerMask whatIsWater;
     [SerializeField] private int standingInWaterTankFillAmount;
     [SerializeField] private float TankFillRateInSeconds;
     private bool fillWater;
 
-    WeaponBehaviour weaponBehaviourSkript;
+	WeaponBehaviour weaponBehaviourSkript;
     MainPlant mainPlantSkript;
 
-    public bool hasAntitoxin;
+	[Header("Antitoxin")]
+	public bool hasAntitoxin;
     public bool inInteractionRangeWithPlant;
     public float interactionRange;
 
@@ -120,15 +126,29 @@ public class PlayerMovement : MonoBehaviour
 
         
 
-        if (Input.GetKey(jumpKey) && readyToJump && jumpsLeft > 0 && !GameManager.Instance.gameOver)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded && jumpsLeft > 0 && !GameManager.Instance.gameOver)
         {
-            readyToJump = false; // verhindert durchgängiges Anwenden von Kraft und sorgt für kontrollierten Impuls
+            readyToJump = false; // verhindert durchgängiges Anwenden von Kraft und sorgt für kontrollierten, kurzen Impuls
+            float jumpPower = normalJumpForce;
+            
             jumpsLeft -= 1;
 
-            Jump();
+            Jump(jumpPower);
 
             Invoke("ResetJump", jumpCooldown);
         }
+        else if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsLeft > 0 && !GameManager.Instance.gameOver)
+        {
+			readyToJump = false;
+			float jumpPower = extraJumpForce;
+			jumpsLeft -= 1;
+
+			WaterTank.Instance.waterLevel -= waterConsumptionExtraJump;
+			
+			Jump(jumpPower);
+
+			Invoke("ResetJump", jumpCooldown);
+		}
 
 		if (readyToJump && grounded) // reset jumpCount, wenn auf Boden
 		{
@@ -172,12 +192,12 @@ public class PlayerMovement : MonoBehaviour
             playerRb.linearVelocity = new Vector3(limitedVel.x, playerRb.linearVelocity.y, limitedVel.z);
         }
     }
-    private void Jump()
+    private void Jump(float jumpPower)
     {
         //reset y velocity
         playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, 0f, playerRb.linearVelocity.z);
 
-        playerRb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        playerRb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
     }
 
     private void ResetJump()
