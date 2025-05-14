@@ -1,15 +1,13 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class StatsManager : MonoBehaviour
 {
     public static StatsManager Instance;
     public StatsSO baseStats;
     [SerializeField] public StatsSO stats;
-    public TMP_Text healthText;
-    [Header("Movement Stats")]
-    public int moveSpeed;
-    public int jumpForce;
+     public static Action<StatsManager> OnStatsChanged;
     void Awake()
     {
         if(Instance == null){
@@ -36,17 +34,21 @@ public class StatsManager : MonoBehaviour
     public void UpdateSpeedStat(int amount)
     {
         stats.moveSpeed += amount;
+        OnStatsChanged.Invoke(this);
     }   
      public void UpdateWaterLossStat(float amount)
     {
         stats.waterLoss -= amount;
+        OnStatsChanged.Invoke(this);
     }
     public void UpdateMaxHealthStat(int amount)
     {
         stats.plantMaxHealth += amount;
         stats.health += amount;
+        OnStatsChanged.Invoke(this);
         UIManager.Instance.plantHealthBar.maxValue = stats.plantMaxHealth;
         UIManager.Instance.UpdatePlantHealthBar(stats.health);
+        
         
     }
 
@@ -63,7 +65,7 @@ public class StatsManager : MonoBehaviour
         // Plant Stats
         target.plantMaxHealth = source.plantMaxHealth;
         target.health = source.health;
-        target.maxPlantWater = source.maxPlantWater;
+        target.plantMaxWater = source.plantMaxWater;
         target.plantWater = source.plantWater;  
         target.waterLoss = source.waterLoss;
         target.waterLossRate = source.waterLossRate;

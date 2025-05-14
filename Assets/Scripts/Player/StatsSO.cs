@@ -6,7 +6,7 @@ public class StatsSO : ScriptableObject
     [Header("Plant Stats")]
     public int plantMaxHealth = 50;
     public int  health = 50;
-    public float maxPlantWater  = 50;
+    public float plantMaxWater  = 50;
     public float plantWater = 50;
     public float waterLoss = 2;
     public float waterLossRate = 1;

@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
 		isHitmarkerShown = false;
         plantHealthBar.maxValue = StatsManager.Instance.stats.plantMaxHealth;
         plantHealthBar.value = StatsManager.Instance.stats.health;
-        plantWaterBar.maxValue = StatsManager.Instance.stats.maxPlantWater;
+        plantWaterBar.maxValue = StatsManager.Instance.stats.plantMaxWater;
         plantWaterBar.value = StatsManager.Instance.stats.plantWater;
 	}
 

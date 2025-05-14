@@ -58,9 +58,18 @@ public class PlayerMovement : MonoBehaviour
     public bool hasAntitoxin;
 
 
+    private void OnEnable()
+    {
+        StatsManager.OnStatsChanged += RefreshStats;
+    }
+
+    private void OnDisable()
+    {
+        StatsManager.OnStatsChanged -= RefreshStats;
+    }
 
 
-	private void Start()
+    private void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.freezeRotation = true;
@@ -68,6 +77,15 @@ public class PlayerMovement : MonoBehaviour
 		mainPlantSkript = GameObject.Find("Great Plant").GetComponent<MainPlant>();
 
 	}
+
+    private void RefreshStats(StatsManager stats)
+    {
+        moveSpeed = StatsManager.Instance.stats.moveSpeed;
+        groundDrag = StatsManager.Instance.stats.groundDrag;
+        jumpForce = StatsManager.Instance.stats.jumpForce;
+        jumpCooldown = StatsManager.Instance.stats.jumpCooldown;
+        airMultiplier = StatsManager.Instance.stats.airMultiplier;
+    }
 
     private void Update()
     {
@@ -196,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
         // Begrenze die Y-Komponente des Knockbacks
         knockbackDirection.y = Mathf.Clamp(knockbackDirection.y + upwardModifier, 0, maxVerticalKnockback);
 
-        // Stelle sicher, dass der Knockback nicht zu stark vertikal ausfällt
+        // Stelle sicher, dass der Knockback nicht zu stark vertikal ausfï¿½llt
         Vector3 finalKnockback = new Vector3(knockbackDirection.x, knockbackDirection.y, knockbackDirection.z);
         knockbackTime = knockbackDuration;
         isKnockbacked = true;
@@ -205,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffüllen, wenn im Wasser stehend
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffï¿½llen, wenn im Wasser stehend
         {
 			fillWater = true;
 			StartCoroutine(FillWaterTankCoroutine(standingInWaterTankFillAmount)); //Timer einbauen
@@ -218,13 +236,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffüllen, wenn im Wasser stehend
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffï¿½llen, wenn im Wasser stehend
         {
             fillWater = false;
         }
     }
 
-    IEnumerator FillWaterTankCoroutine(int tankFillAmount) //Falls Powerups Tank auch auffüllen können, einfach Coroutine callen und Wert durchgeben
+    IEnumerator FillWaterTankCoroutine(int tankFillAmount) //Falls Powerups Tank auch auffï¿½llen kï¿½nnen, einfach Coroutine callen und Wert durchgeben
     {
         while (fillWater)
         {
