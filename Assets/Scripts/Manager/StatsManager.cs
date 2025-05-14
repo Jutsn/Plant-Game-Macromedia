@@ -10,6 +10,7 @@ public class StatsManager : MonoBehaviour
      public static Action<StatsManager> OnStatsChanged;
     void Awake()
     {
+        //erstellt Kopie von Base Stats SO, wenn keine eigenen Stats SO eingesetzt wurden (fuer das testen)
         if(Instance == null){
             Instance = this;
             if(stats == null)
@@ -21,16 +22,12 @@ public class StatsManager : MonoBehaviour
     }
 
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            ResetStatsToBase();
-        }
-        Debug.Log(stats.health);
+    {   
+        GetInput();
     }
 
     #region Upgrade Stats
-
+    //Update Funktionen für Stat Buffs von Variablen
     public void UpdateSpeedStat(int amount)
     {
         stats.moveSpeed += amount;
@@ -53,13 +50,25 @@ public class StatsManager : MonoBehaviour
     }
 
     #endregion 
-
+    //Button Input für das Playtesten
+    public void GetInput()
+    {
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            ResetStatsToBase();
+        }
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            OnStatsChanged.Invoke(this);
+        }
+    }
     public void ResetStatsToBase()
     {
         ResetStats(baseStats, stats);
     }
 
-    #region reset stats
+    #region set stats
+    //Stats SO wird zurückgesetzt auf BaseStats 
      private void ResetStats(StatsSO source, StatsSO target)
     {
         // Plant Stats
@@ -86,6 +95,20 @@ public class StatsManager : MonoBehaviour
         // Water Stats
         target.standingInWaterTankFillAmount = source.standingInWaterTankFillAmount;
         target.generalTankFillRate = source.generalTankFillRate;
+        OnStatsChanged.Invoke(this);
+    }
+    // health variable wird mit der MainPlant Health Variable synchronisiert
+    public void SetHealth(int amount)
+    {
+        stats.health += amount;
+        OnStatsChanged.Invoke(this);
+    }
+    // plantWater variable wird mit der MainPlant plantWater Variable synchronisiert
+    public void SetPlantWater(float amount)
+    {
+        stats.plantWater += amount;
+        OnStatsChanged.Invoke(this);
+
     }
     #endregion stats
 }

@@ -41,7 +41,7 @@ public class SkillSlot : MonoBehaviour
 
         }
     }
-
+    // überprüft für jeden Skill ob die Vorrausgesetzen Skills freigeschaltet sind
     public bool CanUnlockSkill()
     {
         foreach(SkillSlot slot in prerequisiteSkillSlots)
@@ -53,13 +53,13 @@ public class SkillSlot : MonoBehaviour
         }
         return true;
     }
-
+    //wenn ein skill freigeschalten wird, dann wird die UI von dem Skill geupdatet 
     public void Unlocked()
     {
         isUnlocked = true;
         UpdateUI();
     }
-
+    //Farbe vom skill Icon wird geupdatet eventuell in UIManager verschieben
     private void UpdateUI()
     {
         skillIcon.sprite = skillSO.skillIcon;    

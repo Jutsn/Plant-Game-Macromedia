@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MainPlant : MonoBehaviour
 {
-	public int plantMaxHealth = 50;
+	public int plantMaxHealth;
     public int  health = 50;
     public float plantMaxWater  = 50;
     public float plantWater = 50;
@@ -32,7 +32,9 @@ public class MainPlant : MonoBehaviour
 	void RefreshStats(StatsManager stats)
 	{
 		plantMaxHealth = StatsManager.Instance.stats.plantMaxHealth;
+		health = StatsManager.Instance.stats.health;
 		plantMaxWater = StatsManager.Instance.stats.plantMaxWater;
+		plantWater = StatsManager.Instance.stats.plantWater;
 		waterLoss = StatsManager.Instance.stats.waterLoss;
 		waterLossRate = StatsManager.Instance.stats.waterLossRate;
 		noWaterDamage = StatsManager.Instance.stats.noWaterDamage;
@@ -41,6 +43,19 @@ public class MainPlant : MonoBehaviour
 		healthRegen = StatsManager.Instance.stats.healthRegen;
 		healthRegenRate = StatsManager.Instance.stats.healthRegenRate;
 	}
+	// holt sich die stats aus dem statsmanager
+    void Awake()
+    {
+        plantMaxHealth = StatsManager.Instance.stats.plantMaxHealth;
+		plantMaxWater = StatsManager.Instance.stats.plantMaxWater;
+		waterLoss = StatsManager.Instance.stats.waterLoss;
+		waterLossRate = StatsManager.Instance.stats.waterLossRate;
+		noWaterDamage = StatsManager.Instance.stats.noWaterDamage;
+		poisonDamage = StatsManager.Instance.stats.poisonDamage;
+		passiveHealthLossRate = StatsManager.Instance.stats.passiveHealthLossRate;
+		healthRegen = StatsManager.Instance.stats.healthRegen;
+		healthRegenRate = StatsManager.Instance.stats.healthRegenRate;
+    }
     void Start()
     {
 
@@ -57,6 +72,7 @@ public class MainPlant : MonoBehaviour
 			if (plantWater > 0) //Wenn Wasserstand ueber null
 			{
 				plantWater -= waterLoss; //Wasserverlust
+				StatsManager.Instance.SetPlantWater(plantWater);
 				UIManager.Instance.UpdatePlantWaterBar(plantWater);
 			}
 			if (plantWater < 0) //Wenn Wasserstand unter 0
@@ -74,13 +90,16 @@ public class MainPlant : MonoBehaviour
 			if (plantWater == 0 && health > 0) // Wenn kein Wasser mehr vorhanden
 			{
 				health -= noWaterDamage; //Lebensverlust
+				StatsManager.Instance.SetHealth(health);
 				UIManager.Instance.UpdatePlantHealthBar(health);
 			}
 			if (mainPlantState == MainPlantState.poisened && health > 0) //Wenn vergiftet
 			{
 				health -= poisonDamage; //Lebensverlust
-				UIManager.Instance.UpdatePlantHealthBar(health);
 				UIManager.Instance.ChangeHealthBarColor(Color.magenta);
+				StatsManager.Instance.SetHealth(health);
+				UIManager.Instance.UpdatePlantHealthBar(health);
+				
 			}
 			if (health < 0) //Wenn Lebenszahl negativ
 			{
@@ -102,11 +121,13 @@ public class MainPlant : MonoBehaviour
 			if (plantWater > 0 && health < plantMaxHealth) //Wenn Wasser vorhanden und maxHealth nicht �berschritten
 			{
 				health += healthRegen; // Heile Leben
+				StatsManager.Instance.SetHealth(health);
 				UIManager.Instance.UpdatePlantHealthBar(health);
 			}
 			if (health >  plantMaxHealth)
 			{
 				health =  plantMaxHealth;
+				StatsManager.Instance.SetHealth(health);
 				UIManager.Instance.UpdatePlantHealthBar(health);
 			}
 			yield return new WaitForSeconds(healthRegenRate); //Warte vor n�chster Wiederholung f�r ...Sekunden
@@ -115,6 +136,7 @@ public class MainPlant : MonoBehaviour
 	public void GetActiveDamage(int damage)
 	{
 		health -= damage;
+		StatsManager.Instance.SetHealth(health);
 		UIManager.Instance.UpdatePlantHealthBar(health);
 	}
 
@@ -123,6 +145,7 @@ public class MainPlant : MonoBehaviour
 		if (plantWater < plantMaxWater)
 		{
 			plantWater += waterInAmmunation;
+			StatsManager.Instance.SetPlantWater(plantWater);
 			UIManager.Instance.UpdatePlantWaterBar(plantWater);
 		}
 		else if(plantWater > plantMaxWater)
@@ -134,6 +157,7 @@ public class MainPlant : MonoBehaviour
 	public void DetoxPlant()
 	{
 		mainPlantState = MainPlantState.normal;
+		StatsManager.Instance.SetHealth(health);
 		UIManager.Instance.UpdatePlantHealthBar(health);
 		UIManager.Instance.ChangeHealthBarColor(Color.green);
 	}
