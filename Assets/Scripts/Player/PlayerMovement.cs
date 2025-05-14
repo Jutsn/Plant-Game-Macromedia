@@ -68,20 +68,17 @@ public class PlayerMovement : MonoBehaviour
         StatsManager.OnStatsChanged -= RefreshStats;
     }
 
-    private void Awake()
-    {
-        moveSpeed = StatsManager.Instance.stats.moveSpeed;
-        groundDrag = StatsManager.Instance.stats.groundDrag;
-        jumpForce = StatsManager.Instance.stats.jumpForce;
-        jumpCooldown = StatsManager.Instance.stats.jumpCooldown;
-        airMultiplier = StatsManager.Instance.stats.airMultiplier;
-    }
     private void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.freezeRotation = true;
 		weaponBehaviourSkript = GameObject.Find("Weapon").GetComponent<WeaponBehaviour>();
 		mainPlantSkript = GameObject.Find("Great Plant").GetComponent<MainPlant>();
+        moveSpeed = StatsManager.Instance.stats.moveSpeed;
+        groundDrag = StatsManager.Instance.stats.groundDrag;
+        jumpForce = StatsManager.Instance.stats.jumpForce;
+        jumpCooldown = StatsManager.Instance.stats.jumpCooldown;
+        airMultiplier = StatsManager.Instance.stats.airMultiplier;
 
 	}
 

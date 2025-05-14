@@ -44,9 +44,10 @@ public class MainPlant : MonoBehaviour
 		healthRegenRate = StatsManager.Instance.stats.healthRegenRate;
 	}
 	// holt sich die stats aus dem statsmanager
-    void Awake()
+
+    void Start()
     {
-        plantMaxHealth = StatsManager.Instance.stats.plantMaxHealth;
+		plantMaxHealth = StatsManager.Instance.stats.plantMaxHealth;
 		plantMaxWater = StatsManager.Instance.stats.plantMaxWater;
 		waterLoss = StatsManager.Instance.stats.waterLoss;
 		waterLossRate = StatsManager.Instance.stats.waterLossRate;
@@ -55,10 +56,8 @@ public class MainPlant : MonoBehaviour
 		passiveHealthLossRate = StatsManager.Instance.stats.passiveHealthLossRate;
 		healthRegen = StatsManager.Instance.stats.healthRegen;
 		healthRegenRate = StatsManager.Instance.stats.healthRegenRate;
-    }
-    void Start()
-    {
 
+		
         mainPlantState = MainPlantState.normal; //MainPlantState(Enum) auf normal setzen
         StartCoroutine(PassiveWaterLossCoroutine()); 
         StartCoroutine(PassiveHealthLossCoroutine()); //Verdurstung + Vergiftung
