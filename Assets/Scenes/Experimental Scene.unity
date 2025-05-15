@@ -5058,6 +5058,14 @@ PrefabInstance:
       propertyPath: cooldownTimeShotgun
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3388505504596069455, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: waterConsumptionShotgun
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388505504596069455, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: waterConsumptionRateBeam
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 3418413217228822778, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
       propertyPath: prewarm
       value: 0

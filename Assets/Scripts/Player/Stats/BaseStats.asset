@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BaseStats
   m_EditorClassIdentifier: 
   plantMaxHealth: 50
-  currentPlantHealth: 50
+  health: 50
   plantMaxWater: 50
-  currentPlantWater: 590
+  plantWater: 50
   waterLoss: 2
   waterLossRate: 1
   noWaterDamage: 1
@@ -25,9 +25,22 @@ MonoBehaviour:
   healthRegenRate: 3
   moveSpeed: 9
   groundDrag: 5
-  jumpForce: 12
+  normalJumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
-  readyToJump: 1
-  standingInWaterTankFillAmount: 0
-  generalTankFillRate: 0
+  jumpCount: 2
+  extraJumpForce: 18
+  waterConsumptionExtraJump: 2
+  flyingIsUnlocked: 1
+  timeUntilFlyingAfterJump: 1.5
+  jetpackFlyForce: 1.5
+  waterConsumptionFlying: 2
+  waterConsumptionFlyingIntervallInSeconds: 0.5
+  hasAntitoxin: 0
+  interactionRange: 10
+  playerTankMaxWaterLevel: 100
+  playerTankWaterLevel: 100
+  standingInWaterTankFillAmount: 10
+  TankFillRateInSeconds: 0.5
+  hasIceSkating: 0
+  hasDash: 0
