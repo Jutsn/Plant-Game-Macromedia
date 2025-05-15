@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05e3fb83746079745ae43716290f0026, type: 3}
-  m_Name: fasterReload
+  m_Name: Plant Water Consumption Down
   m_EditorClassIdentifier: 
-  skillName: Faster Reload
-  maxLevel: 2
-  skillIcon: {fileID: 21300000, guid: 49cfe97e7f6d389479a5bb2eb8585c9b, type: 3}
+  skillName: Water Loss Down
+  maxLevel: 4
+  skillIcon: {fileID: 21300000, guid: 03b677a216202374d98617890ae3b367, type: 3}

@@ -22,13 +22,15 @@ public class SkillTreeManager : MonoBehaviour
     }
     private void Start()
     {
+        //für jeden SkillButton wird überprüft ob der Button geklickt wurde und ob genug Skillpunkte verfügbar sind
         foreach (SkillSlot slot in skillSlots)
         {
             slot.skillButton.onClick.AddListener(() => CheckAvailablePoints(slot));
         }
         UpdateAbilityPoints(0);
     }
-
+    //wenn genug skillpunkte verfügbar sind wird auf das SkillSlot script verwiesen 
+    // und geschaut ob für das gewuenschte Upgrade die vorraussetzungen erfuellt sind
     private void CheckAvailablePoints(SkillSlot slot)
     {
         if(availablePoints > 0)
@@ -44,7 +46,7 @@ public class SkillTreeManager : MonoBehaviour
             UpdateAbilityPoints(-1);
         }
     }
-
+    //wird aufgerufen, wenn skill maximiert, schaltet den nächsten skill frei, wenn vorrausetzungen erfuellt
     private void HandleSkillMaxed(SkillSlot skillSlot)
     {
         foreach (SkillSlot slot in skillSlots)
@@ -56,6 +58,7 @@ public class SkillTreeManager : MonoBehaviour
             
         }
     }
+    //updatet anzeige von skill points
     public void UpdateAbilityPoints(int amount)
     {
         availablePoints += amount;

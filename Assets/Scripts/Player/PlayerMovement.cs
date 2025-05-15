@@ -81,24 +81,47 @@ public class PlayerMovement : MonoBehaviour
     public float interactionRange;
 
 
+    private void OnEnable()
+    {
+        StatsManager.OnStatsChanged += RefreshStats;
+    }
 
+    private void OnDisable()
+    {
+        StatsManager.OnStatsChanged -= RefreshStats;
+    }
 
-	private void Start()
+    private void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.freezeRotation = true;
 		weaponBehaviourSkript = GameObject.Find("Weapon").GetComponent<WeaponBehaviour>();
 		mainPlantSkript = GameObject.Find("Great Plant").GetComponent<MainPlant>();
-		//FlyTimeLeft = jetpackFlyTimeMax;
+        moveSpeed = StatsManager.Instance.stats.moveSpeed;
+        groundDrag = StatsManager.Instance.stats.groundDrag;
+        jumpForce = StatsManager.Instance.stats.jumpForce;
+        jumpCooldown = StatsManager.Instance.stats.jumpCooldown;
+        airMultiplier = StatsManager.Instance.stats.airMultiplier;
+
 	}
+
+    private void RefreshStats(StatsManager stats)
+    {
+        moveSpeed = StatsManager.Instance.stats.moveSpeed;
+        groundDrag = StatsManager.Instance.stats.groundDrag;
+        jumpForce = StatsManager.Instance.stats.jumpForce;
+        jumpCooldown = StatsManager.Instance.stats.jumpCooldown;
+        airMultiplier = StatsManager.Instance.stats.airMultiplier;
+    }
 
     private void Update()
     {
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-        // is MainPlant in Range for Interaction
-        inInteractionRangeWithPlant = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactionRange) && hit.collider.CompareTag("Plant");
-        
+
+        MyInput();
+        SpeedControl();
+		//FlyTimeLeft = jetpackFlyTimeMax;
 		MyInput();
         SpeedControl();
 
@@ -159,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
     {
 		if (Input.GetKey(jumpKey) && readyToJump && grounded && jumpsLeft > 0 && !GameManager.Instance.gameOver) //Sprung am Boden
 		{
-			readyToJump = false; // verhindert durchgängiges Anwenden von Kraft und sorgt für kontrollierten, kurzen Impuls
+			readyToJump = false; // verhindert durchgÃ¤ngiges Anwenden von Kraft und sorgt fÃ¼r kontrollierten, kurzen Impuls
 			readyToFly = false;
 			float jumpPower = normalJumpForce;
 
@@ -170,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
 			Invoke("ResetJump", jumpCooldown);
 			Invoke("ResetFly", TimeUntilFlyingAfterJump);
 		}
-		else if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsLeft > 0 && WaterTank.Instance.waterLevel > 0 && !GameManager.Instance.gameOver) //Sprünge in der Luft
+		else if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsLeft > 0 && WaterTank.Instance.waterLevel > 0 && !GameManager.Instance.gameOver) //SprÃ¼nge in der Luft
 		{
 			readyToJump = false;
 			readyToFly = false;
@@ -187,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
 		else if (Input.GetKey(jumpKey) && readyToJump && readyToFly && hasJetpack && jumpsLeft == 0 && WaterTank.Instance.waterLevel > 0 && !GameManager.Instance.gameOver) //Fly with Jetpack (&& FlyTimeLeft > 0)
 		{
 			Fly();
-			//FlyTimeLeft -= Mathf.Round(Time.deltaTime * 100) / 100f; //Diese Zeile und Bool in else if-Bedingung rausnehmen, um Flugdauer nur von Wasserstand abhängig zu machen. Außerdem maxFlyTime und FlyTime Variablen im Kopf entfernen, da nicht mehr gebraucht.
+			//FlyTimeLeft -= Mathf.Round(Time.deltaTime * 100) / 100f; //Diese Zeile und Bool in else if-Bedingung rausnehmen, um Flugdauer nur von Wasserstand abhÃ¤ngig zu machen. AuÃŸerdem maxFlyTime und FlyTime Variablen im Kopf entfernen, da nicht mehr gebraucht.
 			FlyingWaterConsumption();
 		}
 
@@ -286,7 +309,7 @@ public class PlayerMovement : MonoBehaviour
         // Begrenze die Y-Komponente des Knockbacks
         knockbackDirection.y = Mathf.Clamp(knockbackDirection.y + upwardModifier, 0, maxVerticalKnockback);
 
-        // Stelle sicher, dass der Knockback nicht zu stark vertikal ausfällt
+        // Stelle sicher, dass der Knockback nicht zu stark vertikal ausfï¿½llt
         Vector3 finalKnockback = new Vector3(knockbackDirection.x, knockbackDirection.y, knockbackDirection.z);
         knockbackTime = knockbackDuration;
         isKnockbacked = true;
@@ -295,7 +318,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffüllen, wenn im Wasser stehend
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffï¿½llen, wenn im Wasser stehend
         {
 			fillWater = true;
 			StartCoroutine(FillWaterTankCoroutine(standingInWaterTankFillAmount)); //Timer einbauen
@@ -308,13 +331,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffüllen, wenn im Wasser stehend
+        if (other.gameObject.layer == LayerMask.NameToLayer("Water")) //Wassertank auffï¿½llen, wenn im Wasser stehend
         {
             fillWater = false;
         }
     }
 
-    IEnumerator FillWaterTankCoroutine(int tankFillAmount) //Falls Powerups Tank auch auffüllen können, einfach Coroutine callen und Wert durchgeben
+    IEnumerator FillWaterTankCoroutine(int tankFillAmount) //Falls Powerups Tank auch auffï¿½llen kï¿½nnen, einfach Coroutine callen und Wert durchgeben
     {
         while (fillWater)
         {
