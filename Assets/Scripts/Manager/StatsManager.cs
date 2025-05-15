@@ -131,5 +131,10 @@ public class StatsManager : MonoBehaviour
         stats.playerTankWaterLevel = amount;
         OnStatsChanged.Invoke(this);
     }
+    public void SetAntitoxin(bool hasantitoxin)
+    {
+		stats.hasAntitoxin = hasantitoxin;
+		OnStatsChanged.Invoke(this);
+	}
     #endregion stats
 }

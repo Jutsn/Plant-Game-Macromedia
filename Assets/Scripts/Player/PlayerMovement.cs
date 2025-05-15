@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(InteractionKey) && inInteractionRangeWithPlant && hasAntitoxin && !GameManager.Instance.gameOver) //Pflanze entgiften
 		{
             hasAntitoxin = false;
-			StatsManager.Instance.stats.hasAntitoxin = false;
+            StatsManager.Instance.SetAntitoxin(hasAntitoxin);
 			mainPlantSkript.DetoxPlant();
 		}
     }
@@ -362,8 +362,8 @@ public class PlayerMovement : MonoBehaviour
 		if (other.gameObject.GetComponent<PickUp>().pickUpType == PickUpType.antitoxin) //Antitoxin-Check
 		{
 			hasAntitoxin = true;
-            StatsManager.Instance.stats.hasAntitoxin = true;
-            Destroy(other.gameObject);
+			StatsManager.Instance.SetAntitoxin(hasAntitoxin);
+			Destroy(other.gameObject);
 		}
 	}
 }
