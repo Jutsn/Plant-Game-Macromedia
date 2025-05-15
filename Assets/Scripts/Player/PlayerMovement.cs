@@ -97,9 +97,10 @@ public class PlayerMovement : MonoBehaviour
         playerRb.freezeRotation = true;
 		weaponBehaviourSkript = GameObject.Find("Weapon").GetComponent<WeaponBehaviour>();
 		mainPlantSkript = GameObject.Find("Great Plant").GetComponent<MainPlant>();
-        moveSpeed = StatsManager.Instance.stats.moveSpeed;
+		//FlyTimeLeft = jetpackFlyTimeMax;
+		moveSpeed = StatsManager.Instance.stats.moveSpeed;
         groundDrag = StatsManager.Instance.stats.groundDrag;
-        jumpForce = StatsManager.Instance.stats.jumpForce;
+        normalJumpForce = StatsManager.Instance.stats.jumpForce;
         jumpCooldown = StatsManager.Instance.stats.jumpCooldown;
         airMultiplier = StatsManager.Instance.stats.airMultiplier;
 
@@ -109,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = StatsManager.Instance.stats.moveSpeed;
         groundDrag = StatsManager.Instance.stats.groundDrag;
-        jumpForce = StatsManager.Instance.stats.jumpForce;
+        normalJumpForce = StatsManager.Instance.stats.jumpForce;
         jumpCooldown = StatsManager.Instance.stats.jumpCooldown;
         airMultiplier = StatsManager.Instance.stats.airMultiplier;
     }
@@ -121,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
         SpeedControl();
-		//FlyTimeLeft = jetpackFlyTimeMax;
+		
 		MyInput();
         SpeedControl();
 
