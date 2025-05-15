@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private int waterConsumptionExtraJump;
 
 	[Header("FlyingSkill")]
-	[SerializeField] private bool hasJetpack;
+	[SerializeField] private bool flyingIsUnlocked;
 	[SerializeField] private float timeUntilFlyingAfterJump;
 	[SerializeField] private float jetpackFlyForce;
 	[SerializeField] private int waterConsumptionFlying;
@@ -75,9 +75,10 @@ public class PlayerMovement : MonoBehaviour
     MainPlant mainPlantSkript;
 
 	[Header("Antitoxin-Interaction")]
-	public bool hasAntitoxin;
-    public bool inInteractionRangeWithPlant;
-    public float interactionRange;
+	[SerializeField] private bool hasAntitoxin;
+	[SerializeField] private float interactionRange;
+	private bool inInteractionRangeWithPlant;
+    
 
 
     private void OnEnable()
@@ -104,12 +105,13 @@ public class PlayerMovement : MonoBehaviour
         airMultiplier = StatsManager.Instance.stats.airMultiplier;
 		jumpCount = StatsManager.Instance.stats.jumpCount;
 	    waterConsumptionExtraJump = StatsManager.Instance.stats.waterConsumptionExtraJump;
-		hasJetpack = StatsManager.Instance.stats.hasJetpack;
+		flyingIsUnlocked = StatsManager.Instance.stats.flyingIsUnlocked;
 		timeUntilFlyingAfterJump = StatsManager.Instance.stats.timeUntilFlyingAfterJump;
 		jetpackFlyForce = StatsManager.Instance.stats. jetpackFlyForce;
 		waterConsumptionFlying = StatsManager.Instance.stats.waterConsumptionFlying;
 		waterConsumptionFlyingIntervallInSeconds = StatsManager.Instance.stats.waterConsumptionFlyingIntervallInSeconds;
-
+		hasAntitoxin = StatsManager.Instance.stats.hasAntitoxin;
+		interactionRange = StatsManager.Instance.stats.interactionRange;
 	}
 
     private void RefreshStats(StatsManager stats)
@@ -121,19 +123,24 @@ public class PlayerMovement : MonoBehaviour
         airMultiplier = StatsManager.Instance.stats.airMultiplier;
 		jumpCount = StatsManager.Instance.stats.jumpCount;
 		waterConsumptionExtraJump = StatsManager.Instance.stats.waterConsumptionExtraJump;
-		hasJetpack = StatsManager.Instance.stats.hasJetpack;
+		flyingIsUnlocked = StatsManager.Instance.stats.flyingIsUnlocked;
 		timeUntilFlyingAfterJump = StatsManager.Instance.stats.timeUntilFlyingAfterJump;
 		jetpackFlyForce = StatsManager.Instance.stats.jetpackFlyForce;
 		waterConsumptionFlying = StatsManager.Instance.stats.waterConsumptionFlying;
 		waterConsumptionFlyingIntervallInSeconds = StatsManager.Instance.stats.waterConsumptionFlyingIntervallInSeconds;
+		hasAntitoxin = StatsManager.Instance.stats.hasAntitoxin;
+		interactionRange = StatsManager.Instance.stats.interactionRange;
 	}
 
     private void Update()
     {
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+		// is MainPlant in Range for Interaction
+		inInteractionRangeWithPlant = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactionRange) && hit.collider.CompareTag("Plant");
+        Debug.DrawLine(Camera.main.transform.position, hit.point, Color.yellow);
 
-        MyInput();
+		MyInput();
         SpeedControl();
 
         //handle drag
@@ -182,7 +189,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(InteractionKey) && inInteractionRangeWithPlant && hasAntitoxin && !GameManager.Instance.gameOver) //Pflanze entgiften
 		{
             hasAntitoxin = false;
-            mainPlantSkript.DetoxPlant();
+			StatsManager.Instance.stats.hasAntitoxin = false;
+			mainPlantSkript.DetoxPlant();
 		}
     }
     private void JumpButtonInput()
@@ -200,21 +208,21 @@ public class PlayerMovement : MonoBehaviour
 			Invoke("ResetJump", jumpCooldown);
 			Invoke("ResetFly", timeUntilFlyingAfterJump);
 		}
-		else if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsLeft > 0 && WaterTank.Instance.waterLevel > 0 && !GameManager.Instance.gameOver) //Sprünge in der Luft
+		else if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsLeft > 0 && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver) //Sprünge in der Luft
 		{
 			readyToJump = false;
 			readyToFly = false;
 			float jumpPower = extraJumpForce;
 			jumpsLeft -= 1;
 
-			WaterTank.Instance.waterLevel -= waterConsumptionExtraJump;
+            WaterTank.Instance.UseTankWater(waterConsumptionExtraJump);
 
 			Jump(jumpPower);
 
 			Invoke("ResetJump", jumpCooldown);
 			Invoke("ResetFly", timeUntilFlyingAfterJump);
 		}
-		else if (Input.GetKey(jumpKey) && readyToJump && readyToFly && hasJetpack && jumpsLeft == 0 && WaterTank.Instance.waterLevel > 0 && !GameManager.Instance.gameOver) //Fly with Jetpack (&& FlyTimeLeft > 0)
+		else if (Input.GetKey(jumpKey) && readyToJump && readyToFly && flyingIsUnlocked && jumpsLeft == 0 && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver) //Fly with Jetpack (&& FlyTimeLeft > 0)
 		{
 			Fly();
 			//FlyTimeLeft -= Mathf.Round(Time.deltaTime * 100) / 100f; //Diese Zeile und Bool in else if-Bedingung rausnehmen, um Flugdauer nur von Wasserstand abhängig zu machen. Außerdem maxFlyTime und FlyTime Variablen im Kopf entfernen, da nicht mehr gebraucht.
@@ -271,9 +279,9 @@ public class PlayerMovement : MonoBehaviour
     private void FlyingWaterConsumption()
     {
         flyWaterConsumptionTimer += Time.deltaTime;
-        if(flyWaterConsumptionTimer >= waterConsumptionFlyingIntervallInSeconds) //Nach Ablauf einer Sekunde...
+        if (flyWaterConsumptionTimer >= waterConsumptionFlyingIntervallInSeconds) //Nach Ablauf einer Sekunde...
         {
-			WaterTank.Instance.waterLevel -= waterConsumptionFlying;
+			WaterTank.Instance.UseTankWater(waterConsumptionFlying);
 			flyWaterConsumptionTimer = 0f;
 		}
 		
@@ -354,6 +362,7 @@ public class PlayerMovement : MonoBehaviour
 		if (other.gameObject.GetComponent<PickUp>().pickUpType == PickUpType.antitoxin) //Antitoxin-Check
 		{
 			hasAntitoxin = true;
+            StatsManager.Instance.stats.hasAntitoxin = true;
             Destroy(other.gameObject);
 		}
 	}

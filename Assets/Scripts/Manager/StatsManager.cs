@@ -97,13 +97,19 @@ public class StatsManager : MonoBehaviour
 	    target.waterConsumptionExtraJump = source.waterConsumptionExtraJump;
 
 		//FlyingStats
-		target.hasJetpack = source.hasJetpack;
+		target.flyingIsUnlocked = source.flyingIsUnlocked;
 		target.timeUntilFlyingAfterJump = source.timeUntilFlyingAfterJump;
 		target.jetpackFlyForce = source.jetpackFlyForce;
 		target.waterConsumptionFlying = source.waterConsumptionFlying;
 		target.waterConsumptionFlyingIntervallInSeconds = source.waterConsumptionFlyingIntervallInSeconds;
 
-		// Water Stats
+		//Antitoxin-Interaction
+		target.hasAntitoxin = source.hasAntitoxin;
+        target.interactionRange = source.interactionRange;
+
+        // Water Stats
+        target.playerTankMaxWaterLevel = source.playerTankMaxWaterLevel;
+		target.playerTankWaterLevel = source.playerTankWaterLevel;
 		target.standingInWaterTankFillAmount = source.standingInWaterTankFillAmount;
         target.TankFillRateInSeconds = source.TankFillRateInSeconds;
         OnStatsChanged.Invoke(this);
@@ -119,7 +125,11 @@ public class StatsManager : MonoBehaviour
     {
         stats.plantWater = amount;
         OnStatsChanged.Invoke(this);
-
+    }
+    public void SetPlayerTankWater(int amount)
+    {
+        stats.playerTankWaterLevel = amount;
+        OnStatsChanged.Invoke(this);
     }
     #endregion stats
 }

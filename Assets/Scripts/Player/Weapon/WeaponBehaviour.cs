@@ -23,7 +23,7 @@ public class WeaponBehaviour : MonoBehaviour
 	}
 	void Update()
 	{
-		if (Input.GetButtonDown("Fire1") && standardWeaponMode == StandardWeaponMode.beam && WaterTank.Instance.waterLevel > 0 && !GameManager.Instance.gameOver) // Schie�en solange Maustaste gedr�ckt
+		if (Input.GetButtonDown("Fire1") && standardWeaponMode == StandardWeaponMode.beam && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver) // Schie�en solange Maustaste gedr�ckt
 		{
 			beamParticles.Play();
 			isFiringBeam = true;
@@ -35,7 +35,7 @@ public class WeaponBehaviour : MonoBehaviour
 			beamParticles.Stop(); // Partikel stoppen
 		}
 
-		if(Input.GetButtonDown("Fire1") && isFiringShotgun == false && standardWeaponMode == StandardWeaponMode.shotgun && WaterTank.Instance.waterLevel > 0 && !GameManager.Instance.gameOver)
+		if(Input.GetButtonDown("Fire1") && isFiringShotgun == false && standardWeaponMode == StandardWeaponMode.shotgun && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver)
 		{
 			isFiringShotgun = true;
 			StartCoroutine(ShootShotgun()); //Shoot Shotgun
@@ -46,8 +46,8 @@ public class WeaponBehaviour : MonoBehaviour
 	{	
 		while (isFiringBeam && standardWeaponMode == StandardWeaponMode.beam)
 		{
-			WaterTank.Instance.waterLevel -= waterConsumption;
-			if (WaterTank.Instance.waterLevel < 0)
+			WaterTank.Instance.UseTankWater(waterConsumption);
+			if (WaterTank.Instance.playerTankWaterLevel < 0)
 			{
 				isFiringBeam = false;
 				beamParticles.Stop();
@@ -57,7 +57,7 @@ public class WeaponBehaviour : MonoBehaviour
 
 		if (isFiringShotgun && standardWeaponMode == StandardWeaponMode.shotgun)
 		{
-			WaterTank.Instance.waterLevel -= waterConsumption;
+			WaterTank.Instance.UseTankWater(waterConsumption);
 			yield return new WaitForSeconds(cooldownTimeShotgun);
 			isFiringShotgun = false;
 		}

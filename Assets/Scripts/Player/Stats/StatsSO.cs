@@ -31,18 +31,23 @@ public class StatsSO : ScriptableObject
 	[Header("FlyingStats")]
 	//public float jetpackFlyTimeMax;
 	//public float FlyTimeLeft;
-	public bool hasJetpack = false;
+	public bool flyingIsUnlocked = false;
 	public float timeUntilFlyingAfterJump = 1.5f;
 	public float jetpackFlyForce = 6;
 	public int waterConsumptionFlying = 2;
 	public float waterConsumptionFlyingIntervallInSeconds = 0.5f;
 
+	[Header("Antitoxin-Interaction")]
+	public bool hasAntitoxin = false;
+	public float interactionRange = 10;
+
 	[Header("WaterStats")]
-    public int standingInWaterTankFillAmount;
+	public int playerTankMaxWaterLevel = 50;
+	public int playerTankWaterLevel;
+	public int standingInWaterTankFillAmount;
     public float TankFillRateInSeconds;
 
     [Header("JetpackStats")]
     public bool hasIceSkating;
-    public bool hasFlying;
 	public bool hasDash;
 }

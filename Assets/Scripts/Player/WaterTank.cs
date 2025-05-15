@@ -4,26 +4,62 @@ public class WaterTank : MonoBehaviour
 {
     public static WaterTank Instance;
 
-    public int waterLevel;
-    private int maxWaterLevel;
-    
-    void Awake()
+    public int playerTankMaxWaterLevel;
+	public int playerTankWaterLevel;
+
+	void Awake()
     {
-        Instance = this;
-        maxWaterLevel = waterLevel;
+		if (Instance == null)
+		{
+			Instance = this;
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
+        
     }
+	void OnEnable()
+	{
+		StatsManager.OnStatsChanged += RefreshStats;
+	}
+
+	void OnDisable()
+	{
+		StatsManager.OnStatsChanged += RefreshStats;
+	}
+
+	private void Start()
+	{
+		playerTankMaxWaterLevel = StatsManager.Instance.stats.playerTankMaxWaterLevel;
+		playerTankWaterLevel = StatsManager.Instance.stats.playerTankWaterLevel;
+	}
+
+	void RefreshStats(StatsManager stats)
+	{
+		playerTankMaxWaterLevel = StatsManager.Instance.stats.playerTankMaxWaterLevel;
+		playerTankWaterLevel = StatsManager.Instance.stats.playerTankWaterLevel;
+		
+	}
 	private void Update()
 	{
-		if (waterLevel < 0)
-            waterLevel = 0;
-        if (waterLevel > maxWaterLevel)
-            waterLevel = maxWaterLevel;
-
-        UIManager.Instance.UpdateWaterTankBar(waterLevel, maxWaterLevel); // gibt wasserstand an UI Manager durch
+		if (playerTankWaterLevel < 0)
+            playerTankWaterLevel = 0;
+        if (playerTankWaterLevel > playerTankMaxWaterLevel)
+            playerTankWaterLevel = playerTankMaxWaterLevel;
+		
+        UIManager.Instance.UpdateWaterTankBar(playerTankWaterLevel, playerTankMaxWaterLevel); // gibt wasserstand an UI Manager durch
 	}
 
     public void FillTank(int tankFillRate)
     {
-        waterLevel += tankFillRate;
-    }
+        playerTankWaterLevel += tankFillRate;
+		StatsManager.Instance.SetPlayerTankWater(playerTankWaterLevel);
+	}
+
+	public void UseTankWater (int waterAmount)
+	{
+		playerTankWaterLevel -= waterAmount;
+		StatsManager.Instance.SetPlayerTankWater(playerTankWaterLevel);
+	}
 }
