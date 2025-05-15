@@ -18,10 +18,27 @@ public class StatsSO : ScriptableObject
 
     [Header("PlayerStats")]
     public float moveSpeed = 9;
-    public float groundDrag = 5;
+	public float sprintMultiplier = 1.3f;
+	public float groundDrag = 5;
     public float normalJumpForce = 12;
     public float jumpCooldown = 0.25f;
     public float airMultiplier = 0.4f;
+
+	[Header("IceSprint")]
+	public bool iceSprintIsUnlocked;
+	public float iceMoveSpeed;
+	public int waterConsumptionIceSprint = 2;
+	public float waterConsumptionIceSprintIntervallInSeconds = 0.5f;
+
+	[Header("Dash")]
+	public bool dashIsUnlocked;
+	public int maxDashCount = 3;
+	public int dashCount = 1;
+	public float dashCountResetIntervallInSeconds;
+	public float dashForce = 18;
+	public float timeUntilSpeedControlGetsActivatedAgain = 0.5f;
+	public int waterConsumptionDash = 2;
+	
 
 	[Header("MultiJumpStats")]
 	public int jumpCount = 1;
@@ -45,7 +62,7 @@ public class StatsSO : ScriptableObject
 	public int playerTankMaxWaterLevel = 50;
 	public int playerTankWaterLevel;
 	public int standingInWaterTankFillAmount;
-    public float TankFillRateInSeconds;
+    public float tankFillRateInSeconds;
 
     [Header("JetpackStats")]
     public bool hasIceSkating;

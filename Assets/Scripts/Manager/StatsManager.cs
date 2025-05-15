@@ -86,10 +86,26 @@ public class StatsManager : MonoBehaviour
 
         // Player Stats
         target.moveSpeed = source.moveSpeed;
+        target.sprintMultiplier = source.sprintMultiplier;
         target.groundDrag = source.groundDrag;
         target.normalJumpForce = source.normalJumpForce;
         target.jumpCooldown = source.jumpCooldown;
         target.airMultiplier = source.airMultiplier;
+
+		//Ice-Sprint
+        target.iceSprintIsUnlocked = source.iceSprintIsUnlocked;
+		target.iceMoveSpeed = source.iceMoveSpeed;
+		target.waterConsumptionIceSprint = source.waterConsumptionIceSprint;
+		target.waterConsumptionIceSprintIntervallInSeconds = source.waterConsumptionIceSprintIntervallInSeconds;
+
+        //Dash
+        target.dashIsUnlocked = source.dashIsUnlocked;
+		target.maxDashCount = source.maxDashCount;
+		target.dashCount = source.dashCount;
+		target.dashCountResetIntervallInSeconds = source.dashCountResetIntervallInSeconds;
+		target.dashForce = source.dashForce;
+        target.timeUntilSpeedControlGetsActivatedAgain = source.timeUntilSpeedControlGetsActivatedAgain;
+		target.waterConsumptionDash = source.waterConsumptionDash;
 
 		//MultiJumpStats
 		target.jumpCount = source.jumpCount;
@@ -111,7 +127,7 @@ public class StatsManager : MonoBehaviour
         target.playerTankMaxWaterLevel = source.playerTankMaxWaterLevel;
 		target.playerTankWaterLevel = source.playerTankWaterLevel;
 		target.standingInWaterTankFillAmount = source.standingInWaterTankFillAmount;
-        target.TankFillRateInSeconds = source.TankFillRateInSeconds;
+        target.tankFillRateInSeconds = source.tankFillRateInSeconds;
         OnStatsChanged.Invoke(this);
     }
     // health variable wird mit der MainPlant Health Variable synchronisiert
@@ -136,5 +152,21 @@ public class StatsManager : MonoBehaviour
 		stats.hasAntitoxin = hasantitoxin;
 		OnStatsChanged.Invoke(this);
 	}
+    public void SetGroundDrag(float amount)
+    {
+		stats.groundDrag = amount;
+		OnStatsChanged.Invoke(this);
+	}
+    public void SetSpeed(float amount)
+    {
+		stats.moveSpeed = amount;
+		OnStatsChanged.Invoke(this);
+	}
+    public void SetDashCount(int amount)
+    {
+		stats.dashCount = amount;
+		OnStatsChanged.Invoke(this);
+	}
+
     #endregion stats
 }

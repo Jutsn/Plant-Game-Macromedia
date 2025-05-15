@@ -16,7 +16,7 @@ MonoBehaviour:
   health: 50
   plantMaxWater: 50
   plantWater: 50
-  waterLoss: 2
+  waterLoss: 0
   waterLossRate: 1
   noWaterDamage: 1
   poisonDamage: 1
@@ -24,16 +24,28 @@ MonoBehaviour:
   healthRegen: 1
   healthRegenRate: 3
   moveSpeed: 9
+  sprintMultiplier: 1.4
   groundDrag: 5
   normalJumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
+  iceSprintIsUnlocked: 1
+  iceMoveSpeed: 17
+  waterConsumptionIceSprint: 5
+  waterConsumptionIceSprintIntervallInSeconds: 1
+  dashIsUnlocked: 1
+  maxDashCount: 3
+  dashCount: 3
+  dashCountResetIntervallInSeconds: 2
+  dashForce: 12
+  timeUntilSpeedControlGetsActivatedAgain: 0.1
+  waterConsumptionDash: 2
   jumpCount: 2
   extraJumpForce: 18
   waterConsumptionExtraJump: 2
   flyingIsUnlocked: 1
   timeUntilFlyingAfterJump: 1.5
-  jetpackFlyForce: 1.5
+  jetpackFlyForce: 3
   waterConsumptionFlying: 2
   waterConsumptionFlyingIntervallInSeconds: 0.5
   hasAntitoxin: 0
@@ -41,6 +53,6 @@ MonoBehaviour:
   playerTankMaxWaterLevel: 100
   playerTankWaterLevel: 100
   standingInWaterTankFillAmount: 10
-  TankFillRateInSeconds: 0.5
+  tankFillRateInSeconds: 0.5
   hasIceSkating: 0
   hasDash: 0

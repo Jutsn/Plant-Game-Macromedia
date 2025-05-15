@@ -4889,6 +4889,14 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: dashCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: dashForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
       propertyPath: jumpCount
       value: 2
       objectReference: {fileID: 0}
@@ -4903,6 +4911,10 @@ PrefabInstance:
     - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
       propertyPath: jumpCooldown
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: maxDashCount
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
       propertyPath: hasDoubleJump
@@ -4961,6 +4973,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
+      propertyPath: dashCountResetIntervallInSeconds
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
       propertyPath: waterConsumptionFlyingIntervallInSeconds
       value: 0.5
       objectReference: {fileID: 0}
@@ -4980,6 +4996,10 @@ PrefabInstance:
     - target: {fileID: 4377544965600102647, guid: d22580292675e824582cbb05d0b5381c, type: 3}
       propertyPath: m_Name
       value: Spawn Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4377544965600102647, guid: d22580292675e824582cbb05d0b5381c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7221166587014927219, guid: d22580292675e824582cbb05d0b5381c, type: 3}
       propertyPath: m_LocalScale.x
@@ -5149,6 +5169,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2960662899981771115, guid: c0e23e472df6c0245b368ee8d57eee3c, type: 3}
+      propertyPath: waterLossRate
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3605367296733249113, guid: c0e23e472df6c0245b368ee8d57eee3c, type: 3}
       propertyPath: m_Name
       value: Great Plant
