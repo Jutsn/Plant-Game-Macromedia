@@ -28,23 +28,22 @@ public class PlayerMovement : MonoBehaviour
 
 	Rigidbody playerRb;
 
-	[Header("Movement Skills")]
+	[Header("MultiJumpSkill")]
 	[SerializeField] private int jumpCount;
 	[SerializeField] private float extraJumpForce;
 	private int jumpsLeft;
 	[SerializeField] private int waterConsumptionExtraJump;
 
-	//[SerializeField] private float jetpackFlyTimeMax;
-	//private float FlyTimeLeft;
+	[Header("FlyingSkill")]
 	[SerializeField] private bool hasJetpack;
+	[SerializeField] private float timeUntilFlyingAfterJump;
 	[SerializeField] private float jetpackFlyForce;
-	[SerializeField] private float TimeUntilFlyingAfterJump;
-	private bool readyToFly = true;
-
-
 	[SerializeField] private int waterConsumptionFlying;
 	[SerializeField] private float waterConsumptionFlyingIntervallInSeconds;
+	private bool readyToFly = true;
 	private float flyWaterConsumptionTimer = 0f;
+	//[SerializeField] private float jetpackFlyTimeMax;
+	//private float FlyTimeLeft;
 
 	[Header("Knockback")]
     [SerializeField] private int knockbackForce;
@@ -100,9 +99,16 @@ public class PlayerMovement : MonoBehaviour
 		//FlyTimeLeft = jetpackFlyTimeMax;
 		moveSpeed = StatsManager.Instance.stats.moveSpeed;
         groundDrag = StatsManager.Instance.stats.groundDrag;
-        normalJumpForce = StatsManager.Instance.stats.jumpForce;
+        normalJumpForce = StatsManager.Instance.stats.normalJumpForce;
         jumpCooldown = StatsManager.Instance.stats.jumpCooldown;
         airMultiplier = StatsManager.Instance.stats.airMultiplier;
+		jumpCount = StatsManager.Instance.stats.jumpCount;
+	    waterConsumptionExtraJump = StatsManager.Instance.stats.waterConsumptionExtraJump;
+		hasJetpack = StatsManager.Instance.stats.hasJetpack;
+		timeUntilFlyingAfterJump = StatsManager.Instance.stats.timeUntilFlyingAfterJump;
+		jetpackFlyForce = StatsManager.Instance.stats. jetpackFlyForce;
+		waterConsumptionFlying = StatsManager.Instance.stats.waterConsumptionFlying;
+		waterConsumptionFlyingIntervallInSeconds = StatsManager.Instance.stats.waterConsumptionFlyingIntervallInSeconds;
 
 	}
 
@@ -110,10 +116,17 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = StatsManager.Instance.stats.moveSpeed;
         groundDrag = StatsManager.Instance.stats.groundDrag;
-        normalJumpForce = StatsManager.Instance.stats.jumpForce;
+        normalJumpForce = StatsManager.Instance.stats.normalJumpForce;
         jumpCooldown = StatsManager.Instance.stats.jumpCooldown;
         airMultiplier = StatsManager.Instance.stats.airMultiplier;
-    }
+		jumpCount = StatsManager.Instance.stats.jumpCount;
+		waterConsumptionExtraJump = StatsManager.Instance.stats.waterConsumptionExtraJump;
+		hasJetpack = StatsManager.Instance.stats.hasJetpack;
+		timeUntilFlyingAfterJump = StatsManager.Instance.stats.timeUntilFlyingAfterJump;
+		jetpackFlyForce = StatsManager.Instance.stats.jetpackFlyForce;
+		waterConsumptionFlying = StatsManager.Instance.stats.waterConsumptionFlying;
+		waterConsumptionFlyingIntervallInSeconds = StatsManager.Instance.stats.waterConsumptionFlyingIntervallInSeconds;
+	}
 
     private void Update()
     {
@@ -121,9 +134,6 @@ public class PlayerMovement : MonoBehaviour
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
         MyInput();
-        SpeedControl();
-		
-		MyInput();
         SpeedControl();
 
         //handle drag
@@ -162,9 +172,6 @@ public class PlayerMovement : MonoBehaviour
 
         JumpButtonInput();
 
-
-		
-
 		GetMouseInput();
 
         if (Input.GetKeyDown(weaponModeChangeKey) || isMouseWheelScrolled && !GameManager.Instance.gameOver)
@@ -177,7 +184,6 @@ public class PlayerMovement : MonoBehaviour
             hasAntitoxin = false;
             mainPlantSkript.DetoxPlant();
 		}
-
     }
     private void JumpButtonInput()
     {
@@ -192,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
 			Jump(jumpPower);
 
 			Invoke("ResetJump", jumpCooldown);
-			Invoke("ResetFly", TimeUntilFlyingAfterJump);
+			Invoke("ResetFly", timeUntilFlyingAfterJump);
 		}
 		else if (Input.GetKeyDown(jumpKey) && readyToJump && jumpsLeft > 0 && WaterTank.Instance.waterLevel > 0 && !GameManager.Instance.gameOver) //Sprünge in der Luft
 		{
@@ -206,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
 			Jump(jumpPower);
 
 			Invoke("ResetJump", jumpCooldown);
-			Invoke("ResetFly", TimeUntilFlyingAfterJump);
+			Invoke("ResetFly", timeUntilFlyingAfterJump);
 		}
 		else if (Input.GetKey(jumpKey) && readyToJump && readyToFly && hasJetpack && jumpsLeft == 0 && WaterTank.Instance.waterLevel > 0 && !GameManager.Instance.gameOver) //Fly with Jetpack (&& FlyTimeLeft > 0)
 		{
@@ -262,7 +268,6 @@ public class PlayerMovement : MonoBehaviour
 
 		playerRb.AddForce(transform.up * jetpackFlyForce, ForceMode.Impulse);
 	}
-
     private void FlyingWaterConsumption()
     {
         flyWaterConsumptionTimer += Time.deltaTime;
@@ -273,17 +278,14 @@ public class PlayerMovement : MonoBehaviour
 		}
 		
 	}
-
 	private void ResetJump()
     {
         readyToJump = true;
     }
-
 	private void ResetFly()
 	{
 		readyToFly = true;
 	}
-
 	private void GetMouseInput()
 	{
 		if (mouseWheelInput != 0)

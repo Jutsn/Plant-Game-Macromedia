@@ -87,26 +87,37 @@ public class StatsManager : MonoBehaviour
         // Player Stats
         target.moveSpeed = source.moveSpeed;
         target.groundDrag = source.groundDrag;
-        target.jumpForce = source.jumpForce;
+        target.normalJumpForce = source.normalJumpForce;
         target.jumpCooldown = source.jumpCooldown;
         target.airMultiplier = source.airMultiplier;
-        target.readyToJump = source.readyToJump;
 
-        // Water Stats
-        target.standingInWaterTankFillAmount = source.standingInWaterTankFillAmount;
-        target.generalTankFillRate = source.generalTankFillRate;
+		//MultiJumpStats
+		target.jumpCount = source.jumpCount;
+	    target.extraJumpForce = source.extraJumpForce;
+	    target.waterConsumptionExtraJump = source.waterConsumptionExtraJump;
+
+		//FlyingStats
+		target.hasJetpack = source.hasJetpack;
+		target.timeUntilFlyingAfterJump = source.timeUntilFlyingAfterJump;
+		target.jetpackFlyForce = source.jetpackFlyForce;
+		target.waterConsumptionFlying = source.waterConsumptionFlying;
+		target.waterConsumptionFlyingIntervallInSeconds = source.waterConsumptionFlyingIntervallInSeconds;
+
+		// Water Stats
+		target.standingInWaterTankFillAmount = source.standingInWaterTankFillAmount;
+        target.TankFillRateInSeconds = source.TankFillRateInSeconds;
         OnStatsChanged.Invoke(this);
     }
     // health variable wird mit der MainPlant Health Variable synchronisiert
     public void SetHealth(int amount)
     {
-        stats.health += amount;
+        stats.health = amount;
         OnStatsChanged.Invoke(this);
     }
     // plantWater variable wird mit der MainPlant plantWater Variable synchronisiert
     public void SetPlantWater(float amount)
     {
-        stats.plantWater += amount;
+        stats.plantWater = amount;
         OnStatsChanged.Invoke(this);
 
     }

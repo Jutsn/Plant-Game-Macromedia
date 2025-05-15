@@ -19,17 +19,30 @@ public class StatsSO : ScriptableObject
     [Header("PlayerStats")]
     public float moveSpeed = 9;
     public float groundDrag = 5;
-    public float jumpForce = 12;
+    public float normalJumpForce = 12;
     public float jumpCooldown = 0.25f;
     public float airMultiplier = 0.4f;
 
-    [Header("WaterStats")]
+	[Header("MultiJumpStats")]
+	public int jumpCount = 1;
+	public float extraJumpForce = 18;
+	public int waterConsumptionExtraJump = 2;
+
+	[Header("FlyingStats")]
+	//public float jetpackFlyTimeMax;
+	//public float FlyTimeLeft;
+	public bool hasJetpack = false;
+	public float timeUntilFlyingAfterJump = 1.5f;
+	public float jetpackFlyForce = 6;
+	public int waterConsumptionFlying = 2;
+	public float waterConsumptionFlyingIntervallInSeconds = 0.5f;
+
+	[Header("WaterStats")]
     public int standingInWaterTankFillAmount;
     public float TankFillRateInSeconds;
 
     [Header("JetpackStats")]
     public bool hasIceSkating;
-    public int jumpCount = 1;
     public bool hasFlying;
 	public bool hasDash;
 }

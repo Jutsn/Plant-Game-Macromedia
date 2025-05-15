@@ -2255,9 +2255,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseStats: {fileID: 11400000, guid: d93ae459512da654babdbacace04991e, type: 2}
   stats: {fileID: 11400000, guid: 5ae7778b732733e42b35c6dbc10431e4, type: 2}
-  healthText: {fileID: 0}
-  moveSpeed: 0
-  jumpForce: 0
 --- !u!4 &1199776371
 Transform:
   m_ObjectHideFlags: 0
