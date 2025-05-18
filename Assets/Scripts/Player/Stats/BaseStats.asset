@@ -16,9 +16,9 @@ MonoBehaviour:
   health: 50
   plantMaxWater: 50
   plantWater: 50
-  waterLoss: 0
+  waterLoss: 1
   waterLossRate: 1
-  noWaterDamage: 1
+  noWaterDamage: 10
   poisonDamage: 1
   passiveHealthLossRate: 1
   healthRegen: 1

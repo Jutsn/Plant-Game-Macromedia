@@ -40,9 +40,7 @@ public class SoundManager : MonoBehaviour
 					audioSource[i].clip = hitMarkerSound;
 					audioSource[i].transform.position = collisionPoint;
 					//audioSource[i].volume = Mathf.Lerp(0.55f,0.01f,distanceToCollisionPoint);
-					Debug.Log(audioSource[i].volume);
 					audioSource[i].Play();
-					Debug.Log("AudioSource" + i + "is playing.");
 					yield return new WaitForSeconds(rate);
 					isSplashPlaying = false;
 					break;

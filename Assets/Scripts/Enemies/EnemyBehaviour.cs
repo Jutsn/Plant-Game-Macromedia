@@ -10,7 +10,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	protected int damageMade;
 	protected Rigidbody rb;
 	protected float enemyHealth;
-	//protected Collider enemyCollider; //Man könnte einen größeren Collider um die Gegner herum ziehen, um Spielerannäherung zu erkennen und hn statt der Main Plant anzugreifen
+	//protected Collider enemyCollider; //Man könnte einen größeren Collider um die Gegner herum ziehen, um Spielerannäherung zu erkennen und ihn statt der Main Plant anzugreifen
 
 	
 	protected virtual void OnEnable()
@@ -60,9 +60,38 @@ public abstract class EnemyBehaviour : MonoBehaviour
 		enemyHealth -= damageOfAmmo;
 		if (enemyHealth < 0)
 		{
-			gameObject.SetActive(false);
+			Death();
 		}
 		
 	}
- 
+
+	public virtual void Death()
+	{
+		GameManager.Instance.killedEnemies += 1;
+		DropResources();
+		gameObject.SetActive(false);
+	}
+
+	protected virtual void DropResources()
+	{
+		int randomNumber = Random.Range(1, 101);
+		int dropChance = GetDropChance();
+		if (randomNumber >= 1 && randomNumber <= dropChance)
+		{
+			GameObject resource1 = Resource1Pool.Instance.GetPooledObject();
+
+			if (resource1 != null)
+			{
+				resource1.transform.position = transform.position;
+				resource1.transform.rotation = transform.rotation;
+				resource1.SetActive(true);
+			}
+		}
+	}
+
+	protected virtual int GetDropChance()
+	{
+		int dropChance = 0;
+		return dropChance;
+	}
 }

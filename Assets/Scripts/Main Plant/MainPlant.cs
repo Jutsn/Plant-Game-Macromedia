@@ -106,7 +106,6 @@ public class MainPlant : MonoBehaviour
 			}
 			if (health == 0) //Wenn keine Leben
 			{
-				GameManager.Instance.gameOver = true; //gameOver-Variable in GameManager true setzen und Schleife nicht nochmal wiederholen
 				GameManager.Instance.GameOver(); //GameOver-Methode in GameManager callen 
 			}
 			yield return new WaitForSeconds(passiveHealthLossRate); //Warte vor n�chster Wiederholung f�r ...Sekunden

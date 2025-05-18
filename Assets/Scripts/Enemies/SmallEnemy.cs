@@ -19,4 +19,10 @@ public class SmallEnemy : EnemyBehaviour
 		base.DoDamage(); //Basis-Funktion des Eltern-Skripts ausführen
 		gameObject.SetActive(false); ////Setze kleine Gegner inaktiv für Object-Pooling
 	}
+
+	protected override int GetDropChance()
+	{
+		int dropChance = GameManager.Instance.GetDropChanceResource1SmallEnemy();
+		return dropChance;
+	}
 }

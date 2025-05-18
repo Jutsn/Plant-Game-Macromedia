@@ -1,11 +1,11 @@
-using Unity.Mathematics;
+
 using UnityEngine;
-using System;
 using System.Collections;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject[] spawnPoints;
+    public GameObject[] enemySpawnPoints;
+    public GameObject[] resource2SpawnPoints;
 
 	[SerializeField] private int smallEnemyAmountA;
 	[SerializeField] private int bigEnemyAmountA;
@@ -16,7 +16,8 @@ public class SpawnManager : MonoBehaviour
 
 	void Start()
     {
-        spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
+        enemySpawnPoints = GameObject.FindGameObjectsWithTag("Enemy Spawn Point");
+        resource2SpawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point Resource 2");
         StartCoroutine(SpawnCoroutineA());
 		StartCoroutine(SpawnCoroutineB());
     }
@@ -33,8 +34,8 @@ public class SpawnManager : MonoBehaviour
 
 				if (smallEnemy != null)
 				{
-					smallEnemy.transform.position = spawnPoints[0].transform.position;
-					smallEnemy.transform.rotation = spawnPoints[0].transform.rotation;
+					smallEnemy.transform.position = enemySpawnPoints[0].transform.position;
+					smallEnemy.transform.rotation = enemySpawnPoints[0].transform.rotation;
 					smallEnemy.SetActive(true);
 				}
 
@@ -51,8 +52,8 @@ public class SpawnManager : MonoBehaviour
 
 				if (bigEnemy != null)
 				{
-					bigEnemy.transform.position = spawnPoints[0].transform.position;
-					bigEnemy.transform.rotation = spawnPoints[0].transform.rotation;
+					bigEnemy.transform.position = enemySpawnPoints[0].transform.position;
+					bigEnemy.transform.rotation = enemySpawnPoints[0].transform.rotation;
 					bigEnemy.SetActive(true);
 				}
 
@@ -77,8 +78,8 @@ public class SpawnManager : MonoBehaviour
 
 				if (smallEnemy != null)
 				{
-					smallEnemy.transform.position = spawnPoints[1].transform.position;
-					smallEnemy.transform.rotation = spawnPoints[1].transform.rotation;
+					smallEnemy.transform.position = enemySpawnPoints[1].transform.position;
+					smallEnemy.transform.rotation = enemySpawnPoints[1].transform.rotation;
 					smallEnemy.SetActive(true);
 				}
 
@@ -95,8 +96,8 @@ public class SpawnManager : MonoBehaviour
 
 				if (bigEnemy != null)
 				{
-					bigEnemy.transform.position = spawnPoints[1].transform.position;
-					bigEnemy.transform.rotation = spawnPoints[1].transform.rotation;
+					bigEnemy.transform.position = enemySpawnPoints[1].transform.position;
+					bigEnemy.transform.rotation = enemySpawnPoints[1].transform.rotation;
 					bigEnemy.SetActive(true);
 				}
 
@@ -107,5 +108,25 @@ public class SpawnManager : MonoBehaviour
 				yield return new WaitForSeconds(spawnRatePointB);
 			}
 		}
+	}
+
+	public void SpawnResource2()
+	{
+		GameObject resource2 = Resource2Pool.Instance.GetPooledObject();
+
+		if (resource2 != null)
+		{
+			resource2.transform.position = GetResource2SpawnPoint();
+			resource2.transform.rotation = resource2.transform.rotation;
+			resource2.SetActive(true);
+		}
+	}
+
+	private Vector3 GetResource2SpawnPoint()
+	{
+		int i = Random.Range(0, resource2SpawnPoints.Length);
+		Vector3 spawnPos = resource2SpawnPoints[i].transform.position;
+
+		return spawnPos;
 	}
 }

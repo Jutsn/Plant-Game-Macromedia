@@ -120,7 +120,6 @@ public class StatsManager : MonoBehaviour
 		target.waterConsumptionFlyingIntervallInSeconds = source.waterConsumptionFlyingIntervallInSeconds;
 
 		//Antitoxin-Interaction
-		target.hasAntitoxin = source.hasAntitoxin;
         target.interactionRange = source.interactionRange;
 
         // Water Stats
@@ -147,11 +146,7 @@ public class StatsManager : MonoBehaviour
         stats.playerTankWaterLevel = amount;
         OnStatsChanged.Invoke(this);
     }
-    public void SetAntitoxin(bool hasantitoxin)
-    {
-		stats.hasAntitoxin = hasantitoxin;
-		OnStatsChanged.Invoke(this);
-	}
+    
     public void SetGroundDrag(float amount)
     {
 		stats.groundDrag = amount;

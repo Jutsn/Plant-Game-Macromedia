@@ -8,7 +8,8 @@ using UnityEngine.InputSystem.XR;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
+	#region Variablen
+	[Header("Movement")]
     [SerializeField] private float moveSpeed;
 	private float walkSpeed;
 	private float sprintSpeed;
@@ -31,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
 	float verticalInput;
 	public float mouseWheelInput;
 	bool isMouseWheelScrolled;
-
 
     [Header("DoubleTapRecognitionOfSprintKey")]
 	private float doubleTapTime = 0.7f;  // Max Zeit zwischen zwei Tastenanschlägen
@@ -107,13 +107,12 @@ public class PlayerMovement : MonoBehaviour
     MainPlant mainPlantSkript;
 
 	[Header("Antitoxin-Interaction")]
-	[SerializeField] private bool hasAntitoxin;
 	[SerializeField] private float interactionRange;
 	private bool inInteractionRangeWithPlant;
-    
 
+	#endregion Variablen
 
-    private void OnEnable()
+	private void OnEnable()
     {
         StatsManager.OnStatsChanged += RefreshStats;
     }
@@ -174,7 +173,6 @@ public class PlayerMovement : MonoBehaviour
 		standingInWaterTankFillAmount = StatsManager.Instance.stats.standingInWaterTankFillAmount;
 		tankFillRateInSeconds = StatsManager.Instance.stats.tankFillRateInSeconds;
 		//Antitoxin-Interaction
-		hasAntitoxin = StatsManager.Instance.stats.hasAntitoxin;
 		interactionRange = StatsManager.Instance.stats.interactionRange;
 		#endregion stats
 	}
@@ -244,7 +242,7 @@ public class PlayerMovement : MonoBehaviour
 
 		JumpButtonInput();
 
-		if (Input.GetKeyDown(dashKey) && dashCount > 0 && !doDash && dashIsUnlocked) // wird in Fixed Update ausgeführt
+		if (Input.GetKeyDown(dashKey) && dashCount > 0 && !doDash && dashIsUnlocked && !GameManager.Instance.gameOver) // wird in Fixed Update ausgeführt
 		{
 			dashCount--;
 			StatsManager.Instance.SetDashCount(dashCount);
@@ -259,13 +257,13 @@ public class PlayerMovement : MonoBehaviour
             weaponBehaviourSkript.SwitchWeaponMode();
 		}
 
-        if (Input.GetKeyDown(interactionKey) && inInteractionRangeWithPlant && hasAntitoxin && !GameManager.Instance.gameOver) //Pflanze entgiften
+        if (Input.GetKeyDown(interactionKey) && inInteractionRangeWithPlant && GameManager.Instance.resources.antitoxin > 0 && !GameManager.Instance.gameOver) //Pflanze entgiften
 		{
-            hasAntitoxin = false;
-            StatsManager.Instance.SetAntitoxin(hasAntitoxin);
+			GameManager.Instance.LooseAntitoxin();
 			mainPlantSkript.DetoxPlant();
 		}
     }
+	#region Movement
 	private void GetMouseInput()
 	{
 		if (mouseWheelInput != 0)
@@ -461,7 +459,6 @@ public class PlayerMovement : MonoBehaviour
 		}
 		
 	}
-	
 	private void ResetFly()
 	{
 		readyToFly = true;
@@ -476,6 +473,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 	}
+	#endregion Movement
 
 	private void OnCollisionEnter(Collision collision)
     {
@@ -505,7 +503,7 @@ public class PlayerMovement : MonoBehaviour
 			fillWater = true;
 			StartCoroutine(FillWaterTankCoroutine(standingInWaterTankFillAmount)); //Timer einbauen
         }
-        if (other.gameObject.CompareTag("PickUp"))
+		if (other.gameObject.CompareTag("PickUp"))
         {
 			CheckPickUpType(other);
 		}
@@ -531,14 +529,22 @@ public class PlayerMovement : MonoBehaviour
 			yield return new WaitForSeconds(tankFillRateInSeconds);
 		}
     }
-
     void CheckPickUpType(Collider other)
     {
 		if (other.gameObject.GetComponent<PickUp>().pickUpType == PickUpType.antitoxin) //Antitoxin-Check
 		{
-			hasAntitoxin = true;
-			StatsManager.Instance.SetAntitoxin(hasAntitoxin);
+			GameManager.Instance.GetAntitoxin();
 			Destroy(other.gameObject);
+		}
+		else if (other.gameObject.GetComponent<PickUp>().pickUpType == PickUpType.resource1)
+		{
+			GameManager.Instance.GetResource1();
+			other.gameObject.SetActive(false);
+		}
+		else if (other.gameObject.GetComponent<PickUp>().pickUpType == PickUpType.resource2)
+		{
+			GameManager.Instance.GetResource2();
+			other.gameObject.SetActive(false);
 		}
 	}
 }

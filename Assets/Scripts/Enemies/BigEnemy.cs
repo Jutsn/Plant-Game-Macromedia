@@ -22,4 +22,10 @@ public class BigEnemy : EnemyBehaviour
 	{
 		mainPlantScript.mainPlantState = MainPlantState.poisened; //Zustand der Main Plant auf "poisened" setzen
 	}
+
+	protected override int GetDropChance()
+	{
+		int dropChance = GameManager.Instance.GetDropChanceResource1BigEnemy();
+		return dropChance;
+	}
 }

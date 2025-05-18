@@ -4,15 +4,17 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Spawn Point
   - Enemy
   - PickUp
   - Plant
+  - Spawn Point Resource 2
+  - Enemy Spawn Point
+  - Spawn Point
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Loot
   - Water
   - UI
   - 
