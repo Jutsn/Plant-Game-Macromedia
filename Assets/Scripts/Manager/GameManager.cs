@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int missionTimer = 0;
     public int missionTimeMax = 1200;
 	public int waveLength = 150;
+    public bool waveActive;
 	public int killedEnemies = 0;
 
     private SpawnManager spawnManagerScript;
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
 	void OnEnable()
 	{
 		SceneManager.sceneLoaded += OnSceneLoaded;
-        spawnManagerScript = GameObject.FindAnyObjectByType<SpawnManager>();
+        spawnManagerScript = FindAnyObjectByType<SpawnManager>();
 	}
 
 	void OnDisable()
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
 
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        waveActive = true;
         StartCoroutine(MissionTimerCoroutine());
     }
 
@@ -63,7 +66,6 @@ public class GameManager : MonoBehaviour
                 ResumeGame();
                 UIManager.Instance.HideUpgradeUI();
             }
-
         }
     }
     public void GameOver()
@@ -78,16 +80,17 @@ public class GameManager : MonoBehaviour
     {
         while (!gameOver)
         {
-			if (missionTimer < missionTimeMax)
+			yield return new WaitForSeconds(1);
+			if (missionTimer < missionTimeMax && waveActive)
 			{
-				yield return new WaitForSeconds(1);
 				missionTimer += 1;
 
-                if (missionTimer % waveLength == 0)
-                {
-                    spawnManagerScript.SpawnResource2();
-                }
-
+				if (missionTimer % waveLength == 0) //Welle beenden
+				{
+					spawnManagerScript.SpawnResource2();
+					spawnManagerScript.SpawnEliteEnemy(); //Spawn Elite
+					waveActive = false;
+				}
 			}
             else if (missionTimer >= missionTimeMax)
 			{
@@ -96,6 +99,12 @@ public class GameManager : MonoBehaviour
 			}
 		}
 	}
+
+    public IEnumerator SetWaveActiveAgainCoroutine()
+    {
+        yield return new WaitForSeconds (1);
+        waveActive = true;
+    }
 
     #region pause game
     public void PauseGame()
@@ -111,9 +120,10 @@ public class GameManager : MonoBehaviour
         IsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    } 
-    #endregion    
+    }
+    #endregion
 
+    #region ResourceFunctions
     public void GetResource1()
     {
         resources.resource1 += 1;
@@ -135,7 +145,10 @@ public class GameManager : MonoBehaviour
 		resources.antitoxin -= 1;
 	}
 
-    public int GetDropChanceResource1SmallEnemy()
+	#endregion ResourceFunctions
+
+	#region DropchanceFunctions
+	public int GetDropChanceResource1SmallEnemy()
     {
         return resources.dropChanceResource1SmallEnemy;
     }
@@ -152,4 +165,5 @@ public class GameManager : MonoBehaviour
     {
         return resources.maxDropAmountResource2Elite;
     }
+	#endregion DropchanceFunctions
 }

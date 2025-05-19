@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class BigEnemyElite : BigEnemy
 {
+	public override void Death()
+	{
+		GameManager.Instance.StartCoroutine(GameManager.Instance.SetWaveActiveAgainCoroutine());
+		base.Death();
+		
+		//SetWave Active
+	}
 	protected override void DropResources()
 	{
 		

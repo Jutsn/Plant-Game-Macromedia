@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -9,9 +10,9 @@ public class SpawnManager : MonoBehaviour
 
 	[SerializeField] private int smallEnemyAmountA;
 	[SerializeField] private int bigEnemyAmountA;
+	[SerializeField] private float spawnRatePointA;
 	[SerializeField] private int smallEnemyAmountB;
 	[SerializeField] private int bigEnemyAmountB;							//neuen Enemy-Pool erstellen, falls neuer Gegnertyp hinzukommt
-	[SerializeField] private float spawnRatePointA;
 	[SerializeField] private float spawnRatePointB;
 
 	void Start()
@@ -28,41 +29,53 @@ public class SpawnManager : MonoBehaviour
 
 		while (!GameManager.Instance.gameOver)
 		{
-			for (int i = 0; i < smallEnemyAmountA; i++)
+			while (GameManager.Instance.waveActive)
 			{
-				GameObject smallEnemy = SmallEnemyPool.Instance.GetPooledObject();
-
-				if (smallEnemy != null)
+				for (int i = 0; i < smallEnemyAmountA; i++)
 				{
-					smallEnemy.transform.position = enemySpawnPoints[0].transform.position;
-					smallEnemy.transform.rotation = enemySpawnPoints[0].transform.rotation;
-					smallEnemy.SetActive(true);
+					GameObject smallEnemy = SmallEnemyPool.Instance.GetPooledObject();
+
+					if (smallEnemy != null)
+					{
+						smallEnemy.transform.position = enemySpawnPoints[0].transform.position;
+						smallEnemy.transform.rotation = enemySpawnPoints[0].transform.rotation;
+						smallEnemy.SetActive(true);
+					}
+
+					if (GameManager.Instance.gameOver)
+					{
+						yield break; //für sofortigen SpawnStopp bei GameOver 
+					}
+					else if (!GameManager.Instance.waveActive)
+					{
+						break;
+					}
+					yield return new WaitForSeconds(spawnRatePointA);
 				}
 
-				if (GameManager.Instance.gameOver)
+				for (int i = 0; i < bigEnemyAmountA; i++)
 				{
-					yield break; //für sofortigen SpawnStopp bei GameOver 
+					GameObject bigEnemy = BigEnemyPool.Instance.GetPooledObject();
+
+					if (bigEnemy != null)
+					{
+						bigEnemy.transform.position = enemySpawnPoints[0].transform.position;
+						bigEnemy.transform.rotation = enemySpawnPoints[0].transform.rotation;
+						bigEnemy.SetActive(true);
+					}
+
+					if (GameManager.Instance.gameOver)
+					{
+						yield break; //für sofortigen SpawnStopp bei GameOver
+					}
+					else if (!GameManager.Instance.waveActive)
+					{
+						break;
+					}
+					yield return new WaitForSeconds(spawnRatePointA);
 				}
-				yield return new WaitForSeconds(spawnRatePointA);
 			}
-
-			for (int i = 0; i < bigEnemyAmountA; i++)
-			{
-				GameObject bigEnemy = BigEnemyPool.Instance.GetPooledObject();
-
-				if (bigEnemy != null)
-				{
-					bigEnemy.transform.position = enemySpawnPoints[0].transform.position;
-					bigEnemy.transform.rotation = enemySpawnPoints[0].transform.rotation;
-					bigEnemy.SetActive(true);
-				}
-
-				if (GameManager.Instance.gameOver)
-				{
-					yield break; //für sofortigen SpawnStopp bei GameOver
-				}
-				yield return new WaitForSeconds(spawnRatePointA);
-			}
+			yield return new WaitForSeconds(2);
 		}
 	}
 
@@ -72,41 +85,53 @@ public class SpawnManager : MonoBehaviour
 
 		while (!GameManager.Instance.gameOver)
 		{
-			for (int i = 0; i < smallEnemyAmountB; i++)
+			while (GameManager.Instance.waveActive)
 			{
-				GameObject smallEnemy = SmallEnemyPool.Instance.GetPooledObject();
-
-				if (smallEnemy != null)
+				for (int i = 0; i < smallEnemyAmountB; i++)
 				{
-					smallEnemy.transform.position = enemySpawnPoints[1].transform.position;
-					smallEnemy.transform.rotation = enemySpawnPoints[1].transform.rotation;
-					smallEnemy.SetActive(true);
+					GameObject smallEnemy = SmallEnemyPool.Instance.GetPooledObject();
+
+					if (smallEnemy != null)
+					{
+						smallEnemy.transform.position = enemySpawnPoints[1].transform.position;
+						smallEnemy.transform.rotation = enemySpawnPoints[1].transform.rotation;
+						smallEnemy.SetActive(true);
+					}
+
+					if (GameManager.Instance.gameOver)
+					{
+						yield break; //für sofortigen SpawnStopp bei GameOver
+					}
+					else if (!GameManager.Instance.waveActive)
+					{
+						break;
+					}
+					yield return new WaitForSeconds(spawnRatePointB);
 				}
 
-				if (GameManager.Instance.gameOver)
+				for (int i = 0; i < bigEnemyAmountB; i++)
 				{
-					yield break; //für sofortigen SpawnStopp bei GameOver
+					GameObject bigEnemy = BigEnemyPool.Instance.GetPooledObject();
+
+					if (bigEnemy != null)
+					{
+						bigEnemy.transform.position = enemySpawnPoints[1].transform.position;
+						bigEnemy.transform.rotation = enemySpawnPoints[1].transform.rotation;
+						bigEnemy.SetActive(true);
+					}
+
+					if (GameManager.Instance.gameOver)
+					{
+						yield break; //für sofortigen SpawnStopp bei GameOver
+					}
+					else if (!GameManager.Instance.waveActive)
+					{
+						break;
+					}
+					yield return new WaitForSeconds(spawnRatePointB);
 				}
-				yield return new WaitForSeconds(spawnRatePointB);
 			}
-
-			for (int i = 0; i < bigEnemyAmountB; i++)
-			{
-				GameObject bigEnemy = BigEnemyPool.Instance.GetPooledObject();
-
-				if (bigEnemy != null)
-				{
-					bigEnemy.transform.position = enemySpawnPoints[1].transform.position;
-					bigEnemy.transform.rotation = enemySpawnPoints[1].transform.rotation;
-					bigEnemy.SetActive(true);
-				}
-
-				if (GameManager.Instance.gameOver)
-				{
-					yield break; //für sofortigen SpawnStopp bei GameOver
-				}
-				yield return new WaitForSeconds(spawnRatePointB);
-			}
+			yield return new WaitForSeconds (2);
 		}
 	}
 
@@ -128,5 +153,18 @@ public class SpawnManager : MonoBehaviour
 		Vector3 spawnPos = resource2SpawnPoints[i].transform.position;
 
 		return spawnPos;
+	}
+
+	public void SpawnEliteEnemy() //Funktion zum Spawnen des Elitengegners
+	{
+		GameObject bigEnemyElite = BigEnemyElitePool.Instance.GetPooledObject();
+
+		if (bigEnemyElite != null)
+		{
+			int spawnPointIndex = Random.Range(0, enemySpawnPoints.Length);
+			bigEnemyElite.transform.position = enemySpawnPoints[spawnPointIndex].transform.position;
+			bigEnemyElite.transform.rotation = enemySpawnPoints[spawnPointIndex].transform.rotation;
+			bigEnemyElite.SetActive(true);
+		}
 	}
 }
