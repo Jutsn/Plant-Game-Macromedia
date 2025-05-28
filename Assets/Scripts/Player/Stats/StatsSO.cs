@@ -55,7 +55,6 @@ public class StatsSO : ScriptableObject
 	public float waterConsumptionFlyingIntervallInSeconds = 0.5f;
 
 	[Header("Antitoxin-Interaction")]
-	public bool hasAntitoxin = false;
 	public float interactionRange = 10;
 
 	[Header("WaterStats")]
