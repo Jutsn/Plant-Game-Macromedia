@@ -8,130 +8,94 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] enemySpawnPoints;
     public GameObject[] resource2SpawnPoints;
 
-	[SerializeField] private int smallEnemyAmountA;
-	[SerializeField] private int bigEnemyAmountA;
-	[SerializeField] private float spawnRatePointA;
-	[SerializeField] private int smallEnemyAmountB;
-	[SerializeField] private int bigEnemyAmountB;							//neuen Enemy-Pool erstellen, falls neuer Gegnertyp hinzukommt
-	[SerializeField] private float spawnRatePointB;
+	[SerializeField] private int smallEnemySpawnAmount;
+	[SerializeField] private int bigEnemySpawnAmount;
+	[SerializeField] private float enemySpawnRate;
+
+	public bool newWave = true;
+	public int currentSpawnPointIndex;
 
 	void Start()
     {
         enemySpawnPoints = GameObject.FindGameObjectsWithTag("Enemy Spawn Point");
         resource2SpawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point Resource 2");
-        StartCoroutine(SpawnCoroutineA());
-		StartCoroutine(SpawnCoroutineB());
+        StartCoroutine(SpawnCoroutine());
     }
 
-    IEnumerator SpawnCoroutineA() //Diesen Block hier kopieren und anpassen, falls Spawnpunkt C hinzukommt. Variablen erstellen und Array-Nummer anpassen (spawnPoints [2]) nicht vergessen. 
+    IEnumerator SpawnCoroutine() //Diesen Block hier kopieren und anpassen, falls Spawnpunkt C hinzukommt. Variablen erstellen und Array-Nummer anpassen (spawnPoints [2]) nicht vergessen. 
     {
-		yield return new WaitForSeconds(spawnRatePointA); //Durch warten sicherstellen, dass die Pools vollständig befüllt sind. Verhindert index out of Range-Bug.
+		yield return new WaitForSeconds(enemySpawnRate); //Durch warten sicherstellen, dass die Pools vollständig befüllt sind. Verhindert index out of Range-Bug.
 
 		while (!GameManager.Instance.gameOver)
 		{
 			while (GameManager.Instance.waveActive)
 			{
-				for (int i = 0; i < smallEnemyAmountA; i++)
+				if (newWave)
 				{
-					GameObject smallEnemy = SmallEnemyPool.Instance.GetPooledObject();
+					newWave = false;
+					int newSpawnPointIndex = Random.Range(0,enemySpawnPoints.Length);
 
-					if (smallEnemy != null)
+					if (currentSpawnPointIndex == newSpawnPointIndex)
 					{
-						smallEnemy.transform.position = enemySpawnPoints[0].transform.position;
-						smallEnemy.transform.rotation = enemySpawnPoints[0].transform.rotation;
-						smallEnemy.SetActive(true);
+						newWave = true; //Wähle erneut einen Punkt aus
 					}
-
-					if (GameManager.Instance.gameOver)
+					else if (currentSpawnPointIndex != newSpawnPointIndex)
 					{
-						yield break; //für sofortigen SpawnStopp bei GameOver 
+						currentSpawnPointIndex = newSpawnPointIndex; //Speichere den neuen Punkt als aktuellen und starte das Spawnen
 					}
-					else if (!GameManager.Instance.waveActive)
-					{
-						break;
-					}
-					yield return new WaitForSeconds(spawnRatePointA);
+					yield return new WaitForSeconds(1);
 				}
-
-				for (int i = 0; i < bigEnemyAmountA; i++)
+				else if (!newWave)
 				{
-					GameObject bigEnemy = BigEnemyPool.Instance.GetPooledObject();
+					for (int i = 0; i < smallEnemySpawnAmount; i++)
+					{
+						GameObject smallEnemy = SmallEnemyPool.Instance.GetPooledObject();
 
-					if (bigEnemy != null)
-					{
-						bigEnemy.transform.position = enemySpawnPoints[0].transform.position;
-						bigEnemy.transform.rotation = enemySpawnPoints[0].transform.rotation;
-						bigEnemy.SetActive(true);
+						if (smallEnemy != null)
+						{
+							smallEnemy.transform.position = enemySpawnPoints[currentSpawnPointIndex].transform.position;
+							smallEnemy.transform.rotation = enemySpawnPoints[currentSpawnPointIndex].transform.rotation;
+							smallEnemy.SetActive(true);
+						}
+
+						if (GameManager.Instance.gameOver)
+						{
+							yield break; //für sofortigen SpawnStopp bei GameOver 
+						}
+						else if (!GameManager.Instance.waveActive)
+						{
+							break;
+						}
+						yield return new WaitForSeconds(enemySpawnRate);
 					}
 
-					if (GameManager.Instance.gameOver)
+					for (int i = 0; i < bigEnemySpawnAmount; i++)
 					{
-						yield break; //für sofortigen SpawnStopp bei GameOver
+						GameObject bigEnemy = BigEnemyPool.Instance.GetPooledObject();
+
+						if (bigEnemy != null)
+						{
+							bigEnemy.transform.position = enemySpawnPoints[currentSpawnPointIndex].transform.position;
+							bigEnemy.transform.rotation = enemySpawnPoints[currentSpawnPointIndex].transform.rotation;
+							bigEnemy.SetActive(true);
+						}
+
+						if (GameManager.Instance.gameOver)
+						{
+							yield break; //für sofortigen SpawnStopp bei GameOver
+						}
+						else if (!GameManager.Instance.waveActive)
+						{
+							break;
+						}
+						yield return new WaitForSeconds(enemySpawnRate);
 					}
-					else if (!GameManager.Instance.waveActive)
-					{
-						break;
-					}
-					yield return new WaitForSeconds(spawnRatePointA);
+
+					newWave = true;
 				}
 			}
+
 			yield return new WaitForSeconds(2);
-		}
-	}
-
-	IEnumerator SpawnCoroutineB()
-	{
-		yield return new WaitForSeconds(spawnRatePointB); //Durch warten sicherstellen, dass die Pools vollständig befüllt sind. Verhindert index out of Range-Bug.
-
-		while (!GameManager.Instance.gameOver)
-		{
-			while (GameManager.Instance.waveActive)
-			{
-				for (int i = 0; i < smallEnemyAmountB; i++)
-				{
-					GameObject smallEnemy = SmallEnemyPool.Instance.GetPooledObject();
-
-					if (smallEnemy != null)
-					{
-						smallEnemy.transform.position = enemySpawnPoints[1].transform.position;
-						smallEnemy.transform.rotation = enemySpawnPoints[1].transform.rotation;
-						smallEnemy.SetActive(true);
-					}
-
-					if (GameManager.Instance.gameOver)
-					{
-						yield break; //für sofortigen SpawnStopp bei GameOver
-					}
-					else if (!GameManager.Instance.waveActive)
-					{
-						break;
-					}
-					yield return new WaitForSeconds(spawnRatePointB);
-				}
-
-				for (int i = 0; i < bigEnemyAmountB; i++)
-				{
-					GameObject bigEnemy = BigEnemyPool.Instance.GetPooledObject();
-
-					if (bigEnemy != null)
-					{
-						bigEnemy.transform.position = enemySpawnPoints[1].transform.position;
-						bigEnemy.transform.rotation = enemySpawnPoints[1].transform.rotation;
-						bigEnemy.SetActive(true);
-					}
-
-					if (GameManager.Instance.gameOver)
-					{
-						yield break; //für sofortigen SpawnStopp bei GameOver
-					}
-					else if (!GameManager.Instance.waveActive)
-					{
-						break;
-					}
-					yield return new WaitForSeconds(spawnRatePointB);
-				}
-			}
-			yield return new WaitForSeconds (2);
 		}
 	}
 
@@ -161,9 +125,9 @@ public class SpawnManager : MonoBehaviour
 
 		if (bigEnemyElite != null)
 		{
-			int spawnPointIndex = Random.Range(0, enemySpawnPoints.Length);
-			bigEnemyElite.transform.position = enemySpawnPoints[spawnPointIndex].transform.position;
-			bigEnemyElite.transform.rotation = enemySpawnPoints[spawnPointIndex].transform.rotation;
+			//int spawnPointIndex = Random.Range(0, enemySpawnPoints.Length);
+			bigEnemyElite.transform.position = enemySpawnPoints[currentSpawnPointIndex].transform.position;
+			bigEnemyElite.transform.rotation = enemySpawnPoints[currentSpawnPointIndex].transform.rotation;
 			bigEnemyElite.SetActive(true);
 		}
 	}

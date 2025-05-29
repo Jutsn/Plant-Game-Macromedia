@@ -16,13 +16,13 @@ MonoBehaviour:
   health: 50
   plantMaxWater: 50
   plantWater: 50
-  waterLoss: 1
+  waterLoss: 5
   waterLossRate: 1
-  noWaterDamage: 10
-  poisonDamage: 1
+  noWaterDamage: 1
+  poisonDamage: 2
   passiveHealthLossRate: 1
   healthRegen: 1
-  healthRegenRate: 3
+  healthRegenRate: 20
   moveSpeed: 9
   sprintMultiplier: 1.4
   groundDrag: 5

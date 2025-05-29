@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &933781590324075820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8853441370782546754}
+  m_Layer: 0
+  m_Name: Resource 2 Spawn Point 2
+  m_TagString: Spawn Point Resource 2
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8853441370782546754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933781590324075820}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -56.49994, y: 15.08, z: 10.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7221166587014927219}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2920699522021947142
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,9 +71,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7221166587014927219}
+  - component: {fileID: 8232344567732069946}
   - component: {fileID: 6900606921182554384}
   - component: {fileID: 6823310339501162100}
-  - component: {fileID: 8232344567732069946}
+  - component: {fileID: 5187602197149046193}
+  - component: {fileID: 2332710499145702016}
+  - component: {fileID: 5632770283038272915}
   m_Layer: 0
   m_Name: Spawn Manager
   m_TagString: Untagged
@@ -65,8 +99,29 @@ Transform:
   m_Children:
   - {fileID: 3080211403285512232}
   - {fileID: 3356121548031861438}
+  - {fileID: 538496256234506740}
+  - {fileID: 8853441370782546754}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8232344567732069946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377544965600102647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ecae4a6648a3c41b0806aed8ae3dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawnPoints: []
+  resource2SpawnPoints: []
+  smallEnemySpawnAmount: 15
+  bigEnemySpawnAmount: 1
+  enemySpawnRate: 5
+  newWave: 1
+  currentSpawnPointIndex: 0
 --- !u!114 &6900606921182554384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +152,7 @@ MonoBehaviour:
   pooledObjects: []
   objectToPool: {fileID: 2580165273377984627, guid: 241b5652520a64c4cbbc755e2fcdad4e, type: 3}
   amountToPool: 8
---- !u!114 &8232344567732069946
+--- !u!114 &5187602197149046193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,16 +161,73 @@ MonoBehaviour:
   m_GameObject: {fileID: 4377544965600102647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4ecae4a6648a3c41b0806aed8ae3dbf, type: 3}
+  m_Script: {fileID: 11500000, guid: af200f0a5f17a654a88d19f7be99f564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints: []
-  smallEnemyAmountA: 5
-  bigEnemyAmountA: 2
-  smallEnemyAmountB: 3
-  bigEnemyAmountB: 2
-  spawnRatePointA: 3
-  spawnRatePointB: 3
+  pooledObjects: []
+  objectToPool: {fileID: 4369229039379522615, guid: 53e45aee63e994d40bfc3d7dd5b1100b, type: 3}
+  amountToPool: 6
+--- !u!114 &2332710499145702016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377544965600102647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10c2c3e1a8e13747af896cc9ecf26ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 2409339679426455200, guid: 01b0b518a86d8da4e8006abbd5b37521, type: 3}
+  amountToPool: 15
+--- !u!114 &5632770283038272915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377544965600102647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d17d688fa99414bb1bbe810d7d12a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 5145033674234347225, guid: 56c7d61886524e645af5cffc58ecc150, type: 3}
+  amountToPool: 10
+--- !u!1 &6216513661468773679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 538496256234506740}
+  m_Layer: 0
+  m_Name: Resource 2 Spawn Point 1
+  m_TagString: Spawn Point Resource 2
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &538496256234506740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6216513661468773679}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 30.32006, y: 20.54, z: -18.62}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7221166587014927219}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8527177403840182816
 GameObject:
   m_ObjectHideFlags: 0

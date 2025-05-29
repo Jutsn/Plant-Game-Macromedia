@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
 					spawnManagerScript.SpawnResource2();
 					spawnManagerScript.SpawnEliteEnemy(); //Spawn Elite
 					waveActive = false;
+                    spawnManagerScript.newWave = true;
 				}
 			}
             else if (missionTimer >= missionTimeMax)
