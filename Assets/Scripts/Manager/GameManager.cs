@@ -54,19 +54,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) //Upgrade-UI
-        {
-            if (!IsPaused)
-            {
-				PauseGame();
-				UIManager.Instance.ShowUpgradeUI();
-			}
-            else
-            {
-                ResumeGame();
-                UIManager.Instance.HideUpgradeUI();
-            }
-        }
+        CheckPauseInput();
     }
     public void GameOver()
     {
@@ -107,6 +95,37 @@ public class GameManager : MonoBehaviour
     }
 
     #region pause game
+
+    public void CheckPauseInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab)) //Upgrade-UI
+        {
+            if (!IsPaused)
+            {
+				PauseGame();
+				UIManager.Instance.ShowUpgradeUI();
+			}
+            else
+            {
+                ResumeGame();
+                UIManager.Instance.HideUpgradeUI();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(!IsPaused)
+            {
+                PauseGame();
+                UIManager.Instance.ShowPauseMenu();
+            }
+            else
+            {
+                ResumeGame();
+                UIManager.Instance.HidePauseMenu();
+            }
+        }
+    }
     public void PauseGame()
     {
         Time.timeScale = 0f;

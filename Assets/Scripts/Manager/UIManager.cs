@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public Image plantFill;
     public Image hitMarker;
     public TextMeshProUGUI waterTankPercentage;
+    public GameObject pauseUIPanel;
     
     public GameObject upgradeUIPanel;
 
@@ -44,7 +45,7 @@ public class UIManager : MonoBehaviour
         plantWaterBar.value = StatsManager.Instance.stats.plantWater;
 	}
 
-            #region UpgradeUI
+            
         public void ShowUpgradeUI()
         {
             upgradeUIPanel.SetActive(true);
@@ -55,8 +56,17 @@ public class UIManager : MonoBehaviour
             upgradeUIPanel.SetActive(false);
         }
 
+        public void ShowPauseMenu()
+        {
+            pauseUIPanel.SetActive(true);
+        }
 
-            #endregion
+        public void HidePauseMenu()
+        {
+            pauseUIPanel.SetActive(false);
+        }
+
+            
     
 
     public void UpdatePlantHealthBar(int health) // funktion zum verändern des Sliders, bekommt werte von anderem Script
