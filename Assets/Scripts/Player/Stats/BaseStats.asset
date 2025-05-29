@@ -26,7 +26,7 @@ MonoBehaviour:
   moveSpeed: 9
   sprintMultiplier: 1.4
   groundDrag: 5
-  normalJumpForce: 12
+  normalJumpForce: 16
   jumpCooldown: 0.25
   airMultiplier: 0.4
   iceSprintIsUnlocked: 1
@@ -48,7 +48,6 @@ MonoBehaviour:
   jetpackFlyForce: 3
   waterConsumptionFlying: 2
   waterConsumptionFlyingIntervallInSeconds: 0.5
-  hasAntitoxin: 0
   interactionRange: 10
   playerTankMaxWaterLevel: 100
   playerTankWaterLevel: 100
