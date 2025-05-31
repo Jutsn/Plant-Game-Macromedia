@@ -23,12 +23,15 @@ public class WeaponBehaviour : MonoBehaviour
 	[SerializeField] private int waterConsumptionAR = 3;
 	[SerializeField] private float cooldownTimeAR = 0.5f;
 	private bool isFiringAR;
+	private bool ARFireReady;
+	float arTimer = 0;
 	
 	
 
 	private void Start()
 	{
 		standardWeaponMode = StandardWeaponMode.automaticRifle;
+		
 	}
 	void Update()
 	{
@@ -44,20 +47,32 @@ public class WeaponBehaviour : MonoBehaviour
 			beamParticles.Stop(); // Partikel stoppen
 		}
 
-		if (Input.GetButtonDown("Fire1") && isFiringShotgun == false && standardWeaponMode == StandardWeaponMode.shotgun && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver)
+		if (Input.GetButtonDown("Fire1") && !isFiringShotgun && standardWeaponMode == StandardWeaponMode.shotgun && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver)
 		{
 			isFiringShotgun = true;
 			StartCoroutine(ShootShotgun()); //Shoot Shotgun
 			StartCoroutine(WaterConsumptionCoroutine(waterConsumptionShotgun));
 		}
 
-		if (Input.GetButtonDown("Fire1") && isFiringAR == false && standardWeaponMode == StandardWeaponMode.automaticRifle && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver)
+		if (Input.GetButtonDown("Fire1") && !isFiringAR & standardWeaponMode == StandardWeaponMode.automaticRifle && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver)
 		{
 			isFiringAR = true;
-			StartCoroutine(ShootAR()); //Shoot Shotgun
 			StartCoroutine(WaterConsumptionCoroutine(waterConsumptionAR));
 		}
+		else if (Input.GetButtonUp("Fire1") && isFiringAR)
+		{
+			isFiringAR = false;
+			arTimer = cooldownTimeAR;
+		}
+		if (isFiringAR)
+		{
+			ARTimer(); //Cooldown between bullets while holding
+			ShootAR(); //Shoot AR
+		}
+		
 	}
+	
+
 	IEnumerator WaterConsumptionCoroutine(int waterConsumption)
 	{	
 		while (isFiringBeam && standardWeaponMode == StandardWeaponMode.beam)
@@ -78,11 +93,10 @@ public class WeaponBehaviour : MonoBehaviour
 			isFiringShotgun = false;
 		}
 
-		if (isFiringAR && standardWeaponMode == StandardWeaponMode.automaticRifle)
+		while (isFiringAR && standardWeaponMode == StandardWeaponMode.automaticRifle)
 		{
 			WaterTank.Instance.UseTankWater(waterConsumption);
 			yield return new WaitForSeconds(cooldownTimeAR);
-			isFiringAR = false;
 		}
 		
 	}
@@ -137,17 +151,30 @@ public class WeaponBehaviour : MonoBehaviour
 		ps4.gameObject.SetActive(true);
 		ps4.Play();
 	}
-	IEnumerator ShootAR()
+	private void ShootAR()
 	{
-		ParticleSystem ps5 = WaterBulletParticlePool.Instance.GetPooledARBullet(); //1.Kugel
-		// Richte das Partikelsystem in die Richtung des Treffers aus
-		ps5.transform.position = muzzle.transform.position;
-		ps5.transform.forward = muzzle.transform.forward;
-		// Partikel aktivieren
-		ps5.gameObject.SetActive(true);
-		ps5.Play();
+		
+		if (ARFireReady)
+		{
+			ParticleSystem ps5 = WaterBulletParticlePool.Instance.GetPooledARBullet(); //1.Kugel
+			// Richte das Partikelsystem in die Richtung des Treffers aus
+			ps5.transform.position = muzzle.transform.position;
+			ps5.transform.forward = muzzle.transform.forward;
+			// Partikel aktivieren
+			ps5.gameObject.SetActive(true);
+			ps5.Play();
+			ARFireReady = false;
+		}
+	}
+	private void ARTimer()
+	{
+		arTimer += Time.deltaTime;
 
-		yield return new WaitForEndOfFrame();
+		if (arTimer >= cooldownTimeAR)
+		{
+			arTimer = 0;
+			ARFireReady = true;
+		}
 	}
 
 	public void SwitchWeaponMode()
