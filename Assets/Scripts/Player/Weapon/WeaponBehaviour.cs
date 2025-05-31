@@ -7,19 +7,28 @@ public class WeaponBehaviour : MonoBehaviour
 
 	public Transform firePoint; // Punkt, von dem der Strahl ausgeht
 	public ParticleSystem beamParticles; // Das Partikel-System
+	public GameObject muzzle;
+
+	[Header("Beam")]
 	[SerializeField] private int waterConsumptionBeam;
 	[SerializeField] private float waterConsumptionRateBeam = 1;
+	private bool isFiringBeam;
+
+	[Header("Shotgun")]
 	[SerializeField] private int waterConsumptionShotgun = 3;
 	[SerializeField] private float cooldownTimeShotgun = 0.5f;
-	private bool isFiringBeam;
 	private bool isFiringShotgun;
 
+	[Header("AR")]
+	[SerializeField] private int waterConsumptionAR = 3;
+	[SerializeField] private float cooldownTimeAR = 0.5f;
+	private bool isFiringAR;
 	
-	public GameObject muzzle;
+	
 
 	private void Start()
 	{
-		standardWeaponMode = StandardWeaponMode.beam;
+		standardWeaponMode = StandardWeaponMode.automaticRifle;
 	}
 	void Update()
 	{
@@ -29,17 +38,24 @@ public class WeaponBehaviour : MonoBehaviour
 			isFiringBeam = true;
 			StartCoroutine(WaterConsumptionCoroutine(waterConsumptionBeam));
 		}
-		else if(Input.GetButtonUp("Fire1"))
+		else if (Input.GetButtonUp("Fire1"))
 		{
 			isFiringBeam = false;
 			beamParticles.Stop(); // Partikel stoppen
 		}
 
-		if(Input.GetButtonDown("Fire1") && isFiringShotgun == false && standardWeaponMode == StandardWeaponMode.shotgun && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver)
+		if (Input.GetButtonDown("Fire1") && isFiringShotgun == false && standardWeaponMode == StandardWeaponMode.shotgun && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver)
 		{
 			isFiringShotgun = true;
 			StartCoroutine(ShootShotgun()); //Shoot Shotgun
 			StartCoroutine(WaterConsumptionCoroutine(waterConsumptionShotgun));
+		}
+
+		if (Input.GetButtonDown("Fire1") && isFiringAR == false && standardWeaponMode == StandardWeaponMode.automaticRifle && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver)
+		{
+			isFiringAR = true;
+			StartCoroutine(ShootAR()); //Shoot Shotgun
+			StartCoroutine(WaterConsumptionCoroutine(waterConsumptionAR));
 		}
 	}
 	IEnumerator WaterConsumptionCoroutine(int waterConsumption)
@@ -61,12 +77,19 @@ public class WeaponBehaviour : MonoBehaviour
 			yield return new WaitForSeconds(cooldownTimeShotgun);
 			isFiringShotgun = false;
 		}
+
+		if (isFiringAR && standardWeaponMode == StandardWeaponMode.automaticRifle)
+		{
+			WaterTank.Instance.UseTankWater(waterConsumption);
+			yield return new WaitForSeconds(cooldownTimeAR);
+			isFiringAR = false;
+		}
 		
 	}
 
 	IEnumerator ShootShotgun()
 	{
-		ParticleSystem ps0 = WaterBulletParticlePool.Instance.GetPooledParticleSystem(); //1.Kugel
+		ParticleSystem ps0 = WaterBulletParticlePool.Instance.GetPooledShotgunBullet(); //1.Kugel
 		// Richte das Partikelsystem in die Richtung des Treffers aus
 		ps0.transform.position = muzzle.transform.position;
 		ps0.transform.forward = muzzle.transform.forward;
@@ -76,7 +99,7 @@ public class WeaponBehaviour : MonoBehaviour
 
 		yield return new WaitForEndOfFrame();
 
-		ParticleSystem ps1 = WaterBulletParticlePool.Instance.GetPooledParticleSystem(); //2.Kugel
+		ParticleSystem ps1 = WaterBulletParticlePool.Instance.GetPooledShotgunBullet(); //2.Kugel
 		// Richte das Partikelsystem in die Richtung des Treffers aus
 		ps1.transform.position = muzzle.transform.position;
 		ps1.transform.forward = muzzle.transform.forward + new Vector3(-0.05f, 0f, 0f);
@@ -86,7 +109,7 @@ public class WeaponBehaviour : MonoBehaviour
 
 		yield return new WaitForEndOfFrame();
 
-		ParticleSystem ps2 = WaterBulletParticlePool.Instance.GetPooledParticleSystem(); //3.Kugel
+		ParticleSystem ps2 = WaterBulletParticlePool.Instance.GetPooledShotgunBullet(); //3.Kugel
 		// Richte das Partikelsystem in die Richtung des Treffers aus
 		ps2.transform.position = muzzle.transform.position;
 		ps2.transform.forward = muzzle.transform.forward + new Vector3(0.05f, 0f, 0f);
@@ -96,7 +119,7 @@ public class WeaponBehaviour : MonoBehaviour
 
 		yield return new WaitForEndOfFrame();
 
-		ParticleSystem ps3 = WaterBulletParticlePool.Instance.GetPooledParticleSystem(); //4.Kugel
+		ParticleSystem ps3 = WaterBulletParticlePool.Instance.GetPooledShotgunBullet(); //4.Kugel
 		// Richte das Partikelsystem in die Richtung des Treffers aus
 		ps3.transform.position = muzzle.transform.position;
 		ps3.transform.forward = muzzle.transform.forward + new Vector3(0f, 0.05f, 0f);
@@ -106,13 +129,25 @@ public class WeaponBehaviour : MonoBehaviour
 		
 		yield return new WaitForEndOfFrame();
 
-		ParticleSystem ps4 = WaterBulletParticlePool.Instance.GetPooledParticleSystem(); //5.Kugel
+		ParticleSystem ps4 = WaterBulletParticlePool.Instance.GetPooledShotgunBullet(); //5.Kugel
 		// Richte das Partikelsystem in die Richtung des Treffers aus
 		ps4.transform.position = muzzle.transform.position;
 		ps4.transform.forward = muzzle.transform.forward + new Vector3(0f, -0.05f, 0f);
 		// Partikel aktivieren
 		ps4.gameObject.SetActive(true);
 		ps4.Play();
+	}
+	IEnumerator ShootAR()
+	{
+		ParticleSystem ps5 = WaterBulletParticlePool.Instance.GetPooledARBullet(); //1.Kugel
+		// Richte das Partikelsystem in die Richtung des Treffers aus
+		ps5.transform.position = muzzle.transform.position;
+		ps5.transform.forward = muzzle.transform.forward;
+		// Partikel aktivieren
+		ps5.gameObject.SetActive(true);
+		ps5.Play();
+
+		yield return new WaitForEndOfFrame();
 	}
 
 	public void SwitchWeaponMode()
@@ -122,7 +157,11 @@ public class WeaponBehaviour : MonoBehaviour
 			beamParticles.Stop();
 			standardWeaponMode = StandardWeaponMode.shotgun;
 		}
-		else if (standardWeaponMode == StandardWeaponMode.shotgun) //Wechsel zum Beam
+		else if (standardWeaponMode == StandardWeaponMode.shotgun) //Wechsel zur AR
+		{
+			standardWeaponMode = StandardWeaponMode.automaticRifle;
+		}
+		else if (standardWeaponMode == StandardWeaponMode.automaticRifle) //Wechsel zum Beam
 		{
 			standardWeaponMode = StandardWeaponMode.beam;
 		}

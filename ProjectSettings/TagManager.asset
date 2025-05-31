@@ -10,6 +10,8 @@ TagManager:
   - Spawn Point Resource 2
   - Enemy Spawn Point
   - Spawn Point
+  - Water Bullet Shotgun
+  - Water Bullet AR
   layers:
   - Default
   - TransparentFX
