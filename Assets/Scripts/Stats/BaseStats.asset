@@ -23,6 +23,8 @@ MonoBehaviour:
   passiveHealthLossRate: 1
   healthRegen: 1
   healthRegenRate: 20
+  automDetoxUnlocked: 0
+  secondsUntilAutomaticDetoxification: 3
   moveSpeed: 9
   sprintMultiplier: 1.45
   groundDrag: 5
@@ -40,7 +42,7 @@ MonoBehaviour:
   dashForce: 12
   timeUntilSpeedControlGetsActivatedAgain: 0.1
   waterConsumptionDash: 2
-  jumpCount: 1
+  jumpCount: 2
   extraJumpForce: 18
   waterConsumptionExtraJump: 2
   flyingIsUnlocked: 0

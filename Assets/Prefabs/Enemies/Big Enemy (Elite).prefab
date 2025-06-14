@@ -123,6 +123,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47016d1283a73b94f8408dcabcb0e59d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackActive: 0
+  distanceToAttackGoal: 0
+  attackRange: 7
+  attackGoal: {x: 0, y: 0, z: 0}
   damageOnPlant: 4
   health: 10
 --- !u!195 &3367466754393868297
@@ -170,7 +174,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0

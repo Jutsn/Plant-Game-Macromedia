@@ -15,8 +15,10 @@ public class StatsSO : ScriptableObject
 	public float passiveHealthLossRate = 1;
     public int healthRegen = 1; 
     public float healthRegenRate = 3;
+	public bool automDetoxUnlocked = false;
+	public int secondsUntilAutomaticDetoxification = 3;
 
-    [Header("PlayerStats")]
+	[Header("PlayerStats")]
     public float moveSpeed = 9;
 	public float sprintMultiplier = 1.3f;
 	public float groundDrag = 5;

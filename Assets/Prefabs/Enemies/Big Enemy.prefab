@@ -124,6 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7e5e69eeccd094aa3f87d2548e2880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackActive: 0
+  distanceToAttackGoal: 0
+  attackRange: 6
+  attackGoal: {x: 0, y: 0, z: 0}
   damageOnPlant: 2
   health: 5
 --- !u!195 &6465483698892055392
