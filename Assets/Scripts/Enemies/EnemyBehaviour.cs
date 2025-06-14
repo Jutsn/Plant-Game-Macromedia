@@ -10,6 +10,9 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	protected int damageMade;
 	protected Rigidbody rb;
 	protected float enemyHealth;
+	[SerializeField]  protected bool attackActive;
+	[SerializeField] protected float distanceToAttackGoal;
+	[SerializeField] protected float attackRange;
 	//protected Collider enemyCollider; //Man könnte einen größeren Collider um die Gegner herum ziehen, um Spielerannäherung zu erkennen und ihn statt der Main Plant anzugreifen
 
 	
@@ -31,9 +34,12 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	{
 		if (!GameManager.Instance.gameOver)
 		{
-			if (collision.gameObject == mainPlant) //mainPlant wurde bereits im Eltern-Skript Enemy Behaviour befüllt
+			if (collision.gameObject == mainPlant && !attackActive) //mainPlant wurde bereits im Eltern-Skript Enemy Behaviour befüllt
 			{
-				DoDamage(); //DoDamage-Funktion des Kindes mit persönlichem Damage-Wert des Kindes ausführen
+				attackActive = true;
+				GameObject attackGoal = collision.gameObject;
+				StartCoroutine(AttackPlantCoroutine(attackGoal));
+					
 			}
 			else
 			{
@@ -44,6 +50,22 @@ public abstract class EnemyBehaviour : MonoBehaviour
 		{
 			navMeshAgent.isStopped = true;
 		}
+	}
+	protected virtual IEnumerator AttackPlantCoroutine(GameObject attackGoal)
+	{
+		while (attackActive)
+		{
+			DoDamage(); //DoDamage-Funktion des Kindes mit persönlichem Damage-Wert des Kindes ausführen
+			yield return new WaitForSeconds(2);
+			distanceToAttackGoal = (attackGoal.transform.position - transform.position).magnitude;
+			if (distanceToAttackGoal > attackRange)
+			{
+				attackActive = false;
+				navMeshAgent.SetDestination(mainPlant.transform.position);
+			}
+		}
+		
+		
 	}
 
 	protected virtual void DoDamage() //Höhe des Damages wird aber in den Kinder-Skripten festgelegt 

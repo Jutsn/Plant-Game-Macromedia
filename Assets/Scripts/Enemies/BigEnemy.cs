@@ -16,7 +16,6 @@ public class BigEnemy : EnemyBehaviour
 		damageMade = damageOnPlant;
 		base.DoDamage(); //Basis-DoDamage-Funktion des Eltern-Skripts ausführen
 		PoisonPlant(); // persönliche PoisonPlant-Funktion durchführen
-		gameObject.SetActive(false); //Setze große Gegner inaktiv für Object-Pooling
 	}
 	protected override void PoisonPlant() //Basis PoisonPlant-Funktion des Elternskripts wird hier überschrieben
 	{
