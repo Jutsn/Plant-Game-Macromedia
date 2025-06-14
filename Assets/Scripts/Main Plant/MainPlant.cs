@@ -26,7 +26,7 @@ public class MainPlant : MonoBehaviour
 
     void OnDisable()
     {
-        StatsManager.OnStatsChanged += RefreshStats;
+        StatsManager.OnStatsChanged -= RefreshStats;
     }
 
 	void RefreshStats(StatsManager stats)
