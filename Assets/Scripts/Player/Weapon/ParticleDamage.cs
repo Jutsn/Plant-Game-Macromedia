@@ -35,7 +35,7 @@ public class ParticleDamage : MonoBehaviour
 	
 	//[SerializeField] private float impactSplashHearingDistance = 15f;
 
-	private GameObject playerCam;
+	//private GameObject playerCam;
 
 	private void Awake()
 	{
@@ -56,7 +56,7 @@ public class ParticleDamage : MonoBehaviour
 		}
 		
 			
-		playerCam = GameObject.Find("Player Camera");
+		//playerCam = GameObject.Find("Player Camera");
 	}
 
 	private void Start()

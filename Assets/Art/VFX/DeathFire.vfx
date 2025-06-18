@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Data: {fileID: 8926484042661614627}
   m_InputFlowSlot:
   - link:
-    - context: {fileID: 8926484042661614877}
+    - context: {fileID: 8926484042661614861}
       slotIndex: 0
   m_OutputFlowSlot:
   - link:
@@ -2421,7 +2421,9 @@ MonoBehaviour:
   - link: []
   - link: []
   m_OutputFlowSlot:
-  - link: []
+  - link:
+    - context: {fileID: 8926484042661614613}
+      slotIndex: 0
   loopDuration: 0
   loopCount: 0
   delayBeforeLoop: 0
@@ -2603,9 +2605,7 @@ MonoBehaviour:
   - link: []
   - link: []
   m_OutputFlowSlot:
-  - link:
-    - context: {fileID: 8926484042661614613}
-      slotIndex: 0
+  - link: []
   loopDuration: 0
   loopCount: 0
   delayBeforeLoop: 0
