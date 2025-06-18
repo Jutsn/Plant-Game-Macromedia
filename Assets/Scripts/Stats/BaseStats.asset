@@ -31,11 +31,11 @@ MonoBehaviour:
   normalJumpForce: 16
   jumpCooldown: 0.25
   airMultiplier: 0.4
-  iceSprintIsUnlocked: 0
+  iceSprintIsUnlocked: 1
   iceMoveSpeed: 17
   waterConsumptionIceSprint: 5
   waterConsumptionIceSprintIntervallInSeconds: 1
-  dashIsUnlocked: 0
+  dashIsUnlocked: 1
   maxDashCount: 3
   dashCount: 3
   dashCountResetIntervallInSeconds: 2
@@ -45,7 +45,7 @@ MonoBehaviour:
   jumpCount: 2
   extraJumpForce: 18
   waterConsumptionExtraJump: 2
-  flyingIsUnlocked: 0
+  flyingIsUnlocked: 1
   timeUntilFlyingAfterJump: 1.5
   jetpackFlyForce: 3
   waterConsumptionFlying: 2

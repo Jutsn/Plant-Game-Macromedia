@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 using static UnityEngine.GraphicsBuffer;
 
 public abstract class EnemyBehaviour : MonoBehaviour
@@ -8,6 +9,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	protected GameObject mainPlant;
 	protected NavMeshAgent navMeshAgent;
 	protected MainPlant mainPlantScript;
+	protected VisualEffect deathSmoke;
 	protected int damageMade;
 	protected Rigidbody rb;
 	protected float enemyHealth;
@@ -15,6 +17,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	[SerializeField] protected float distanceToAttackGoal;
 	[SerializeField] protected float attackRange;
 	[SerializeField] protected Vector3 attackGoal;
+	[SerializeField] protected float deathAnimationDuration;
+
 	//protected Collider enemyCollider; //Man könnte einen größeren Collider um die Gegner herum ziehen, um Spielerannäherung zu erkennen und ihn statt der Main Plant anzugreifen
 
 	
@@ -22,6 +26,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	{
 		mainPlant = GameObject.Find("Great Plant");
 		mainPlantScript = mainPlant.GetComponent<MainPlant>();
+		deathSmoke = GetComponentInChildren<VisualEffect>();
 
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		if (GameManager.Instance != null && !GameManager.Instance.gameOver && mainPlant.transform != null) //verhindert Missing Object-Reference Bug beim ersten OnEnable-Call durch Poolerstellung
@@ -130,11 +135,18 @@ public abstract class EnemyBehaviour : MonoBehaviour
 		{
 			Death();
 		}
-		
 	}
 
 	public virtual void Death()
 	{
+		StartCoroutine(DeathCoroutine());
+	}
+
+	protected virtual IEnumerator DeathCoroutine()
+	{
+		DeactivateEnemy();
+		deathSmoke.Play();
+		yield return new WaitForSeconds(deathAnimationDuration);
 		GameManager.Instance.killedEnemies += 1;
 		DropResources();
 		gameObject.SetActive(false);
