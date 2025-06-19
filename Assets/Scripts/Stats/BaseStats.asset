@@ -18,17 +18,15 @@ MonoBehaviour:
   plantWater: 50
   waterLoss: 1
   waterLossRate: 1
-  noWaterDamage: 1
+  noWaterDamage: 10
   poisonDamage: 2
   passiveHealthLossRate: 1
   healthRegen: 1
-  healthRegenRate: 20
-  automDetoxUnlocked: 0
-  secondsUntilAutomaticDetoxification: 3
+  healthRegenRate: 3
   moveSpeed: 9
-  sprintMultiplier: 1.45
+  sprintMultiplier: 1.4
   groundDrag: 5
-  normalJumpForce: 16
+  normalJumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
   iceSprintIsUnlocked: 1
@@ -55,3 +53,7 @@ MonoBehaviour:
   playerTankWaterLevel: 100
   standingInWaterTankFillAmount: 10
   tankFillRateInSeconds: 0.5
+  fireRate: 0
+  damage: 1
+  hasIceSkating: 0
+  hasDash: 0
