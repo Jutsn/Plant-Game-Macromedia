@@ -32,10 +32,11 @@ public class SkillSlot : MonoBehaviour
             currentLevel ++;
             //Nachricht von diesem SkillSlot wird an alle events die "subscribed" sind uns zuhören
             // Das fragezeichen versichert, dass das event existiert
-            OnAbilityPointSpent?.Invoke(this);   
-            if(currentLevel >= skillSO.maxLevel)    
+            OnAbilityPointSpent?.Invoke(this);
+            if (currentLevel >= skillSO.maxLevel)
             {
                 OnSkillMaxed?.Invoke(this);
+                Debug.Log("Skill " + skillSO.skillName + " unlocked.");
             }     
             UpdateUI();
 

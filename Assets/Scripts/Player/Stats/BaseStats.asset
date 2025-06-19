@@ -19,7 +19,7 @@ MonoBehaviour:
   waterLoss: 1
   waterLossRate: 1
   noWaterDamage: 10
-  poisonDamage: 1
+  poisonDamage: 2
   passiveHealthLossRate: 1
   healthRegen: 1
   healthRegenRate: 3
@@ -48,11 +48,12 @@ MonoBehaviour:
   jetpackFlyForce: 3
   waterConsumptionFlying: 2
   waterConsumptionFlyingIntervallInSeconds: 0.5
-  hasAntitoxin: 0
   interactionRange: 10
   playerTankMaxWaterLevel: 100
   playerTankWaterLevel: 100
   standingInWaterTankFillAmount: 10
   tankFillRateInSeconds: 0.5
+  fireRate: 0
+  damage: 1
   hasIceSkating: 0
   hasDash: 0

@@ -52,13 +52,14 @@ public class SkillTreeManager : MonoBehaviour
     //wird aufgerufen, wenn skill maximiert, schaltet den nächsten skill frei, wenn vorrausetzungen erfuellt
     private void HandleSkillMaxed(SkillSlot skillSlot)
     {
+        Debug.Log("HandleSkillMaxed called for: " + skillSlot.skillSO.skillName);
         foreach (SkillSlot slot in skillSlots)
         {
-            if(!slot.isUnlocked && slot.CanUnlockSkill())
+            if (!slot.isUnlocked && slot.CanUnlockSkill())
             {
+                Debug.Log("Unlocking: " + slot.skillSO.skillName);
                 slot.Unlocked();
             }
-            
         }
     }
     //updatet anzeige von skill points
