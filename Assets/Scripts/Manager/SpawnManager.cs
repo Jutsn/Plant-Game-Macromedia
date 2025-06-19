@@ -34,6 +34,7 @@ public class SpawnManager : MonoBehaviour
 				{
 					newWave = false;
 					int newSpawnPointIndex = Random.Range(0,enemySpawnPoints.Length);
+					yield return new WaitForEndOfFrame();
 
 					if (currentSpawnPointIndex == newSpawnPointIndex)
 					{
