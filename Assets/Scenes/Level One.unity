@@ -13883,11 +13883,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &955695866 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1604811452176899864, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-  m_PrefabInstance: {fileID: 5585340338665774367}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &957519187
 Mesh:
   m_ObjectHideFlags: 0
@@ -28413,11 +28408,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 243905682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1681320952 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4821567749265106613, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-  m_PrefabInstance: {fileID: 5585340338665774367}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1690506588
 GameObject:
   m_ObjectHideFlags: 0
@@ -38395,98 +38385,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: dashCount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: dashForce
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: jumpCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: playerCam
-      value: 
-      objectReference: {fileID: 1681320952}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: hasJetpack
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: jumpCooldown
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: maxDashCount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: hasDoubleJump
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: extraJumpForce
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: jetpackFlyForce
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: normalJumpForce
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: interactionRange
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: jetpackFloatForce
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: jetpackFlyTimeMax
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: jetpackFloatTimeMax
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: weaponModeChangeKey
-      value: 49
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: flyCooldownAfterJump
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: waterConsumptionFlying
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: TimeUntilFlyingAfterJump
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: waterConsumptionExtraJump
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: waterConsumptionFlyingPerSecond
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: dashCountResetIntervallInSeconds
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911973546329279295, guid: 2e790cf09004cbe43932a89c1f93e093, type: 3}
-      propertyPath: waterConsumptionFlyingIntervallInSeconds
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38786,46 +38684,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 682109228024716192, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 2937698768291874463, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: m_Name
-      value: Water Beam
-      objectReference: {fileID: 0}
-    - target: {fileID: 3388505504596069455, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: muzzle
-      value: 
-      objectReference: {fileID: 955695866}
-    - target: {fileID: 3388505504596069455, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: cooldownTimeAR
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3388505504596069455, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: cooldownTimeShotgun
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3388505504596069455, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: waterConsumptionShotgun
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3388505504596069455, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: waterConsumptionRateBeam
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3418413217228822778, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: prewarm
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3959667384746871499, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: waterPerParticleShotgun
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3959667384746871499, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: impactSplashPlayRateBeam
-      value: 0.13
-      objectReference: {fileID: 0}
     - target: {fileID: 4312463290047648454, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
       propertyPath: cameraPosition
       value: 
@@ -38834,10 +38692,6 @@ PrefabInstance:
       propertyPath: playerOrientation
       value: 
       objectReference: {fileID: 1898162976}
-    - target: {fileID: 4534377693748073550, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4821567749265106613, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -38883,9 +38737,7 @@ PrefabInstance:
       value: Camera Holder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 1495139455798389768, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-    - {fileID: 7169681030268006680, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}

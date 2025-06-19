@@ -77,18 +77,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 9
+  normalSprintMultiplier: 0
   groundDrag: 5
-  jumpForce: 12
+  normalJumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
   playerOrientation: {fileID: 4804422954149465266}
   mouseWheelInput: 0
+  iceSprintIsUnlocked: 0
+  iceMoveSpeed: 0
+  waterConsumptionIceSprint: 0
+  WaterConsumptionIceSprintIntervallInSeconds: 0
+  dashIsUnlocked: 0
+  maxDashCount: 3
+  dashCount: 3
+  dashCountResetIntervallInSeconds: 3
+  dashForce: 3
+  timeUntilSpeedControlGetsActivatedAgain: 0.5
+  waterConsumptionDash: 2
+  jumpCount: 2
+  extraJumpForce: 20
+  waterConsumptionExtraJump: 2
+  flyingIsUnlocked: 0
+  timeUntilFlyingAfterJump: 0
+  jetpackFlyForce: 6
+  waterConsumptionFlying: 3
+  waterConsumptionFlyingIntervallInSeconds: 0.5
   knockbackForce: 10
   upwardModifier: 1
   maxVerticalKnockback: 1.5
   knockbackDuration: 1
   jumpKey: 32
-  weaponModeChangeKey: 99
+  weaponModeChangeKey: 49
+  interactionKey: 101
+  sprintKey: 304
+  dashKey: 308
   playerHeight: 3
   whatIsGround:
     serializedVersion: 2
@@ -97,7 +120,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   standingInWaterTankFillAmount: 2
-  generalTankFillRate: 0.2
+  tankFillRateInSeconds: 0
+  interactionRange: 10
 --- !u!114 &5230031931400481954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d745511df1eee64ca82a4d441741b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterLevel: 50
+  playerTankMaxWaterLevel: 0
+  playerTankWaterLevel: 0
 --- !u!1 &2408528719080181242
 GameObject:
   m_ObjectHideFlags: 0
