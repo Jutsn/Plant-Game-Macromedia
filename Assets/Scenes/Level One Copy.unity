@@ -4684,7 +4684,7 @@ MonoBehaviour:
   - {fileID: 109441746}
   - {fileID: 611174471}
   pointsText: {fileID: 1470307396}
-  availablePoints: 100
+  availablePoints: 0
 --- !u!225 &111594454
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -9070,26 +9070,26 @@ PrefabInstance:
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c9581c2162623c149959a8fc7d54f4b8, type: 3}
+      objectReference: {fileID: 21300000, guid: 03b677a216202374d98617890ae3b367, type: 3}
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1166121797886314002, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Interactable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4852061963819539091, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_text
-      value: 0/5
+      value: LOCKED
       objectReference: {fileID: 0}
     - target: {fileID: 4938102925559811878, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: skillSO
@@ -40052,15 +40052,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33be10bd503d50e44993bfee20026822, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -126.18
+      value: -125.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33be10bd503d50e44993bfee20026822, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.84
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33be10bd503d50e44993bfee20026822, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -49.99
+      value: -49.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33be10bd503d50e44993bfee20026822, type: 3}
       propertyPath: m_LocalRotation.w
@@ -40093,6 +40093,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 33be10bd503d50e44993bfee20026822, type: 3}
       propertyPath: m_Name
       value: cave
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 33be10bd503d50e44993bfee20026822, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44627,7 +44631,7 @@ PrefabInstance:
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c9581c2162623c149959a8fc7d54f4b8, type: 3}
+      objectReference: {fileID: 21300000, guid: 1b573a7cc2a543d4facee730b87782ee, type: 3}
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -44646,7 +44650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4852061963819539091, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_text
-      value: 0/5
+      value: 0/4
       objectReference: {fileID: 0}
     - target: {fileID: 4938102925559811878, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: skillSO
