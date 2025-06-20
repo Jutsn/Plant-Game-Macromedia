@@ -9,6 +9,7 @@ public class SkillTreeManager : MonoBehaviour
     public ResourcesSO resources;
     public TMP_Text pointsText;
     public TMP_Text branchPointsText;
+    public TMP_Text powerPoints;
     
 
 
@@ -44,9 +45,12 @@ public class SkillTreeManager : MonoBehaviour
 
     private void HandleAbilityPointsSpent(SkillSlot skillSlot)
     {
-        if(resources.resource1 > skillSlot.skillSO.upgradeCost)
+        if (resources.resource1 > skillSlot.skillSO.upgradeCost)
         {
             UpdateAbilityPoints(-skillSlot.skillSO.upgradeCost);
+            UpdateBranchPoints(-skillSlot.skillSO.unlockBranchCost);
+            UpdatePowerPoints(-skillSlot.skillSO.powerCost);
+
         }
     }
     //wird aufgerufen, wenn skill maximiert, schaltet den nächsten skill frei, wenn vorrausetzungen erfuellt
@@ -73,5 +77,11 @@ public class SkillTreeManager : MonoBehaviour
     {
         resources.resource2 += amount;
         branchPointsText.text = "Branch Points: " + resources.resource2;
+    }
+
+    public void UpdatePowerPoints(int amount)
+    {
+        resources.resource3 += amount;
+        powerPoints.text = "Power Points: " + resources.resource3;
     }
 }
