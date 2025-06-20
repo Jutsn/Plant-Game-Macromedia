@@ -1,4 +1,5 @@
 using NUnit.Framework.Internal;
+using System;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -17,9 +18,11 @@ public class GameManager : MonoBehaviour
 	public int killedEnemies = 0;
 
     private SpawnManager spawnManagerScript;
-    
 
-    public ResourcesSO resources;
+	public static Action GameOverEvent;
+
+
+	public ResourcesSO resources;
 
 	private void Awake()
 	{
@@ -59,6 +62,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameOver = true;
+        GameOverEvent.Invoke();
         GetResource3();
 
         Debug.Log("GameOver"); //Hier Game-Over Bildschirm
@@ -78,6 +82,7 @@ public class GameManager : MonoBehaviour
 					spawnManagerScript.SpawnResource2();
 					spawnManagerScript.SpawnEliteEnemy(); //Spawn Elite
 					waveActive = false;
+                    spawnManagerScript.newWave = true;
 				}
 			}
             else if (missionTimer >= missionTimeMax)

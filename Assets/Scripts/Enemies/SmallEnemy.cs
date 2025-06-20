@@ -17,7 +17,6 @@ public class SmallEnemy : EnemyBehaviour
 	{
 		damageMade = damageOnPlant;
 		base.DoDamage(); //Basis-Funktion des Eltern-Skripts ausführen
-		gameObject.SetActive(false); ////Setze kleine Gegner inaktiv für Object-Pooling
 	}
 
 	protected override int GetDropChance()

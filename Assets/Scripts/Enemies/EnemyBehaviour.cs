@@ -1,15 +1,24 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
+using static UnityEngine.GraphicsBuffer;
 
 public abstract class EnemyBehaviour : MonoBehaviour
 {
 	protected GameObject mainPlant;
 	protected NavMeshAgent navMeshAgent;
 	protected MainPlant mainPlantScript;
+	protected VisualEffect deathSmoke;
 	protected int damageMade;
 	protected Rigidbody rb;
 	protected float enemyHealth;
+	[SerializeField]  protected bool attackActive;
+	[SerializeField] protected float distanceToAttackGoal;
+	[SerializeField] protected float attackRange;
+	[SerializeField] protected Vector3 attackGoal;
+	[SerializeField] protected float deathAnimationDuration;
+
 	//protected Collider enemyCollider; //Man könnte einen größeren Collider um die Gegner herum ziehen, um Spielerannäherung zu erkennen und ihn statt der Main Plant anzugreifen
 
 	
@@ -17,33 +26,97 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	{
 		mainPlant = GameObject.Find("Great Plant");
 		mainPlantScript = mainPlant.GetComponent<MainPlant>();
+		deathSmoke = GetComponentInChildren<VisualEffect>();
 
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		if (GameManager.Instance != null && !GameManager.Instance.gameOver && mainPlant.transform != null) //verhindert Missing Object-Reference Bug beim ersten OnEnable-Call durch Poolerstellung
 		{
 			navMeshAgent.SetDestination(mainPlant.transform.position);
+			Vector3 direction = (mainPlant.transform.position - navMeshAgent.transform.position).normalized;
+
+			// Rückwärtssuche vom Zielpunkt in Richtung Agent
+			Vector3 sampleStart = mainPlant.transform.position - direction * attackRange;
+
+			if (NavMesh.SamplePosition(sampleStart, out NavMeshHit hit, attackRange, NavMesh.AllAreas))
+			{
+				navMeshAgent.SetDestination(hit.position);
+				attackGoal = hit.position;
+			}
+			else
+			{
+				attackGoal = mainPlant.transform.position;
+			}
+
+				
 		}
 		rb = GetComponent<Rigidbody>();
 		rb.linearDamping = 4;
+
+		GameManager.GameOverEvent += DeactivateEnemy;
+	}
+
+	protected virtual void OnDisable()
+	{
+		GameManager.GameOverEvent -= DeactivateEnemy;
 	}
 
 	protected virtual void OnCollisionEnter(Collision collision)
 	{
 		if (!GameManager.Instance.gameOver)
 		{
-			if (collision.gameObject == mainPlant) //mainPlant wurde bereits im Eltern-Skript Enemy Behaviour befüllt
+			if (collision.gameObject == mainPlant && !attackActive) //mainPlant wurde bereits im Eltern-Skript Enemy Behaviour befüllt
 			{
-				DoDamage(); //DoDamage-Funktion des Kindes mit persönlichem Damage-Wert des Kindes ausführen
+				attackActive = true;
+				navMeshAgent.isStopped = true;
+				StartCoroutine(AttackPlantCoroutine());
+					
 			}
 			else
 			{
+				distanceToAttackGoal = (attackGoal - transform.position).magnitude;
+				if (distanceToAttackGoal > attackRange)
+				{
+					navMeshAgent.SetDestination(mainPlant.transform.position);
+				}
+			}
+					
+		}
+	}
+	protected virtual void OnTriggerEnter(Collider other)
+	{
+		if (!GameManager.Instance.gameOver)
+		{
+			if (other.gameObject == mainPlant && !attackActive) //mainPlant wurde bereits im Eltern-Skript Enemy Behaviour befüllt
+			{
+				attackActive = true;
+				navMeshAgent.isStopped = true;
+				StartCoroutine(AttackPlantCoroutine());	
+			}
+					
+		}
+	}
+
+
+	protected virtual IEnumerator AttackPlantCoroutine()
+	{
+		while (attackActive && !GameManager.Instance.gameOver)
+		{
+			DoDamage(); //DoDamage-Funktion des Kindes mit persönlichem Damage-Wert des Kindes ausführen
+			yield return new WaitForSeconds(2);
+			distanceToAttackGoal = (attackGoal - transform.position).magnitude;
+			if (distanceToAttackGoal > attackRange)
+			{
+				attackActive = false;
+				navMeshAgent.isStopped = false;
 				navMeshAgent.SetDestination(mainPlant.transform.position);
 			}
 		}
-		else
-		{
-			navMeshAgent.isStopped = true;
-		}
+	}
+
+	public void DeactivateEnemy()
+	{
+
+		navMeshAgent.isStopped = true;
 	}
 
 	protected virtual void DoDamage() //Höhe des Damages wird aber in den Kinder-Skripten festgelegt 
@@ -62,11 +135,18 @@ public abstract class EnemyBehaviour : MonoBehaviour
 		{
 			Death();
 		}
-		
 	}
 
 	public virtual void Death()
 	{
+		StartCoroutine(DeathCoroutine());
+	}
+
+	protected virtual IEnumerator DeathCoroutine()
+	{
+		DeactivateEnemy();
+		deathSmoke.Play();
+		yield return new WaitForSeconds(deathAnimationDuration);
 		GameManager.Instance.killedEnemies += 1;
 		DropResources();
 		gameObject.SetActive(false);

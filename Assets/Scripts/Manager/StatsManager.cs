@@ -7,7 +7,7 @@ public class StatsManager : MonoBehaviour
     public static StatsManager Instance;
     public StatsSO baseStats;
     [SerializeField] public StatsSO stats;
-     public static Action<StatsManager> OnStatsChanged;
+    public static Action<StatsManager> OnStatsChanged;
     void Awake()
     {
         //erstellt Kopie von Base Stats SO, wenn keine eigenen Stats SO eingesetzt wurden (fuer das testen)
@@ -104,6 +104,8 @@ public class StatsManager : MonoBehaviour
         target.passiveHealthLossRate = source.passiveHealthLossRate;
         target.healthRegen = source.healthRegen;
         target.healthRegenRate = source.healthRegenRate;
+        target.automDetoxUnlocked = source.automDetoxUnlocked;
+        target.secondsUntilAutomaticDetoxification = source.secondsUntilAutomaticDetoxification;
 
         // Player Stats
         target.moveSpeed = source.moveSpeed;

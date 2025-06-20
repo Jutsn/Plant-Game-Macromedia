@@ -16,8 +16,12 @@ public class MainPlant : MonoBehaviour
 	public float passiveHealthLossRate = 1;
     public int healthRegen = 1; 
     public float healthRegenRate = 3;
+    public bool automDetoxUnlocked;
+    public int secondsUntilAutomaticDetoxification = 3;
 
-    public MainPlantState mainPlantState;
+	bool automDetoxStarted;
+
+	public MainPlantState mainPlantState;
 
     void OnEnable()
     {
@@ -26,7 +30,7 @@ public class MainPlant : MonoBehaviour
 
     void OnDisable()
     {
-        StatsManager.OnStatsChanged += RefreshStats;
+        StatsManager.OnStatsChanged -= RefreshStats;
     }
 
 	void RefreshStats(StatsManager stats)
@@ -42,6 +46,8 @@ public class MainPlant : MonoBehaviour
 		passiveHealthLossRate = StatsManager.Instance.stats.passiveHealthLossRate;
 		healthRegen = StatsManager.Instance.stats.healthRegen;
 		healthRegenRate = StatsManager.Instance.stats.healthRegenRate;
+		automDetoxUnlocked = StatsManager.Instance.stats.automDetoxUnlocked;
+		secondsUntilAutomaticDetoxification = StatsManager.Instance.stats.secondsUntilAutomaticDetoxification;
 	}
 	// holt sich die stats aus dem statsmanager
 
@@ -56,9 +62,11 @@ public class MainPlant : MonoBehaviour
 		passiveHealthLossRate = StatsManager.Instance.stats.passiveHealthLossRate;
 		healthRegen = StatsManager.Instance.stats.healthRegen;
 		healthRegenRate = StatsManager.Instance.stats.healthRegenRate;
+		automDetoxUnlocked = StatsManager.Instance.stats.automDetoxUnlocked;
+		secondsUntilAutomaticDetoxification = StatsManager.Instance.stats.secondsUntilAutomaticDetoxification;
 
-		
-        mainPlantState = MainPlantState.normal; //MainPlantState(Enum) auf normal setzen
+
+		mainPlantState = MainPlantState.normal; //MainPlantState(Enum) auf normal setzen
         StartCoroutine(PassiveWaterLossCoroutine()); 
         StartCoroutine(PassiveHealthLossCoroutine()); //Verdurstung + Vergiftung
         StartCoroutine(PassiveHealthRegeneration()); //maxHealth durchgeben
@@ -98,6 +106,11 @@ public class MainPlant : MonoBehaviour
 				UIManager.Instance.ChangeHealthBarColor(Color.magenta);
 				StatsManager.Instance.SetHealth(health);
 				UIManager.Instance.UpdatePlantHealthBar(health);
+				if (!automDetoxStarted && automDetoxUnlocked)
+				{
+					automDetoxStarted = true;
+					StartCoroutine(AutomaticDetoxificationCoroutine());
+				}
 				
 			}
 			if (health < 0) //Wenn Lebenszahl negativ
@@ -160,6 +173,13 @@ public class MainPlant : MonoBehaviour
 		UIManager.Instance.ChangeHealthBarColor(Color.green);
 	}
 
-
-	
+	IEnumerator AutomaticDetoxificationCoroutine()
+	{
+		yield return new WaitForSeconds(secondsUntilAutomaticDetoxification);
+		if (mainPlantState == MainPlantState.poisened)
+		{
+			DetoxPlant();
+			automDetoxStarted = false;
+		}
+	}
 }
