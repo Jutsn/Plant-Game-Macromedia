@@ -66,8 +66,4 @@ public class StatsSO : ScriptableObject
     public float tankFillRateInSeconds;
 	public float fireRate;
 	public int damage = 1;
-
-    [Header("JetpackStats")]
-    public bool hasIceSkating;
-	public bool hasDash;
 }

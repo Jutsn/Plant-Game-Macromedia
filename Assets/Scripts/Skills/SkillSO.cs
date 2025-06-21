@@ -9,4 +9,5 @@ public class SkillSO : ScriptableObject
     public Sprite skillIcon;
     public int upgradeCost;
     public int unlockBranchCost;
+    public int powerCost;
 }

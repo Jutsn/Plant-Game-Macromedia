@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7559461909189104118}
   - component: {fileID: 8533955126564023129}
+  - component: {fileID: 2861934880369198638}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -50,4 +51,17 @@ MonoBehaviour:
   waveLength: 120
   waveActive: 0
   killedEnemies: 0
+  isMainMenu: 0
   resources: {fileID: 11400000, guid: 413d48d5c14e5ef4d8869e8d9e8394c2, type: 2}
+--- !u!114 &2861934880369198638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3433135240756152397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c084d606e1e17cb4dafe63fcbfb03bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

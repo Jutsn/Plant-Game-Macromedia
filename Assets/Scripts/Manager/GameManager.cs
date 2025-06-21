@@ -10,12 +10,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public bool gameOver;
-    public bool IsPaused { get; private set; }
+    [SerializeField] public bool IsPaused;
     public int missionTimer = 0;
     public int missionTimeMax = 1200;
 	public int waveLength = 150;
     public bool waveActive;
 	public int killedEnemies = 0;
+    public bool isMainMenu = false;
 
     private SpawnManager spawnManagerScript;
 
@@ -41,7 +42,6 @@ public class GameManager : MonoBehaviour
 	void OnEnable()
 	{
 		SceneManager.sceneLoaded += OnSceneLoaded;
-        spawnManagerScript = FindAnyObjectByType<SpawnManager>();
 	}
 
 	void OnDisable()
@@ -51,8 +51,28 @@ public class GameManager : MonoBehaviour
 
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        waveActive = true;
-        StartCoroutine(MissionTimerCoroutine());
+		if (scene.buildIndex == 0) //MainMenu
+        {
+            isMainMenu = true;
+            gameOver = true;
+			UIManager.Instance.HidePauseMenu();
+			UIManager.Instance.HideGameOverMenu();
+		}
+            
+		if (scene.buildIndex == 1) //Level 1
+        {
+            isMainMenu = false;
+            gameOver = false;
+			spawnManagerScript = FindAnyObjectByType<SpawnManager>();
+			resources.resource1 = 0;
+			resources.resource2 = 0;
+            missionTimer = 0;
+            killedEnemies = 0;
+			waveActive = true;
+			StartCoroutine(MissionTimerCoroutine());
+		}
+		    
+
     }
 
     void Update()
@@ -63,6 +83,7 @@ public class GameManager : MonoBehaviour
     {
         gameOver = true;
         GameOverEvent.Invoke();
+        UIManager.Instance.ShowGameOverMenu();
         GetResource3();
 
         Debug.Log("GameOver"); //Hier Game-Over Bildschirm
@@ -121,28 +142,35 @@ public class GameManager : MonoBehaviour
         {
             if(!IsPaused)
             {
-                PauseGame();
+				IsPaused = true;
+				PauseGame();
                 UIManager.Instance.ShowPauseMenu();
             }
-            else
+            else if (IsPaused)
             {
-                ResumeGame();
-                UIManager.Instance.HidePauseMenu();
+                UnpauseGame();
             }
         }
     }
+    public void UnpauseGame()
+    {
+		
+		ResumeGame();
+		UIManager.Instance.HidePauseMenu();
+		
+	}
     public void PauseGame()
     {
-        Time.timeScale = 0f;
-        IsPaused = true;
+        
+		Time.timeScale = 0f;
 		Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
     public void ResumeGame()
     {
-        Time.timeScale = 1f;
-        IsPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
+		Time.timeScale = 1f;
+		IsPaused = false;
+		Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
     #endregion
