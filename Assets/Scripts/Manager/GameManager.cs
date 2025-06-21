@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 	public int waveLength = 150;
     public bool waveActive;
 	public int killedEnemies = 0;
+    public bool isMainMenu = false;
 
     private SpawnManager spawnManagerScript;
 

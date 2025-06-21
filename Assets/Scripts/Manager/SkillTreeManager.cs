@@ -49,7 +49,11 @@ public class SkillTreeManager : MonoBehaviour
         {
             UpdateAbilityPoints(-skillSlot.skillSO.upgradeCost);
             UpdateBranchPoints(-skillSlot.skillSO.unlockBranchCost);
-            UpdatePowerPoints(-skillSlot.skillSO.powerCost);
+            if(GameManager.Instance.isMainMenu)
+            {
+                UpdatePowerPoints(-skillSlot.skillSO.powerCost); 
+            }
+           
 
         }
     }
