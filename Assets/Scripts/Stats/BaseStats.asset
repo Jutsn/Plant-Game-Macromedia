@@ -18,9 +18,9 @@ MonoBehaviour:
   plantWater: 50
   waterLoss: 1
   waterLossRate: 1
-  noWaterDamage: 10
+  noWaterDamage: 1
   poisonDamage: 2
-  passiveHealthLossRate: 1
+  passiveHealthLossRate: 3
   healthRegen: 1
   healthRegenRate: 20
   automDetoxUnlocked: 0
@@ -57,5 +57,3 @@ MonoBehaviour:
   tankFillRateInSeconds: 0.5
   fireRate: 0
   damage: 1
-  hasIceSkating: 0
-  hasDash: 0

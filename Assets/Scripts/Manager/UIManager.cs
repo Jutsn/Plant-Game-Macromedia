@@ -64,8 +64,9 @@ public class UIManager : MonoBehaviour
 
     public void HidePauseMenu()
     {
-        pauseUIPanel.SetActive(false);
-    }
+		pauseUIPanel.SetActive(false);
+		
+	}
 
     public void ShowGameOverMenu()
     {
