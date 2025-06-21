@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
 	void OnEnable()
 	{
 		SceneManager.sceneLoaded += OnSceneLoaded;
-        spawnManagerScript = FindAnyObjectByType<SpawnManager>();
 	}
 
 	void OnDisable()
@@ -52,8 +51,18 @@ public class GameManager : MonoBehaviour
 
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        waveActive = true;
-        StartCoroutine(MissionTimerCoroutine());
+        if (scene.buildIndex == 1)
+        {
+			spawnManagerScript = FindAnyObjectByType<SpawnManager>();
+			resources.resource1 = 0;
+			resources.resource2 = 0;
+            missionTimer = 0;
+            killedEnemies = 0;
+			waveActive = true;
+			StartCoroutine(MissionTimerCoroutine());
+		}
+		    
+
     }
 
     void Update()
@@ -64,6 +73,7 @@ public class GameManager : MonoBehaviour
     {
         gameOver = true;
         GameOverEvent.Invoke();
+        UIManager.Instance.ShowGameOverMenu();
         GetResource3();
 
         Debug.Log("GameOver"); //Hier Game-Over Bildschirm

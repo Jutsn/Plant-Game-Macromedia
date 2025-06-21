@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     public GameObject pauseUIPanel;
     
     public GameObject upgradeUIPanel;
+    public GameObject gameOverUIPanel;
 
     private bool isHitmarkerShown;
 
@@ -46,25 +47,35 @@ public class UIManager : MonoBehaviour
 	}
 
             
-        public void ShowUpgradeUI()
-        {
-            upgradeUIPanel.SetActive(true);
-        }
+    public void ShowUpgradeUI()
+    {
+        upgradeUIPanel.SetActive(true);
+    }
 
-        public void HideUpgradeUI()
-        {
-            upgradeUIPanel.SetActive(false);
-        }
+    public void HideUpgradeUI()
+    {
+        upgradeUIPanel.SetActive(false);
+    }
 
-        public void ShowPauseMenu()
-        {
-            pauseUIPanel.SetActive(true);
-        }
+    public void ShowPauseMenu()
+    {
+        pauseUIPanel.SetActive(true);
+    }
 
-        public void HidePauseMenu()
-        {
-            pauseUIPanel.SetActive(false);
-        }
+    public void HidePauseMenu()
+    {
+        pauseUIPanel.SetActive(false);
+    }
+
+    public void ShowGameOverMenu()
+    {
+        gameOverUIPanel.SetActive(true);
+    }
+
+    public void HideGameOverMenu()
+    {
+        gameOverUIPanel.SetActive(false);
+    }
 
             
     
