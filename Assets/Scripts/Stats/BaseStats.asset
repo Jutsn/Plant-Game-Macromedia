@@ -16,11 +16,11 @@ MonoBehaviour:
   health: 50
   plantMaxWater: 50
   plantWater: 50
-  waterLoss: 1
+  waterLoss: 40
   waterLossRate: 1
-  noWaterDamage: 1
+  noWaterDamage: 6
   poisonDamage: 2
-  passiveHealthLossRate: 3
+  passiveHealthLossRate: 1
   healthRegen: 1
   healthRegenRate: 20
   automDetoxUnlocked: 0

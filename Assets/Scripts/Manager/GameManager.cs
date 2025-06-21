@@ -53,12 +53,16 @@ public class GameManager : MonoBehaviour
     {
 		if (scene.buildIndex == 0) //MainMenu
         {
+            isMainMenu = true;
+            gameOver = true;
 			UIManager.Instance.HidePauseMenu();
 			UIManager.Instance.HideGameOverMenu();
 		}
             
 		if (scene.buildIndex == 1) //Level 1
         {
+            isMainMenu = false;
+            gameOver = false;
 			spawnManagerScript = FindAnyObjectByType<SpawnManager>();
 			resources.resource1 = 0;
 			resources.resource2 = 0;
