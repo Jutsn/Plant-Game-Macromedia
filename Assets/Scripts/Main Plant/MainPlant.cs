@@ -170,7 +170,7 @@ public class MainPlant : MonoBehaviour
 		mainPlantState = MainPlantState.normal;
 		StatsManager.Instance.SetHealth(health);
 		UIManager.Instance.UpdatePlantHealthBar(health);
-		UIManager.Instance.ChangeHealthBarColor(Color.green);
+		UIManager.Instance.ChangeHealthBarColor(new Color32 (72, 174, 58, 255));
 	}
 
 	IEnumerator AutomaticDetoxificationCoroutine()

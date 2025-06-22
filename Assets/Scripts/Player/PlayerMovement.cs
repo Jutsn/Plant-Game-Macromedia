@@ -109,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Antitoxin-Interaction")]
 	[SerializeField] private float interactionRange;
 	private bool inInteractionRangeWithPlant;
+	GameObject[] antitoxinSpawner;
 
 	#endregion Variablen
 
@@ -128,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
         playerRb.freezeRotation = true;
 		weaponBehaviourSkript = GameObject.Find("Weapon").GetComponent<WeaponBehaviour>();
 		mainPlantSkript = GameObject.Find("Great Plant").GetComponent<MainPlant>();
+		antitoxinSpawner = GameObject.FindGameObjectsWithTag("Antitoxin-Respawner");
 
 		StatsManager.OnStatsChanged.Invoke(StatsManager.Instance); //Abgleichevent callen statt die RefreshStats Funktion nochmal zu kopieren
 
@@ -534,7 +536,7 @@ public class PlayerMovement : MonoBehaviour
 		if (other.gameObject.GetComponent<PickUp>().pickUpType == PickUpType.antitoxin) //Antitoxin-Check
 		{
 			GameManager.Instance.GetAntitoxin();
-			Destroy(other.gameObject);
+			other.gameObject.GetComponent<Antitoxin>().DeactivateAntitoxin();
 		}
 		else if (other.gameObject.GetComponent<PickUp>().pickUpType == PickUpType.resource1)
 		{

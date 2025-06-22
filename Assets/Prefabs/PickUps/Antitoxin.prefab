@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 458666637338181081}
   - component: {fileID: 6123055609615539734}
   - component: {fileID: 6717119494147579228}
+  - component: {fileID: 9042548044123225894}
   m_Layer: 0
   m_Name: Antitoxin
   m_TagString: PickUp
@@ -122,3 +123,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpType: 0
+--- !u!114 &9042548044123225894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288929682929261370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b8172e17bb6704c89939b5fce50bb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

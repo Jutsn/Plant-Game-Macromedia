@@ -63,12 +63,12 @@ public class GameManager : MonoBehaviour
         {
             isMainMenu = false;
             gameOver = false;
+			waveActive = true;
 			spawnManagerScript = FindAnyObjectByType<SpawnManager>();
 			resources.resource1 = 0;
 			resources.resource2 = 0;
             missionTimer = 0;
             killedEnemies = 0;
-			waveActive = true;
 			StartCoroutine(MissionTimerCoroutine());
 		}
 		    
