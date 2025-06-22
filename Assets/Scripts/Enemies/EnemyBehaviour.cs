@@ -12,26 +12,41 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	protected VisualEffect deathSmoke;
 	protected int damageMade;
 	protected Rigidbody rb;
+	protected Collider collider;
 	protected float enemyHealth;
 	[SerializeField]  protected bool attackActive;
 	[SerializeField] protected float distanceToAttackGoal;
 	[SerializeField] protected float attackRange;
 	[SerializeField] protected Vector3 attackGoal;
 	[SerializeField] protected float deathAnimationDuration;
+	[SerializeField] protected float attackAnimationDuration;
+	[SerializeField] protected float attackAnimationDurationAfterDamage;
+	[SerializeField] protected float deathSmokeDuration;
+	[SerializeField] protected Animator enemyAnimator;
+
 
 	//protected Collider enemyCollider; //Man könnte einen größeren Collider um die Gegner herum ziehen, um Spielerannäherung zu erkennen und ihn statt der Main Plant anzugreifen
 
 	
 	protected virtual void OnEnable()
 	{
-		mainPlant = GameObject.Find("Great Plant");
+		if (mainPlant == null)
+		{
+			mainPlant = GameObject.Find("Great Plant");
+		}
+		
 		mainPlantScript = mainPlant.GetComponent<MainPlant>();
 		deathSmoke = GetComponentInChildren<VisualEffect>();
-
+		enemyAnimator = GetComponentInChildren<Animator>();
+		collider = GetComponent<Collider>();
 		navMeshAgent = GetComponent<NavMeshAgent>();
+
+		collider.enabled = true;
+
 		if (GameManager.Instance != null && !GameManager.Instance.gameOver && mainPlant.transform != null) //verhindert Missing Object-Reference Bug beim ersten OnEnable-Call durch Poolerstellung
 		{
 			navMeshAgent.SetDestination(mainPlant.transform.position);
+			enemyAnimator.SetBool("isWalking", true);
 			Vector3 direction = (mainPlant.transform.position - navMeshAgent.transform.position).normalized;
 
 			// Rückwärtssuche vom Zielpunkt in Richtung Agent
@@ -52,12 +67,12 @@ public abstract class EnemyBehaviour : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		rb.linearDamping = 4;
 
-		GameManager.GameOverEvent += DeactivateEnemy;
+		GameManager.GameOverEvent += DeactivateAgent;
 	}
 
 	protected virtual void OnDisable()
 	{
-		GameManager.GameOverEvent -= DeactivateEnemy;
+		GameManager.GameOverEvent -= DeactivateAgent;
 	}
 
 	protected virtual void OnCollisionEnter(Collision collision)
@@ -68,6 +83,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 			{
 				attackActive = true;
 				navMeshAgent.isStopped = true;
+				enemyAnimator.SetBool("isWalking", false);
 				StartCoroutine(AttackPlantCoroutine());
 					
 			}
@@ -77,6 +93,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 				if (distanceToAttackGoal > attackRange)
 				{
 					navMeshAgent.SetDestination(mainPlant.transform.position);
+					enemyAnimator.SetBool("isWalking", true);
 				}
 			}
 					
@@ -90,6 +107,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 			{
 				attackActive = true;
 				navMeshAgent.isStopped = true;
+				enemyAnimator.SetBool("isWalking", false);
 				StartCoroutine(AttackPlantCoroutine());	
 			}
 					
@@ -101,21 +119,24 @@ public abstract class EnemyBehaviour : MonoBehaviour
 	{
 		while (attackActive && !GameManager.Instance.gameOver)
 		{
+			enemyAnimator.SetTrigger("isAttacking");
+			yield return new WaitForSeconds(attackAnimationDuration);
 			DoDamage(); //DoDamage-Funktion des Kindes mit persönlichem Damage-Wert des Kindes ausführen
-			yield return new WaitForSeconds(2);
+			yield return new WaitForSeconds(attackAnimationDurationAfterDamage);
+
 			distanceToAttackGoal = (attackGoal - transform.position).magnitude;
 			if (distanceToAttackGoal > attackRange)
 			{
 				attackActive = false;
 				navMeshAgent.isStopped = false;
 				navMeshAgent.SetDestination(mainPlant.transform.position);
+				enemyAnimator.SetBool("isWalking", true);
 			}
 		}
 	}
 
-	public void DeactivateEnemy()
+	public void DeactivateAgent()
 	{
-
 		navMeshAgent.isStopped = true;
 	}
 
@@ -144,9 +165,12 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
 	protected virtual IEnumerator DeathCoroutine()
 	{
-		DeactivateEnemy();
-		deathSmoke.Play();
+		DeactivateAgent();
+		enemyAnimator.SetBool("isDead", true);
+		collider.enabled = false;
 		yield return new WaitForSeconds(deathAnimationDuration);
+		deathSmoke.Play();
+		yield return new WaitForSeconds(deathSmokeDuration);
 		GameManager.Instance.killedEnemies += 1;
 		DropResources();
 		gameObject.SetActive(false);

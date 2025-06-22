@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 5187602197149046193}
   - component: {fileID: 2332710499145702016}
   - component: {fileID: 5632770283038272915}
+  - component: {fileID: 6077166293578990078}
   m_Layer: 0
   m_Name: Spawn Manager
   m_TagString: Untagged
@@ -312,9 +313,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawnPoints: []
   resource2SpawnPoints: []
-  smallEnemySpawnAmount: 5
+  smallEnemySpawnAmount: 3
   bigEnemySpawnAmount: 1
-  enemySpawnRate: 4
+  enemySpawnRate: 2
+  pauseBetweenSpawnPointSwitches: 4
   newWave: 1
   currentSpawnPointIndex: 0
 --- !u!114 &6900606921182554384
@@ -392,6 +394,21 @@ MonoBehaviour:
   pooledObjects: []
   objectToPool: {fileID: 5145033674234347225, guid: 56c7d61886524e645af5cffc58ecc150, type: 3}
   amountToPool: 10
+--- !u!114 &6077166293578990078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377544965600102647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ceabdd3f0c3a5e49b43539daef57278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 6288929682929261370, guid: 3404d2169cd5ec3468ad8addbb0e650a, type: 3}
+  amountToPool: 4
 --- !u!1 &4593739329740231430
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,9 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: 0
+  IsPaused: 0
   missionTimer: 0
-  missionTimeMax: 1200
-  waveLength: 120
+  missionTimeMax: 300
+  waveLength: 60
+  timeBetweenWaves: 1
   waveActive: 0
   killedEnemies: 0
   isMainMenu: 0

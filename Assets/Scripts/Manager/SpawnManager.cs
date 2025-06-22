@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
 	[SerializeField] private int smallEnemySpawnAmount;
 	[SerializeField] private int bigEnemySpawnAmount;
 	[SerializeField] private float enemySpawnRate;
+	[SerializeField] private float pauseBetweenSpawnPointSwitches;
 
 	public bool newWave = true;
 	public int currentSpawnPointIndex;
@@ -94,6 +95,7 @@ public class SpawnManager : MonoBehaviour
 
 					newWave = true;
 				}
+				yield return new WaitForSeconds(pauseBetweenSpawnPointSwitches);
 			}
 
 			yield return new WaitForSeconds(2);
