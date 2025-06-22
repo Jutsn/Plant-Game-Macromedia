@@ -51,7 +51,7 @@ MonoBehaviour:
   waterConsumptionFlying: 2
   waterConsumptionFlyingIntervallInSeconds: 0.5
   interactionRange: 10
-  playerTankMaxWaterLevel: 100
+  playerTankMaxWaterLevel: 200
   playerTankWaterLevel: 100
   standingInWaterTankFillAmount: 10
   tankFillRateInSeconds: 0.5

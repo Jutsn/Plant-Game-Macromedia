@@ -67,10 +67,10 @@ public class MainPlant : MonoBehaviour
 
 
 		mainPlantState = MainPlantState.normal; //MainPlantState(Enum) auf normal setzen
-        StartCoroutine(PassiveWaterLossCoroutine()); 
         StartCoroutine(PassiveHealthLossCoroutine()); //Verdurstung + Vergiftung
         StartCoroutine(PassiveHealthRegeneration()); //maxHealth durchgeben
-    }
+		StartCoroutine(PassiveWaterLossCoroutine());
+	}
 
     IEnumerator PassiveWaterLossCoroutine()
     {
@@ -81,6 +81,10 @@ public class MainPlant : MonoBehaviour
 				plantWater -= waterLoss; //Wasserverlust
 				StatsManager.Instance.SetPlantWater(plantWater);
 				UIManager.Instance.UpdatePlantWaterBar(plantWater);
+			}
+			if (plantWater <= plantMaxWater / 100 * 25)
+			{
+				UIManager.Instance.ChangePlantWaterBarColor(Color.red);
 			}
 			if (plantWater < 0) //Wenn Wasserstand unter 0
 			{
@@ -158,6 +162,10 @@ public class MainPlant : MonoBehaviour
 			plantWater += waterInAmmunation;
 			StatsManager.Instance.SetPlantWater(plantWater);
 			UIManager.Instance.UpdatePlantWaterBar(plantWater);
+			if (plantWater >= plantMaxWater / 100 * 25)
+			{
+				UIManager.Instance.ChangePlantWaterBarColor(new Color32(34, 179, 198, 255));
+			}
 		}
 		else if(plantWater > plantMaxWater)
 		{

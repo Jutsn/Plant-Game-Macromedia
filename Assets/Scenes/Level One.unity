@@ -11827,10 +11827,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 42448562}
-    - target: {fileID: 3482388302031038428, guid: 502ea54162246b1488fce03ea779a719, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UnpauseGame
-      objectReference: {fileID: 0}
     - target: {fileID: 3997781679101442660, guid: 502ea54162246b1488fce03ea779a719, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -11842,10 +11838,6 @@ PrefabInstance:
     - target: {fileID: 3997781679101442660, guid: 502ea54162246b1488fce03ea779a719, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3997781679101442661, guid: 502ea54162246b1488fce03ea779a719, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3997781680592659830, guid: 502ea54162246b1488fce03ea779a719, type: 3}
       propertyPath: m_AnchorMax.x
@@ -11866,14 +11858,6 @@ PrefabInstance:
     - target: {fileID: 5814638213797387466, guid: 502ea54162246b1488fce03ea779a719, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6959352903416572522, guid: 502ea54162246b1488fce03ea779a719, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7553233006780596073, guid: 502ea54162246b1488fce03ea779a719, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
