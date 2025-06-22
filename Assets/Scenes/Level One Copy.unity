@@ -4683,13 +4683,8 @@ MonoBehaviour:
   - {fileID: 1647317606}
   - {fileID: 109441746}
   - {fileID: 611174471}
-  resources: {fileID: 0}
   pointsText: {fileID: 1470307396}
-<<<<<<< Updated upstream
   availablePoints: 100
-=======
-  branchPointsText: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!225 &111594454
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -78628,7 +78623,6 @@ MonoBehaviour:
   plantFill: {fileID: 2080722904}
   hitMarker: {fileID: 1605358739}
   waterTankPercentage: {fileID: 510857632}
-  pauseUIPanel: {fileID: 0}
   upgradeUIPanel: {fileID: 20453123}
 --- !u!1001 &1949835062
 PrefabInstance:
