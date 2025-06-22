@@ -4685,11 +4685,7 @@ MonoBehaviour:
   - {fileID: 611174471}
   resources: {fileID: 0}
   pointsText: {fileID: 1470307396}
-<<<<<<< Updated upstream
-  availablePoints: 100
-=======
   branchPointsText: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!225 &111594454
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -7677,7 +7673,7 @@ GameObject:
   - component: {fileID: 229578491}
   - component: {fileID: 229578494}
   m_Layer: 10
-  m_Name: Terrain Lvl.1
+  m_Name: Terrain Lvl.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7788,7 +7784,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.33333334
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: adfe0919e4175c94eb04d3e99feb5dc4, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 7254df4d1b1b382419881a93559edd00, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &230201194
 PrefabInstance:
@@ -9075,26 +9071,26 @@ PrefabInstance:
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c9581c2162623c149959a8fc7d54f4b8, type: 3}
+      objectReference: {fileID: 21300000, guid: 9af5a449a0730e940912c9b15406fc7c, type: 3}
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1166121797886314002, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Interactable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4852061963819539091, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_text
-      value: 0/5
+      value: LOCKED
       objectReference: {fileID: 0}
     - target: {fileID: 4938102925559811878, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: skillSO
@@ -37133,7 +37129,7 @@ PrefabInstance:
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 49cfe97e7f6d389479a5bb2eb8585c9b, type: 3}
+      objectReference: {fileID: 21300000, guid: 8c27f27f721c286448525b0b2549c3fd, type: 3}
     - target: {fileID: 859967497275182400, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_Color.b
       value: 0.5
@@ -40406,7 +40402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4852061963819539091, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: m_text
-      value: 0/5
+      value: 0/1
       objectReference: {fileID: 0}
     - target: {fileID: 4938102925559811878, guid: 24f3d456483faee45a2f9cca922bbbc2, type: 3}
       propertyPath: skillSO
