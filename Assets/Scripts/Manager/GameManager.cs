@@ -1,4 +1,5 @@
 using NUnit.Framework.Internal;
+using System;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -9,17 +10,24 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public bool gameOver;
-    public bool IsPaused { get; private set; }
+    public bool IsPaused;
     public int missionTimer = 0;
     public int missionTimeMax = 1200;
 	public int waveLength = 150;
+	public int timeBetweenWaves = 1;
     public bool waveActive;
 	public int killedEnemies = 0;
+    public bool isMainMenu = false;
+
+    private bool pauseMenu;
+    private bool skillMenu;
 
     private SpawnManager spawnManagerScript;
-    
 
-    public ResourcesSO resources;
+	public static Action GameOverEvent;
+
+
+	public ResourcesSO resources;
 
 	private void Awake()
 	{
@@ -38,7 +46,6 @@ public class GameManager : MonoBehaviour
 	void OnEnable()
 	{
 		SceneManager.sceneLoaded += OnSceneLoaded;
-        spawnManagerScript = FindAnyObjectByType<SpawnManager>();
 	}
 
 	void OnDisable()
@@ -48,29 +55,43 @@ public class GameManager : MonoBehaviour
 
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        waveActive = true;
-        StartCoroutine(MissionTimerCoroutine());
+		UIManager.Instance.HidePauseMenu();
+		UIManager.Instance.HideGameOverMenu();
+		pauseMenu = false;
+		skillMenu = false;
+		resources.resource1 = 0;
+		resources.resource2 = 0;
+		resources.antitoxin = 0;
+		missionTimer = 0;
+		killedEnemies = 0;
+
+		if (scene.buildIndex == 0) //MainMenu
+        {
+            isMainMenu = true;
+            gameOver = true;
+		}
+            
+		if (scene.buildIndex == 1) //Level 1
+        {
+			isMainMenu = false;
+            gameOver = false;
+			waveActive = true;
+			spawnManagerScript = FindAnyObjectByType<SpawnManager>();
+			StartCoroutine(MissionTimerCoroutine());
+		}
+		    
+
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) //Upgrade-UI
-        {
-            if (!IsPaused)
-            {
-				PauseGame();
-				UIManager.Instance.ShowUpgradeUI();
-			}
-            else
-            {
-                ResumeGame();
-                UIManager.Instance.HideUpgradeUI();
-            }
-        }
+        CheckPauseInput();
     }
     public void GameOver()
     {
         gameOver = true;
+        GameOverEvent.Invoke();
+        UIManager.Instance.ShowGameOverMenu();
         GetResource3();
 
         Debug.Log("GameOver"); //Hier Game-Over Bildschirm
@@ -103,23 +124,66 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator SetWaveActiveAgainCoroutine()
     {
-        yield return new WaitForSeconds (1);
+        yield return new WaitForSeconds (timeBetweenWaves);
         waveActive = true;
     }
 
     #region pause game
+
+    public void CheckPauseInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab)) //Upgrade-UI
+        {
+            if (!IsPaused && !gameOver && !pauseMenu)
+            {
+				skillMenu = true;
+				IsPaused = true;
+				PauseGame();
+				UIManager.Instance.ShowUpgradeUI();
+			}
+            else if (IsPaused && !gameOver && !pauseMenu)
+            {
+                ResumeGame();
+				UIManager.Instance.HideUpgradeUI();
+				skillMenu = false;
+			}
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!IsPaused && !gameOver && !skillMenu)
+            {
+                pauseMenu = true;
+				IsPaused = true;
+				PauseGame();
+                UIManager.Instance.ShowPauseMenu();
+            }
+            else if (IsPaused && !gameOver && !skillMenu)
+            {
+                UnpauseGame();
+            }
+        }
+    }
+    public void UnpauseGame()
+    {
+		
+		ResumeGame();
+		UIManager.Instance.HidePauseMenu();
+        pauseMenu = false;
+		
+	}
     public void PauseGame()
     {
-        Time.timeScale = 0f;
-        IsPaused = true;
+        
+		Time.timeScale = 0f;
 		Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
     public void ResumeGame()
     {
-        Time.timeScale = 1f;
-        IsPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
+		Time.timeScale = 1f;
+		IsPaused = false;
+		Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
     #endregion

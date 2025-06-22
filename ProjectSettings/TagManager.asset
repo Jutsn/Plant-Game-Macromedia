@@ -12,6 +12,7 @@ TagManager:
   - Spawn Point
   - Water Bullet Shotgun
   - Water Bullet AR
+  - Antitoxin-Respawner
   layers:
   - Default
   - TransparentFX
@@ -19,8 +20,8 @@ TagManager:
   - Loot
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemies
   - 
   - 
   - whatIsGround

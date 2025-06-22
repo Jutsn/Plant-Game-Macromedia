@@ -6,8 +6,12 @@ using UnityEngine.InputSystem.Interactions;
 public class SkillTreeManager : MonoBehaviour
 {
     public SkillSlot[] skillSlots;
+    public ResourcesSO resources;
     public TMP_Text pointsText;
-    public int availablePoints;
+    public TMP_Text branchPointsText;
+    public TMP_Text powerPoints;
+    
+
 
     private void OnEnable()
     {
@@ -33,7 +37,7 @@ public class SkillTreeManager : MonoBehaviour
     // und geschaut ob für das gewuenschte Upgrade die vorraussetzungen erfuellt sind
     private void CheckAvailablePoints(SkillSlot slot)
     {
-        if(availablePoints > 0)
+        if(resources.resource1 >= slot.skillSO.upgradeCost && resources.resource2 >= slot.skillSO.unlockBranchCost)
         {
             slot.TryUpgradeSkill();
         }
@@ -41,27 +45,47 @@ public class SkillTreeManager : MonoBehaviour
 
     private void HandleAbilityPointsSpent(SkillSlot skillSlot)
     {
-        if(availablePoints > 0)
+        if (resources.resource1 > skillSlot.skillSO.upgradeCost)
         {
-            UpdateAbilityPoints(-1);
+            UpdateAbilityPoints(-skillSlot.skillSO.upgradeCost);
+            UpdateBranchPoints(-skillSlot.skillSO.unlockBranchCost);
+            if(GameManager.Instance.isMainMenu)
+            {
+                UpdatePowerPoints(-skillSlot.skillSO.powerCost); 
+            }
+           
+
         }
     }
     //wird aufgerufen, wenn skill maximiert, schaltet den nächsten skill frei, wenn vorrausetzungen erfuellt
     private void HandleSkillMaxed(SkillSlot skillSlot)
     {
+        Debug.Log("HandleSkillMaxed called for: " + skillSlot.skillSO.skillName);
         foreach (SkillSlot slot in skillSlots)
         {
-            if(!slot.isUnlocked && slot.CanUnlockSkill())
+            if (!slot.isUnlocked && slot.CanUnlockSkill())
             {
+                Debug.Log("Unlocking: " + slot.skillSO.skillName);
                 slot.Unlocked();
             }
-            
         }
     }
     //updatet anzeige von skill points
     public void UpdateAbilityPoints(int amount)
     {
-        availablePoints += amount;
-        pointsText.text = "Points " + availablePoints;
+        resources.resource1 += amount;
+        pointsText.text = "Abillity Points: " + resources.resource1;
+    }
+
+    public void UpdateBranchPoints(int amount)
+    {
+        resources.resource2 += amount;
+        branchPointsText.text = "Branch Points: " + resources.resource2;
+    }
+
+    public void UpdatePowerPoints(int amount)
+    {
+        resources.resource3 += amount;
+        powerPoints.text = "Power Points: " + resources.resource3;
     }
 }

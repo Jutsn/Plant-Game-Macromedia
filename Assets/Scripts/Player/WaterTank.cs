@@ -45,7 +45,11 @@ public class WaterTank : MonoBehaviour
 	{
 		if (playerTankWaterLevel < 0)
             playerTankWaterLevel = 0;
-        if (playerTankWaterLevel > playerTankMaxWaterLevel)
+		if (playerTankWaterLevel <= playerTankMaxWaterLevel/100*25)
+			UIManager.Instance.ChangeWaterTankBarColor(Color.red);
+		if (playerTankWaterLevel >= playerTankMaxWaterLevel/100*25)
+			UIManager.Instance.ChangeWaterTankBarColor(new Color32(32, 202, 236, 255));
+		if (playerTankWaterLevel > playerTankMaxWaterLevel)
             playerTankWaterLevel = playerTankMaxWaterLevel;
 		
         UIManager.Instance.UpdateWaterTankBar(playerTankWaterLevel, playerTankMaxWaterLevel); // gibt wasserstand an UI Manager durch

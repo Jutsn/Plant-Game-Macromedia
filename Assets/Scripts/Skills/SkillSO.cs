@@ -7,4 +7,7 @@ public class SkillSO : ScriptableObject
     public string skillName;
     public int maxLevel;
     public Sprite skillIcon;
+    public int upgradeCost;
+    public int unlockBranchCost;
+    public int powerCost;
 }

@@ -7,7 +7,7 @@ public class StatsManager : MonoBehaviour
     public static StatsManager Instance;
     public StatsSO baseStats;
     [SerializeField] public StatsSO stats;
-     public static Action<StatsManager> OnStatsChanged;
+    public static Action<StatsManager> OnStatsChanged;
     void Awake()
     {
         //erstellt Kopie von Base Stats SO, wenn keine eigenen Stats SO eingesetzt wurden (fuer das testen)
@@ -27,7 +27,6 @@ public class StatsManager : MonoBehaviour
     }
 
     #region Upgrade Stats
-    //Update Funktionen für Stat Buffs von Variablen
     public void UpdateSpeedStat(int amount)
     {
         stats.moveSpeed += amount;
@@ -44,20 +43,42 @@ public class StatsManager : MonoBehaviour
         stats.health += amount;
         OnStatsChanged.Invoke(this);
         UIManager.Instance.plantHealthBar.maxValue = stats.plantMaxHealth;
-        UIManager.Instance.UpdatePlantHealthBar(stats.health);
-        
-        
+        UIManager.Instance.UpdatePlantHealthBar(stats.health);     
+    }
+    public void UpdateFireRateStat(float amount)
+    {
+        stats.fireRate -= amount;
+        OnStatsChanged.Invoke(this);
     }
 
-    #endregion 
+    public void UpdateDamageStat(int amount)
+    {
+        stats.damage += amount;
+        OnStatsChanged.Invoke(this);
+    }
+
+    public void UpdateWaterTankStat(int amount)
+    {
+        stats.playerTankMaxWaterLevel += amount;
+        stats.playerTankWaterLevel += amount;
+        OnStatsChanged.Invoke(this);
+    }
+
+    public void UpdateWaterTankFillRate(float amount)
+    {
+        stats.tankFillRateInSeconds -= amount;
+        OnStatsChanged.Invoke(this);
+    }
+
+    #endregion
     //Button Input für das Playtesten
     public void GetInput()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             ResetStatsToBase();
         }
-        if(Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             OnStatsChanged.Invoke(this);
         }
@@ -83,6 +104,8 @@ public class StatsManager : MonoBehaviour
         target.passiveHealthLossRate = source.passiveHealthLossRate;
         target.healthRegen = source.healthRegen;
         target.healthRegenRate = source.healthRegenRate;
+        target.automDetoxUnlocked = source.automDetoxUnlocked;
+        target.secondsUntilAutomaticDetoxification = source.secondsUntilAutomaticDetoxification;
 
         // Player Stats
         target.moveSpeed = source.moveSpeed;
