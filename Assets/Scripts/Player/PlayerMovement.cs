@@ -23,10 +23,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float airMultiplier;
     private bool readyToJump = true;
 	
-
+	public Animator animator;
 	public Transform playerOrientation;
 	Rigidbody playerRb;
 	Vector3 moveDirection;
+	Vector3 flatVel;
 
 	float horizontalInput;
 	float verticalInput;
@@ -109,7 +110,6 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Antitoxin-Interaction")]
 	[SerializeField] private float interactionRange;
 	private bool inInteractionRangeWithPlant;
-	GameObject[] antitoxinSpawner;
 
 	#endregion Variablen
 
@@ -129,7 +129,6 @@ public class PlayerMovement : MonoBehaviour
         playerRb.freezeRotation = true;
 		weaponBehaviourSkript = GameObject.Find("Weapon").GetComponent<WeaponBehaviour>();
 		mainPlantSkript = GameObject.Find("Great Plant").GetComponent<MainPlant>();
-		antitoxinSpawner = GameObject.FindGameObjectsWithTag("Antitoxin-Respawner");
 
 		StatsManager.OnStatsChanged.Invoke(StatsManager.Instance); //Abgleichevent callen statt die RefreshStats Funktion nochmal zu kopieren
 
@@ -188,6 +187,9 @@ public class PlayerMovement : MonoBehaviour
 
 		MyInput();
 
+		flatVel = new Vector3(playerRb.linearVelocity.x, 0f, playerRb.linearVelocity.z);
+		
+
 		if (speedControlActive)
 		{
 			SpeedControl();
@@ -198,19 +200,23 @@ public class PlayerMovement : MonoBehaviour
 		//handle drag
 		if (grounded && doDash)
 		{
+			animator.SetFloat("speed", 0);
 			playerRb.linearDamping = 0f;
 		}
 		else if (grounded)
         {
+			animator.SetFloat("speed", flatVel.magnitude);
 			playerRb.linearDamping = groundDrag;
 		}
 		else if (!grounded && doDash)
 		{
+			animator.SetFloat("speed", 0);
 			playerRb.linearDamping = 0.5f;
 		}
         else
         {
-            playerRb.linearDamping = 0f;
+			animator.SetFloat("speed", 0);
+			playerRb.linearDamping = 0f;
         }
     }
 
@@ -236,6 +242,8 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+
         mouseWheelInput = Input.GetAxis("Mouse ScrollWheel");
 
 		GetMouseInput();
@@ -424,8 +432,6 @@ public class PlayerMovement : MonoBehaviour
 	}
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(playerRb.linearVelocity.x, 0f, playerRb.linearVelocity.z);
-
         //limit move velocity if needed
         if (flatVel.magnitude > 1.5f * moveSpeed) // Aufs 1,5 facche gesetzt , um Dash zu ermöglichen
         {
