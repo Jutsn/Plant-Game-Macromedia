@@ -3179,10 +3179,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 596502590053069041, guid: f42dea56f28ade74e83d4db87da40af3, type: 3}
-      propertyPath: gameOverUIPanel
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 596502590053069041, guid: f42dea56f28ade74e83d4db87da40af3, type: 3}
       propertyPath: waterTankPercentage
       value: 
       objectReference: {fileID: 0}

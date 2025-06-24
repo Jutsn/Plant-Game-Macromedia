@@ -1754,7 +1754,7 @@ MonoBehaviour:
   pauseUIPanel: {fileID: 4353672074714639988}
   upgradeUIPanel: {fileID: 6959352903416572522}
   gameOverUIPanel: {fileID: 2742241833449921974}
-  winUIPanel: {fileID: 0}
+  winUIPanel: {fileID: 624241099349290192}
   antidotDisplay: {fileID: 4620432814480255776}
   interactSprite: {fileID: 4068942347002274236}
   antidotAmount: {fileID: 5267187538767193375}
@@ -8187,6 +8187,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69fb7a75e8ea333409334239edff29bb, type: 3}
+--- !u!1 &624241099349290192 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8568510134819646217, guid: 69fb7a75e8ea333409334239edff29bb, type: 3}
+  m_PrefabInstance: {fileID: 9097492700846589913}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &9066131745472305531 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 257153369660939938, guid: 69fb7a75e8ea333409334239edff29bb, type: 3}
