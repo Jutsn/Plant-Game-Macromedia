@@ -5,6 +5,7 @@ public class BigEnemyElite : BigEnemy
 	public override void Death()
 	{
 		GameManager.Instance.StartCoroutine(GameManager.Instance.SetWaveActiveAgainCoroutine());
+		MusicManager.Instance.CrossfadeToA();
 		base.Death();
 		
 		//SetWave Active

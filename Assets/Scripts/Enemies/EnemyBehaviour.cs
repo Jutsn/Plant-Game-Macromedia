@@ -33,14 +33,26 @@ public abstract class EnemyBehaviour : MonoBehaviour
 		if (mainPlant == null)
 		{
 			mainPlant = GameObject.Find("Great Plant");
+			mainPlantScript = mainPlant.GetComponent<MainPlant>();
+		}
+		if (navMeshAgent == null)
+		{
+			navMeshAgent = GetComponent<NavMeshAgent>();
+		}
+		if (collider == null)
+		{
+			collider = GetComponent<Collider>();
+		}
+		if (enemyAnimator == null)
+		{
+			enemyAnimator = GetComponentInChildren<Animator>();
+		}
+		if (deathSmoke == null)
+		{
+			deathSmoke = GetComponentInChildren<VisualEffect>();
 		}
 		
-		mainPlantScript = mainPlant.GetComponent<MainPlant>();
-		deathSmoke = GetComponentInChildren<VisualEffect>();
-		enemyAnimator = GetComponentInChildren<Animator>();
-		collider = GetComponent<Collider>();
-		navMeshAgent = GetComponent<NavMeshAgent>();
-
+		deathSmoke.Stop();
 		collider.enabled = true;
 
 		if (GameManager.Instance != null && !GameManager.Instance.gameOver && mainPlant.transform != null) //verhindert Missing Object-Reference Bug beim ersten OnEnable-Call durch Poolerstellung

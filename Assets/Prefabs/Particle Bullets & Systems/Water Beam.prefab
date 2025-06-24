@@ -9747,3 +9747,4 @@ MonoBehaviour:
   damagePerParticleWaterBeam: 0.11
   impactSplashPlayRateBeam: 0.3
   plantWaterPerParticleWaterBeam: 0.25
+  splashImpactSound: {fileID: 8300000, guid: 78ce04fe3b762474cad4dfef4ba68732, type: 3}

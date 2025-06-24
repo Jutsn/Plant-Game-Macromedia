@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour
 	private AudioSource[] audioSource;
 	public AudioClip hitMarkerSound;
 
-	private bool isSplashPlaying;
+	private bool isSFXPlaying;
 
 	private void Awake()
 	{
@@ -24,25 +24,25 @@ public class SoundManager : MonoBehaviour
         audioSource = GetComponents<AudioSource>();
 	}
 
-	public void PlaySplashSound(float rate, Vector3 collisionPoint)
+	public void PlaySFX(float rate, Vector3 placeToPlay, AudioClip audioClip)
     {
-		StartCoroutine(PlaySplashSoundCoroutine(rate, collisionPoint));
+		StartCoroutine(PlaySFXCoroutine(rate, placeToPlay, audioClip));
     }
-    private IEnumerator PlaySplashSoundCoroutine(float rate, Vector3 collisionPoint)
+    private IEnumerator PlaySFXCoroutine(float rate, Vector3 placeToPlay, AudioClip audioClip)
 	{
-		if (!isSplashPlaying)
+		if (!isSFXPlaying)
 		{
-			isSplashPlaying = true;
+			isSFXPlaying = true;
 			for (int i = 0; i < audioSource.Length; i++)
 			{
 				if (!audioSource[i].isPlaying)
 				{
 					audioSource[i].clip = hitMarkerSound;
-					audioSource[i].transform.position = collisionPoint;
+					audioSource[i].transform.position = placeToPlay;
 					//audioSource[i].volume = Mathf.Lerp(0.55f,0.01f,distanceToCollisionPoint);
 					audioSource[i].Play();
 					yield return new WaitForSeconds(rate);
-					isSplashPlaying = false;
+					isSFXPlaying = false;
 					break;
 				}
 			}

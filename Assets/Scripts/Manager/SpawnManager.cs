@@ -133,5 +133,7 @@ public class SpawnManager : MonoBehaviour
 			bigEnemyElite.transform.rotation = enemySpawnPoints[currentSpawnPointIndex].transform.rotation;
 			bigEnemyElite.SetActive(true);
 		}
+
+		MusicManager.Instance.CrossfadeToB();
 	}
 }

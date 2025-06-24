@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-    public IEnumerator SetWaveActiveAgainCoroutine()
+    public IEnumerator SetWaveActiveAgainCoroutine() //After Killed Elite
     {
         yield return new WaitForSeconds (timeBetweenWaves);
         waveActive = true;
