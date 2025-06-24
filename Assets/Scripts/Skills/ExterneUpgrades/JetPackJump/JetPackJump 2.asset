@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e3fb83746079745ae43716290f0026, type: 3}
   m_Name: JetPackJump 2
   m_EditorClassIdentifier: 
-  skillName: JetPackJumpLv1
+  skillName: JetPackJumpLv3
   maxLevel: 1
   skillIcon: {fileID: 21300000, guid: b1ca7598084e20445b98996a45b9d87f, type: 3}
   upgradeCost: 0

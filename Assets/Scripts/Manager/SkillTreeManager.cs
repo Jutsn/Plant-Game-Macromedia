@@ -9,7 +9,7 @@ public class SkillTreeManager : MonoBehaviour
     public ResourcesSO resources;
     public TMP_Text pointsText;
     public TMP_Text branchPointsText;
-    public TMP_Text powerPoints;
+    public TMP_Text powerPointsText;
     
 
 
@@ -123,6 +123,6 @@ public class SkillTreeManager : MonoBehaviour
     public void UpdatePowerPoints(int amount)
     {
         resources.resource3 += amount;
-        powerPoints.text = "Power Points: " + resources.resource3;
+        powerPointsText.text = "Power Points: " + resources.resource3;
     }
 }
