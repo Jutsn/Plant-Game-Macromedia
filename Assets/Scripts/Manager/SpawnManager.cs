@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnCoroutine() //Diesen Block hier kopieren und anpassen, falls Spawnpunkt C hinzukommt. Variablen erstellen und Array-Nummer anpassen (spawnPoints [2]) nicht vergessen. 
     {
-		yield return new WaitForSeconds(enemySpawnRate); //Durch warten sicherstellen, dass die Pools vollständig befüllt sind. Verhindert index out of Range-Bug.
+		yield return new WaitForSeconds(1); //Durch warten sicherstellen, dass die Pools vollständig befüllt sind. Verhindert index out of Range-Bug.
 
 		while (!GameManager.Instance.gameOver)
 		{
