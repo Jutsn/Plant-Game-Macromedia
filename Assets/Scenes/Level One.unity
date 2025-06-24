@@ -38299,6 +38299,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7336080380336894669, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336080380336894669, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.061616085
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336080380336894669, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0016592125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336080380336894669, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.99770916
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336080380336894669, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.027876925
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336080380336894669, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -3.177
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336080380336894669, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 172.921
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336080380336894669, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.387
+      objectReference: {fileID: 0}
     - target: {fileID: 8414560791249043783, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
       propertyPath: m_Name
       value: Camera Holder
