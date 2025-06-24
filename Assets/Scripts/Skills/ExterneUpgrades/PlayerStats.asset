@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a684d01b5437e9479cea0ab1421abe2, type: 3}
+  m_Name: PlayerStats
+  m_EditorClassIdentifier: 
+  plantMaxHealth: 50
+  health: 50
+  plantMaxWater: 50
+  plantWater: 50
+  waterLoss: 2
+  waterLossRate: 1
+  noWaterDamage: 1
+  poisonDamage: 1
+  passiveHealthLossRate: 1
+  healthRegen: 1
+  healthRegenRate: 3
+  automDetoxUnlocked: 0
+  secondsUntilAutomaticDetoxification: 3
+  moveSpeed: 9
+  sprintMultiplier: 1.3
+  groundDrag: 5
+  normalJumpForce: 12
+  jumpCooldown: 0.25
+  airMultiplier: 0.4
+  iceSprintIsUnlocked: 0
+  iceMoveSpeed: 0
+  waterConsumptionIceSprint: 2
+  waterConsumptionIceSprintIntervallInSeconds: 0.5
+  dashIsUnlocked: 1
+  maxDashCount: 3
+  dashCount: 1
+  dashCountResetIntervallInSeconds: 0
+  dashForce: 18
+  timeUntilSpeedControlGetsActivatedAgain: 0.5
+  waterConsumptionDash: 1
+  jumpCount: 4
+  extraJumpForce: 18
+  waterConsumptionExtraJump: 2
+  flyingIsUnlocked: 1
+  timeUntilFlyingAfterJump: 1.5
+  jetpackFlyForce: 6
+  waterConsumptionFlying: 1
+  waterConsumptionFlyingIntervallInSeconds: 0.5
+  interactionRange: 10
+  playerTankMaxWaterLevel: 50
+  playerTankWaterLevel: 0
+  standingInWaterTankFillAmount: 0
+  tankFillRateInSeconds: 0
+  fireRate: 0
+  damage: 1

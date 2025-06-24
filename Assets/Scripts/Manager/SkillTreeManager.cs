@@ -32,12 +32,23 @@ public class SkillTreeManager : MonoBehaviour
             slot.skillButton.onClick.AddListener(() => CheckAvailablePoints(slot));
         }
         UpdateAbilityPoints(0);
+        UpdateBranchPoints(0);
+        if (GameManager.Instance.isMainMenu)
+        {
+            UpdatePowerPoints(0);
+        }
+    }
+
+    private void Update()
+    {
+        UpdateAbilityPoints(0);
+        UpdateBranchPoints(0);
     }
     //wenn genug skillpunkte verfügbar sind wird auf das SkillSlot script verwiesen 
     // und geschaut ob für das gewuenschte Upgrade die vorraussetzungen erfuellt sind
     private void CheckAvailablePoints(SkillSlot slot)
     {
-        if(resources.resource1 >= slot.skillSO.upgradeCost && resources.resource2 >= slot.skillSO.unlockBranchCost)
+        if (resources.resource1 >= slot.skillSO.upgradeCost && resources.resource2 >= slot.skillSO.unlockBranchCost)
         {
             slot.TryUpgradeSkill();
         }

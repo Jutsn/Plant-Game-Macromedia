@@ -95,6 +95,16 @@ public class SkillManager : MonoBehaviour
             case "Poison Immnunity":
                 //StatsManager.Instance.UpdatePoisonImmunity(true);
                 break;
+            case "JetPackJump Lv1":
+                StatsManager.Instance.baseStats.jumpCount += 1;
+                break;
+            case "JetPackFlight":
+                StatsManager.Instance.baseStats.flyingIsUnlocked = true;
+                break;
+            case "JetPackWaterLoss":
+                StatsManager.Instance.baseStats.waterConsumptionFlying = 1;
+                break;
+
             default:
                 // wenn ein skill geupgradet wird aber nicht existiert kommt diese Warnung
                     Debug.LogWarning("Unknown Skill: " + skillName);
