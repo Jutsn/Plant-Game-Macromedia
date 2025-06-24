@@ -16,16 +16,19 @@ public class UIManager : MonoBehaviour
 	public Image hitMarker;
     public TextMeshProUGUI waterTankPercentage;
     
+    
     public GameObject pauseUIPanel;
     
     public GameObject upgradeUIPanel;
     public GameObject gameOverUIPanel;
+    public GameObject winUIPanel;
 	public GameObject antidotDisplay;
 	public GameObject interactSprite;
 	public TextMeshProUGUI antidotAmount;
 
 	private bool isHitmarkerShown;
 
+	public TextMeshProUGUI gameTimerText;
 
 	private void Awake()
 	{
@@ -74,15 +77,21 @@ public class UIManager : MonoBehaviour
 		pauseUIPanel.SetActive(false);
 		
 	}
-
     public void ShowGameOverMenu()
     {
         gameOverUIPanel.SetActive(true);
     }
-
     public void HideGameOverMenu()
     {
         gameOverUIPanel.SetActive(false);
+    }
+    public void ShowWinMenu()
+    {
+        winUIPanel.SetActive(true);
+    }
+    public void HideWinMenu()
+    {
+        winUIPanel.SetActive(false);
     }
     public void RefreshAntidotDisplay(int amount)
     {
@@ -95,8 +104,8 @@ public class UIManager : MonoBehaviour
 			HideAntidotDisplay();
 		}
 		antidotAmount.text = amount.ToString();
-        
     }
+
 	private void ShowAntidotDisplay()
 	{
 		antidotDisplay.SetActive(true);
@@ -116,7 +125,14 @@ public class UIManager : MonoBehaviour
 		interactSprite.SetActive(false);
 	}
 
+	public void RefreshGameTimer(float time)
+    {
+        int minutes = Mathf.FloorToInt(time / 60f);
+	    float seconds = time % 60f;
 
+		string formattedTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+		gameTimerText.text = formattedTime;
+    }
 
 	public void UpdateWaterTankBar(int waterLevel, int maxWaterLevel)
     {

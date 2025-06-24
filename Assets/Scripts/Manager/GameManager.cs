@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public bool gameOver;
+    public bool wonGame;
     public bool IsPaused;
     public int missionTimer = 0;
     public int missionTimeMax = 1200;
@@ -57,8 +58,10 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.HidePauseMenu();
         UIManager.Instance.HideGameOverMenu();
+        UIManager.Instance.HideWinMenu();
         pauseMenu = false;
         skillMenu = false;
+        wonGame = false;
         resources.resource1 = 0;
         resources.resource2 = 0;
         resources.antitoxin = 0;
@@ -91,7 +94,14 @@ public class GameManager : MonoBehaviour
     {
         gameOver = true;
         GameOverEvent.Invoke();
-        UIManager.Instance.ShowGameOverMenu();
+        if (wonGame)
+        {
+			UIManager.Instance.ShowWinMenu();
+		}
+        else if (!wonGame)
+        {
+			UIManager.Instance.ShowGameOverMenu();
+		}   
         GetResource3();
 
         Debug.Log("GameOver"); //Hier Game-Over Bildschirm
@@ -113,10 +123,13 @@ public class GameManager : MonoBehaviour
                     waveActive = false;
                     spawnManagerScript.newWave = true;
                 }
+                UIManager.Instance.RefreshGameTimer(missionTimer);
             }
             else if (missionTimer >= missionTimeMax)
             {
                 missionTimer = missionTimeMax;
+				UIManager.Instance.RefreshGameTimer(missionTimer);
+				wonGame = true;
                 GameOver();
             }
         }

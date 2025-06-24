@@ -11602,6 +11602,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 172655959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &722964603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 624241099349290192, guid: 502ea54162246b1488fce03ea779a719, type: 3}
+  m_PrefabInstance: {fileID: 772240391}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &734984942
 Mesh:
   m_ObjectHideFlags: 0
@@ -11775,6 +11780,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 624241099349290192, guid: 502ea54162246b1488fce03ea779a719, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 850981143798793284, guid: 502ea54162246b1488fce03ea779a719, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11847,6 +11856,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4457183869828327329, guid: 502ea54162246b1488fce03ea779a719, type: 3}
+      propertyPath: winUIPanel
+      value: 
+      objectReference: {fileID: 722964603}
     - target: {fileID: 5021866965703185268, guid: 502ea54162246b1488fce03ea779a719, type: 3}
       propertyPath: m_Name
       value: UIManager final
@@ -12216,6 +12229,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 172655959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &781539553
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -123.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 76.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745209170698845986, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: m_Name
+      value: Antitoxin-Respawner 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7598666864011176547, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
+      propertyPath: respawnTime
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
 --- !u!43 &826052896
 Mesh:
   m_ObjectHideFlags: 0
@@ -32834,6 +32908,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8533955126564023129, guid: 5ae36b8ed2b24e448bdcb41f81d55a9d, type: 3}
+      propertyPath: waveLength
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533955126564023129, guid: 5ae36b8ed2b24e448bdcb41f81d55a9d, type: 3}
+      propertyPath: missionTimeMax
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38407,15 +38489,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.8
+      value: 44.5
       objectReference: {fileID: 0}
     - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.71
+      value: 16.8
       objectReference: {fileID: 0}
     - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.5
+      value: 68.5
       objectReference: {fileID: 0}
     - target: {fileID: 4378785693732012222, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -38448,10 +38530,6 @@ PrefabInstance:
     - target: {fileID: 5745209170698845986, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
       propertyPath: m_Name
       value: Antitoxin-Respawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 7598666864011176547, guid: 43d853c401cc10e41a23519381b0c84d, type: 3}
-      propertyPath: respawnTime
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -38653,5 +38731,6 @@ SceneRoots:
   - {fileID: 172655959}
   - {fileID: 1859218526}
   - {fileID: 5785427994755657267}
+  - {fileID: 781539553}
   - {fileID: 2785231409425718565}
   - {fileID: 1639961102}
