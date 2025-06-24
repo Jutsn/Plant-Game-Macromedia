@@ -6,7 +6,6 @@ using System.Collections;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
-
     
     public Slider plantHealthBar;
     public Slider plantWaterBar;
@@ -16,12 +15,16 @@ public class UIManager : MonoBehaviour
 	public Image waterTankFill;
 	public Image hitMarker;
     public TextMeshProUGUI waterTankPercentage;
+    
     public GameObject pauseUIPanel;
     
     public GameObject upgradeUIPanel;
     public GameObject gameOverUIPanel;
+	public GameObject antidotDisplay;
+	public GameObject interactSprite;
+	public TextMeshProUGUI antidotAmount;
 
-    private bool isHitmarkerShown;
+	private bool isHitmarkerShown;
 
 
 	private void Awake()
@@ -81,13 +84,41 @@ public class UIManager : MonoBehaviour
     {
         gameOverUIPanel.SetActive(false);
     }
+    public void RefreshAntidotDisplay(int amount)
+    {
+		if (amount > 0 && !antidotDisplay.activeInHierarchy)
+		{
+			ShowAntidotDisplay();
+		}
+		else if (amount <= 0 && antidotDisplay.activeInHierarchy)
+		{
+			HideAntidotDisplay();
+		}
+		antidotAmount.text = amount.ToString();
+        
+    }
+	private void ShowAntidotDisplay()
+	{
+		antidotDisplay.SetActive(true);
+	}
 
-            
-    
+	private void HideAntidotDisplay()
+	{
+		antidotDisplay.SetActive(false);
+	}
+	public void ShowInteractSprite()
+	{
+		interactSprite.SetActive(true);
+	}
 
-    
+	public void HideInteractSprite()
+	{
+		interactSprite.SetActive(false);
+	}
 
-    public void UpdateWaterTankBar(int waterLevel, int maxWaterLevel)
+
+
+	public void UpdateWaterTankBar(int waterLevel, int maxWaterLevel)
     {
         waterTankBar.value = waterLevel;
         waterTankPercentage.text = ((float)waterLevel/maxWaterLevel) * 100 +"%";

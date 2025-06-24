@@ -184,7 +184,14 @@ public class PlayerMovement : MonoBehaviour
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 		// is MainPlant in Range for Interaction
 		inInteractionRangeWithPlant = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactionRange) && hit.collider.CompareTag("Plant");
-
+		if (inInteractionRangeWithPlant && mainPlantSkript.mainPlantState == MainPlantState.poisened)
+		{
+			UIManager.Instance.ShowInteractSprite();
+		}
+		else if (!inInteractionRangeWithPlant)
+		{
+			UIManager.Instance.HideInteractSprite();
+		}
 		MyInput();
 
 		flatVel = new Vector3(playerRb.linearVelocity.x, 0f, playerRb.linearVelocity.z);
@@ -267,7 +274,7 @@ public class PlayerMovement : MonoBehaviour
             weaponBehaviourSkript.SwitchWeaponMode();
 		}
 
-        if (Input.GetKeyDown(interactionKey) && inInteractionRangeWithPlant && GameManager.Instance.resources.antitoxin > 0 && !GameManager.Instance.gameOver) //Pflanze entgiften
+        if (Input.GetKeyDown(interactionKey) && inInteractionRangeWithPlant && mainPlantSkript.mainPlantState == MainPlantState.poisened && GameManager.Instance.resources.antitoxin > 0 && !GameManager.Instance.gameOver) //Pflanze entgiften
 		{
 			GameManager.Instance.LooseAntitoxin();
 			mainPlantSkript.DetoxPlant();

@@ -204,11 +204,13 @@ public class GameManager : MonoBehaviour
     public void GetAntitoxin()
     {
         resources.antitoxin += 1;
+        UIManager.Instance.RefreshAntidotDisplay(resources.antitoxin);
     }
     public void LooseAntitoxin()
     {
         resources.antitoxin -= 1;
-    }
+		UIManager.Instance.RefreshAntidotDisplay(resources.antitoxin);
+	}
 
     #endregion ResourceFunctions
 
