@@ -74,6 +74,7 @@ public class StatsManager : MonoBehaviour
     //Button Input für das Playtesten
     public void GetInput()
     {
+        #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Return))
         {
             ResetStatsToBase();
@@ -82,6 +83,7 @@ public class StatsManager : MonoBehaviour
         {
             OnStatsChanged.Invoke(this);
         }
+        #endif
     }
     public void ResetStatsToBase()
     {
