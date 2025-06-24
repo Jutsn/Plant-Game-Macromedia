@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c09d9ace3ef9c8488238a1101db6dfd, type: 3}
   m_Name: Resources
   m_EditorClassIdentifier: 
-  resource1: 0
-  resource2: 0
+  resource1: 100
+  resource2: 100
   resource3: 134
   antitoxin: 0
   dropChanceResource1SmallEnemy: 50

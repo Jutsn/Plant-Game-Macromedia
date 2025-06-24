@@ -31,8 +31,12 @@ public class SkillTreeManager : MonoBehaviour
         {
             slot.skillButton.onClick.AddListener(() => CheckAvailablePoints(slot));
         }
-        UpdateAbilityPoints(0);
-        UpdateBranchPoints(0);
+        if(!GameManager.Instance.isMainMenu)
+        {
+            UpdateAbilityPoints(0);
+            UpdateBranchPoints(0);
+        }
+
         if (GameManager.Instance.isMainMenu)
         {
             UpdatePowerPoints(0);
@@ -41,32 +45,54 @@ public class SkillTreeManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateAbilityPoints(0);
-        UpdateBranchPoints(0);
+        if(!GameManager.Instance.isMainMenu)
+        {
+            UpdateAbilityPoints(0);
+            UpdateBranchPoints(0);
+        }
+
     }
     //wenn genug skillpunkte verfügbar sind wird auf das SkillSlot script verwiesen 
     // und geschaut ob für das gewuenschte Upgrade die vorraussetzungen erfuellt sind
     private void CheckAvailablePoints(SkillSlot slot)
     {
-        if (resources.resource1 >= slot.skillSO.upgradeCost && resources.resource2 >= slot.skillSO.unlockBranchCost)
+        if (GameManager.Instance.isMainMenu)
         {
-            slot.TryUpgradeSkill();
+            if (resources.resource3 >= slot.skillSO.powerCost)
+            {
+                slot.TryUpgradeSkill();
+            }
         }
+        else if (!GameManager.Instance.isMainMenu)
+        {
+            if (resources.resource1 >= slot.skillSO.upgradeCost && resources.resource2 >= slot.skillSO.unlockBranchCost)
+            {
+                slot.TryUpgradeSkill();
+            }
+        }
+
+
     }
 
     private void HandleAbilityPointsSpent(SkillSlot skillSlot)
     {
-        if (resources.resource1 > skillSlot.skillSO.upgradeCost)
+        if (GameManager.Instance.isMainMenu)
         {
-            UpdateAbilityPoints(-skillSlot.skillSO.upgradeCost);
-            UpdateBranchPoints(-skillSlot.skillSO.unlockBranchCost);
-            if(GameManager.Instance.isMainMenu)
+            if (resources.resource3 > skillSlot.skillSO.powerCost)
             {
-                UpdatePowerPoints(-skillSlot.skillSO.powerCost); 
+                UpdatePowerPoints(-skillSlot.skillSO.powerCost);
             }
-           
-
         }
+        else if (!GameManager.Instance.isMainMenu)
+        {
+            if (resources.resource1 > skillSlot.skillSO.upgradeCost && resources.resource2 > skillSlot.skillSO.unlockBranchCost)
+                {
+                    UpdateAbilityPoints(-skillSlot.skillSO.upgradeCost);
+                    UpdateBranchPoints(-skillSlot.skillSO.unlockBranchCost);
+                }
+        }
+
+
     }
     //wird aufgerufen, wenn skill maximiert, schaltet den nächsten skill frei, wenn vorrausetzungen erfuellt
     private void HandleSkillMaxed(SkillSlot skillSlot)

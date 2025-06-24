@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.HidePauseMenu();
         UIManager.Instance.HideGameOverMenu();
-        UIManager.Instance.HideUpgradeUI();
+        MainMenuUIManager.Instance.HideUpgradeUI();
         UIManager.Instance.HideWinMenu();
         pauseMenu = false;
         skillMenu = false;

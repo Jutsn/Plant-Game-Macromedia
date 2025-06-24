@@ -608,14 +608,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager Main Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 3397962484322120194, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+      propertyPath: pauseUIPanel
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3468637694484444561, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 255838399}
+    - target: {fileID: 5233247820971443299, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+      propertyPath: m_text
+      value: 'Power Points: '
+      objectReference: {fileID: 0}
     - target: {fileID: 5682551813733582797, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2111512551}
+    - target: {fileID: 5730925741226815670, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8398219514618581660, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -657,7 +669,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5098979389571935944, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
