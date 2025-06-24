@@ -4311,11 +4311,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: 0
+  IsPaused: 0
   missionTimer: 0
   missionTimeMax: 1200
   waveLength: 120
+  timeBetweenWaves: 1
   waveActive: 0
   killedEnemies: 0
+  isMainMenu: 0
   resources: {fileID: 11400000, guid: 413d48d5c14e5ef4d8869e8d9e8394c2, type: 2}
 --- !u!4 &308986577
 Transform:
@@ -5190,7 +5193,7 @@ GameObject:
   - component: {fileID: 409276410}
   - component: {fileID: 409276409}
   - component: {fileID: 409276408}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8603,10 +8606,14 @@ MonoBehaviour:
   plantHealthBar: {fileID: 90347808}
   plantWaterBar: {fileID: 1725079454}
   waterTankBar: {fileID: 1915143217}
-  plantFill: {fileID: 465781200}
+  plantHealthFill: {fileID: 0}
+  plantWaterFill: {fileID: 0}
+  waterTankFill: {fileID: 0}
   hitMarker: {fileID: 542400981}
   waterTankPercentage: {fileID: 547579785}
+  pauseUIPanel: {fileID: 0}
   upgradeUIPanel: {fileID: 883708993}
+  gameOverUIPanel: {fileID: 0}
 --- !u!4 &575891281
 Transform:
   m_ObjectHideFlags: 0
@@ -21774,7 +21781,7 @@ GameObject:
   - component: {fileID: 1309232054}
   - component: {fileID: 1309232053}
   - component: {fileID: 1309232052}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stairs (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29796,7 +29803,7 @@ GameObject:
   - component: {fileID: 1591186398}
   - component: {fileID: 1591186397}
   - component: {fileID: 1591186396}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PolyShape (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33483,8 +33490,10 @@ MonoBehaviour:
   - {fileID: 1312905786}
   - {fileID: 320693931}
   - {fileID: 1627387108}
+  resources: {fileID: 0}
   pointsText: {fileID: 513150557}
-  availablePoints: 0
+  branchPointsText: {fileID: 0}
+  powerPoints: {fileID: 0}
 --- !u!225 &1884518522
 CanvasGroup:
   m_ObjectHideFlags: 0
