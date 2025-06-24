@@ -96,8 +96,14 @@ public class SkillManager : MonoBehaviour
                 //StatsManager.Instance.UpdatePoisonImmunity(true);
                 break;
             case "JetPackJumpLv1":
-                StatsManager.Instance.baseStats.jumpCount += 1;
+                StatsManager.Instance.baseStats.jumpCount = 2;
                 break;
+            case "JetPackJumpLv2":
+                StatsManager.Instance.baseStats.jumpCount = 3;
+                break;
+            case "JetPackJumpLv3":
+                StatsManager.Instance.baseStats.jumpCount = 4;
+                break;  
             case "JetPackFlight":
                 StatsManager.Instance.baseStats.flyingIsUnlocked = true;
                 break;

@@ -7,9 +7,10 @@ public class MainMenuUIManager : MonoBehaviour
 {
     public static MainMenuUIManager Instance { get; private set; }
     public GameObject upgradeUIPanel;
+    public GameObject mainMenuPanel;
 
 	private void Awake()
-	{
+    {
         if (Instance == null)
         {
             Instance = this;
@@ -19,7 +20,7 @@ public class MainMenuUIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-	}
+    }
 
             
     public void ShowUpgradeUI()

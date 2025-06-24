@@ -137,7 +137,9 @@ public class UIManager : MonoBehaviour
 	public void UpdateWaterTankBar(int waterLevel, int maxWaterLevel)
     {
         waterTankBar.value = waterLevel;
-        waterTankPercentage.text = ((float)waterLevel/maxWaterLevel) * 100 +"%";
+        float percentage = ((float)waterLevel / maxWaterLevel) * 100;
+        waterTankPercentage.text = percentage.ToString("F0") + "%";
+
     }
 
 	public void ChangeWaterTankBarColor(Color color)
