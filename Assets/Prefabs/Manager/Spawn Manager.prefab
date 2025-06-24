@@ -316,7 +316,7 @@ MonoBehaviour:
   smallEnemySpawnAmount: 3
   bigEnemySpawnAmount: 1
   enemySpawnRate: 2
-  pauseBetweenSpawnPointSwitches: 4
+  pauseBetweenSpawnPointSwitches: 2.5
   newWave: 1
   currentSpawnPointIndex: 0
 --- !u!114 &6900606921182554384

@@ -343,7 +343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915519401504916153, guid: 67f716418f7ba2146a845739c7782755, type: 3}
       propertyPath: standardWeaponMode
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6915519401504916153, guid: 67f716418f7ba2146a845739c7782755, type: 3}
       propertyPath: cooldownTimeShotgun
@@ -388,6 +388,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -70819749373640993, guid: 67f716418f7ba2146a845739c7782755, type: 3}
+    - {fileID: 877171623533139949, guid: 67f716418f7ba2146a845739c7782755, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67f716418f7ba2146a845739c7782755, type: 3}

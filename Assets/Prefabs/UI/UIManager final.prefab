@@ -641,6 +641,7 @@ GameObject:
   - component: {fileID: 751818723048443397}
   - component: {fileID: 8963331675551016160}
   - component: {fileID: 3482388302031038428}
+  - component: {fileID: 5622023718594407163}
   m_Layer: 5
   m_Name: Button (Legacy)
   m_TagString: Untagged
@@ -750,9 +751,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: UnpauseGame
+      - m_Target: {fileID: 5622023718594407163}
+        m_TargetAssemblyTypeName: PauseButton, Assembly-CSharp
+        m_MethodName: CallUnpause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -762,6 +763,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5622023718594407163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2172269923218896081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e712f220ca8db74c898216e2abd8c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2184929755637768622
 GameObject:
   m_ObjectHideFlags: 0

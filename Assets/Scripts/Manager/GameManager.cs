@@ -83,9 +83,17 @@ public class GameManager : MonoBehaviour
             spawnManagerScript = FindAnyObjectByType<SpawnManager>();
             StartCoroutine(MissionTimerCoroutine());
         }
+		if (scene.buildIndex == 2) //Level 1
+		{
+			isMainMenu = false;
+			gameOver = false;
+			waveActive = true;
+			spawnManagerScript = FindAnyObjectByType<SpawnManager>();
+			StartCoroutine(MissionTimerCoroutine());
+		}
 
 
-    }
+	}
 
     void Update()
     {
