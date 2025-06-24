@@ -38242,13 +38242,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5530914232005126797, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530914232005126797, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530914232005126797, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9992797
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530914232005126797, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.037948884
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530914232005126797, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -4.35
+      objectReference: {fileID: 0}
     - target: {fileID: 8414560791249043783, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
       propertyPath: m_Name
       value: Camera Holder
-      objectReference: {fileID: 0}
-    - target: {fileID: 8994508130760825115, guid: 3e9264573ce80484a8e2a69115a29ccc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

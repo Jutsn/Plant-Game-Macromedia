@@ -8,6 +8,7 @@ public class WeaponBehaviour : MonoBehaviour
 	public Transform firePoint; // Punkt, von dem der Strahl ausgeht
 	public ParticleSystem beamParticles; // Das Partikel-System
 	public GameObject muzzle;
+	public Animator animator;
 
 	[Header("Beam")]
 	[SerializeField] private int waterConsumptionBeam;
@@ -37,6 +38,7 @@ public class WeaponBehaviour : MonoBehaviour
 	{
 		if (Input.GetButtonDown("Fire1") && standardWeaponMode == StandardWeaponMode.beam && WaterTank.Instance.playerTankWaterLevel > 0 && !GameManager.Instance.gameOver && !GameManager.Instance.IsPaused) // Schie�en solange Maustaste gedr�ckt
 		{
+			animator.SetBool("isBeaming", true);
 			beamParticles.Play();
 			isFiringBeam = true;
 			StartCoroutine(WaterConsumptionCoroutine(waterConsumptionBeam));
@@ -44,6 +46,7 @@ public class WeaponBehaviour : MonoBehaviour
 		else if (Input.GetButtonUp("Fire1"))
 		{
 			isFiringBeam = false;
+			animator.SetBool("isBeaming", false);
 			beamParticles.Stop(); // Partikel stoppen
 		}
 
@@ -66,6 +69,7 @@ public class WeaponBehaviour : MonoBehaviour
 		}
 		if (isFiringAR)
 		{
+			
 			ARTimer(); //Cooldown between bullets while holding
 			ShootAR(); //Shoot AR
 		}
@@ -103,6 +107,8 @@ public class WeaponBehaviour : MonoBehaviour
 
 	IEnumerator ShootShotgun()
 	{
+		animator.SetTrigger("isShooting");
+		yield return new WaitForSeconds(0.1f);
 		ParticleSystem ps0 = WaterBulletParticlePool.Instance.GetPooledShotgunBullet(); //1.Kugel
 		// Richte das Partikelsystem in die Richtung des Treffers aus
 		ps0.transform.position = muzzle.transform.position;
@@ -156,13 +162,7 @@ public class WeaponBehaviour : MonoBehaviour
 		
 		if (ARFireReady)
 		{
-			ParticleSystem ps5 = WaterBulletParticlePool.Instance.GetPooledARBullet(); //1.Kugel
-			// Richte das Partikelsystem in die Richtung des Treffers aus
-			ps5.transform.position = muzzle.transform.position;
-			ps5.transform.forward = muzzle.transform.forward;
-			// Partikel aktivieren
-			ps5.gameObject.SetActive(true);
-			ps5.Play();
+			StartCoroutine(ShootARBullet());
 			ARFireReady = false;
 		}
 	}
@@ -176,20 +176,35 @@ public class WeaponBehaviour : MonoBehaviour
 			ARFireReady = true;
 		}
 	}
+	IEnumerator ShootARBullet()
+	{
+		animator.SetTrigger("isShooting");
+		yield return new WaitForSeconds(0.1f);
+		ParticleSystem ps5 = WaterBulletParticlePool.Instance.GetPooledARBullet(); //1.Kugel
+																				   // Richte das Partikelsystem in die Richtung des Treffers aus
+		ps5.transform.position = muzzle.transform.position;
+		ps5.transform.forward = muzzle.transform.forward;
+		// Partikel aktivieren
+		ps5.gameObject.SetActive(true);
+		ps5.Play();
+	}
 
 	public void SwitchWeaponMode()
 	{
 		if (standardWeaponMode == StandardWeaponMode.beam) //Wechsel zur Shotgun
 		{
 			beamParticles.Stop();
+			animator.SetTrigger("isSwitchingWeapon");
 			standardWeaponMode = StandardWeaponMode.shotgun;
 		}
 		else if (standardWeaponMode == StandardWeaponMode.shotgun) //Wechsel zur AR
 		{
+			animator.SetTrigger("isSwitchingWeapon");
 			standardWeaponMode = StandardWeaponMode.automaticRifle;
 		}
 		else if (standardWeaponMode == StandardWeaponMode.automaticRifle) //Wechsel zum Beam
 		{
+			animator.SetTrigger("isSwitchingWeapon");
 			standardWeaponMode = StandardWeaponMode.beam;
 		}
 	}

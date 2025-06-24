@@ -5504,7 +5504,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -9738,7 +9738,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729bffc0d492c88459cbfafb1903f6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterPerParticleWaterBeam: 0.1
-  damagePerParticleWaterBeam: 0.1
-  waterPerParticleShotgun: 1
+  damagePerParticleAR: 0.8
+  impactSplashPlayRateAR: 0.3
+  plantWaterPerParticleAR: 1
   damagePerParticleShotgun: 0.8
+  impactSplashPlayRateShotgun: 0.1
+  plantWaterPerParticleShotgun: 1
+  damagePerParticleWaterBeam: 0.11
+  impactSplashPlayRateBeam: 0.3
+  plantWaterPerParticleWaterBeam: 0.25
