@@ -13,10 +13,10 @@ public class GameManager : MonoBehaviour
     public bool IsPaused;
     public int missionTimer = 0;
     public int missionTimeMax = 1200;
-	public int waveLength = 150;
-	public int timeBetweenWaves = 1;
+    public int waveLength = 150;
+    public int timeBetweenWaves = 1;
     public bool waveActive;
-	public int killedEnemies = 0;
+    public int killedEnemies = 0;
     public bool isMainMenu = false;
 
     private bool pauseMenu;
@@ -24,14 +24,14 @@ public class GameManager : MonoBehaviour
 
     private SpawnManager spawnManagerScript;
 
-	public static Action GameOverEvent;
+    public static Action GameOverEvent;
 
 
-	public ResourcesSO resources;
+    public ResourcesSO resources;
 
-	private void Awake()
-	{
-		if (Instance == null)
+    private void Awake()
+    {
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -40,46 +40,46 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-		Application.targetFrameRate = 60;
-	}
+        Application.targetFrameRate = 60;
+    }
 
-	void OnEnable()
-	{
-		SceneManager.sceneLoaded += OnSceneLoaded;
-	}
-
-	void OnDisable()
-	{
-		SceneManager.sceneLoaded -= OnSceneLoaded;
-	}
-
-	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    void OnEnable()
     {
-		UIManager.Instance.HidePauseMenu();
-		UIManager.Instance.HideGameOverMenu();
-		pauseMenu = false;
-		skillMenu = false;
-		resources.resource1 = 0;
-		resources.resource2 = 0;
-		resources.antitoxin = 0;
-		missionTimer = 0;
-		killedEnemies = 0;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
-		if (scene.buildIndex == 0) //MainMenu
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        UIManager.Instance.HidePauseMenu();
+        UIManager.Instance.HideGameOverMenu();
+        pauseMenu = false;
+        skillMenu = false;
+        resources.resource1 = 0;
+        resources.resource2 = 0;
+        resources.antitoxin = 0;
+        missionTimer = 0;
+        killedEnemies = 0;
+
+        if (scene.buildIndex == 0) //MainMenu
         {
             isMainMenu = true;
             gameOver = true;
-		}
-            
-		if (scene.buildIndex == 1) //Level 1
+        }
+
+        if (scene.buildIndex == 1) //Level 1
         {
-			isMainMenu = false;
+            isMainMenu = false;
             gameOver = false;
-			waveActive = true;
-			spawnManagerScript = FindAnyObjectByType<SpawnManager>();
-			StartCoroutine(MissionTimerCoroutine());
-		}
-		    
+            waveActive = true;
+            spawnManagerScript = FindAnyObjectByType<SpawnManager>();
+            StartCoroutine(MissionTimerCoroutine());
+        }
+
 
     }
 
@@ -101,30 +101,30 @@ public class GameManager : MonoBehaviour
     {
         while (!gameOver)
         {
-			yield return new WaitForSeconds(1);
-			if (missionTimer < missionTimeMax && waveActive)
-			{
-				missionTimer += 1;
+            yield return new WaitForSeconds(1);
+            if (missionTimer < missionTimeMax && waveActive)
+            {
+                missionTimer += 1;
 
-				if (missionTimer % waveLength == 0) //Welle beenden
-				{
-					spawnManagerScript.SpawnResource2();
-					spawnManagerScript.SpawnEliteEnemy(); //Spawn Elite
-					waveActive = false;
+                if (missionTimer % waveLength == 0) //Welle beenden
+                {
+                    spawnManagerScript.SpawnResource2();
+                    spawnManagerScript.SpawnEliteEnemy(); //Spawn Elite
+                    waveActive = false;
                     spawnManagerScript.newWave = true;
-				}
-			}
+                }
+            }
             else if (missionTimer >= missionTimeMax)
-			{
-				missionTimer = missionTimeMax;
-				GameOver();
-			}
-		}
-	}
+            {
+                missionTimer = missionTimeMax;
+                GameOver();
+            }
+        }
+    }
 
     public IEnumerator SetWaveActiveAgainCoroutine()
     {
-        yield return new WaitForSeconds (timeBetweenWaves);
+        yield return new WaitForSeconds(timeBetweenWaves);
         waveActive = true;
     }
 
@@ -136,26 +136,26 @@ public class GameManager : MonoBehaviour
         {
             if (!IsPaused && !gameOver && !pauseMenu)
             {
-				skillMenu = true;
-				IsPaused = true;
-				PauseGame();
-				UIManager.Instance.ShowUpgradeUI();
-			}
+                skillMenu = true;
+                IsPaused = true;
+                PauseGame();
+                UIManager.Instance.ShowUpgradeUI();
+            }
             else if (IsPaused && !gameOver && !pauseMenu)
             {
                 ResumeGame();
-				UIManager.Instance.HideUpgradeUI();
-				skillMenu = false;
-			}
+                UIManager.Instance.HideUpgradeUI();
+                skillMenu = false;
+            }
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!IsPaused && !gameOver && !skillMenu)
             {
                 pauseMenu = true;
-				IsPaused = true;
-				PauseGame();
+                IsPaused = true;
+                PauseGame();
                 UIManager.Instance.ShowPauseMenu();
             }
             else if (IsPaused && !gameOver && !skillMenu)
@@ -166,24 +166,24 @@ public class GameManager : MonoBehaviour
     }
     public void UnpauseGame()
     {
-		
-		ResumeGame();
-		UIManager.Instance.HidePauseMenu();
+
+        ResumeGame();
+        UIManager.Instance.HidePauseMenu();
         pauseMenu = false;
-		
-	}
+
+    }
     public void PauseGame()
     {
-        
-		Time.timeScale = 0f;
-		Cursor.lockState = CursorLockMode.None;
+
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
     public void ResumeGame()
     {
-		Time.timeScale = 1f;
-		IsPaused = false;
-		Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+        IsPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
     #endregion
@@ -199,21 +199,21 @@ public class GameManager : MonoBehaviour
     }
     public void GetResource3()
     {
-		resources.resource3 += missionTimer + killedEnemies;
-	} 
+        resources.resource3 += missionTimer + killedEnemies;
+    }
     public void GetAntitoxin()
     {
-		resources.antitoxin += 1;
-	}
+        resources.antitoxin += 1;
+    }
     public void LooseAntitoxin()
     {
-		resources.antitoxin -= 1;
-	}
+        resources.antitoxin -= 1;
+    }
 
-	#endregion ResourceFunctions
+    #endregion ResourceFunctions
 
-	#region DropchanceFunctions
-	public int GetDropChanceResource1SmallEnemy()
+    #region DropchanceFunctions
+    public int GetDropChanceResource1SmallEnemy()
     {
         return resources.dropChanceResource1SmallEnemy;
     }
@@ -230,5 +230,10 @@ public class GameManager : MonoBehaviour
     {
         return resources.maxDropAmountResource2Elite;
     }
-	#endregion DropchanceFunctions
+    #endregion DropchanceFunctions
+    
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
