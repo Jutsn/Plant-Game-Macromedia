@@ -42,7 +42,7 @@ MonoBehaviour:
   dashForce: 12
   timeUntilSpeedControlGetsActivatedAgain: 0.1
   waterConsumptionDash: 2
-  jumpCount: 2
+  jumpCount: 5
   extraJumpForce: 18
   waterConsumptionExtraJump: 2
   flyingIsUnlocked: 1
