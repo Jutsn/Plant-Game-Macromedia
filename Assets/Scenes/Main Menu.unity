@@ -1145,6 +1145,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 986475892897434605, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+      propertyPath: m_Name
+      value: Shop
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319448202031798496, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+      propertyPath: m_Name
+      value: Quit
+      objectReference: {fileID: 0}
     - target: {fileID: 1716708713907246961, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1180,6 +1188,10 @@ PrefabInstance:
     - target: {fileID: 2753213362557254300, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: m_Name
       value: UIManager Main Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3364878695558660245, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+      propertyPath: m_Name
+      value: LoadLevel1
       objectReference: {fileID: 0}
     - target: {fileID: 3397962484322120194, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: pauseUIPanel
@@ -1219,12 +1231,16 @@ PrefabInstance:
       objectReference: {fileID: 2111512551}
     - target: {fileID: 5730925741226815670, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5924653312620975145, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: skillSO
       value: 
       objectReference: {fileID: 11400000, guid: a1fe358318f8be640be35b8ea6bac832, type: 2}
+    - target: {fileID: 6496544171002701078, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+      propertyPath: m_Name
+      value: LoadLevel2
+      objectReference: {fileID: 0}
     - target: {fileID: 8013005834769410622, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: skillSO
       value: 
