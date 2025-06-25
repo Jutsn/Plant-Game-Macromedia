@@ -56,9 +56,10 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+		if (MainMenuUIManager.Instance != null)
+		    MainMenuUIManager.Instance.HideUpgradeUI();
+		
         
-        
-        MainMenuUIManager.Instance.HideUpgradeUI();
         pauseMenu = false;
         skillMenu = false;
         wonGame = false;
@@ -77,19 +78,22 @@ public class GameManager : MonoBehaviour
 
         if (scene.buildIndex == 1) //Level 1
         {
-            isMainMenu = false;
-            MainMenuUIManager.Instance.HideMainMenu();
+            
+			if (MainMenuUIManager.Instance != null)
+				MainMenuUIManager.Instance.HideMainMenu();
             UnpauseGame();
 			UIManager.Instance.HideGameOverMenu();
 			UIManager.Instance.HideWinMenu();
-            gameOver = false;
+			isMainMenu = false;
+			gameOver = false;
             waveActive = true;
             spawnManagerScript = FindAnyObjectByType<SpawnManager>();
             StartCoroutine(MissionTimerCoroutine());
         }
 		if (scene.buildIndex == 2) //Level 1
 		{
-			MainMenuUIManager.Instance.HideMainMenu();
+			if (MainMenuUIManager.Instance != null)
+				MainMenuUIManager.Instance.HideMainMenu();
 			UnpauseGame();
 			UIManager.Instance.HideGameOverMenu();
 			UIManager.Instance.HideWinMenu();

@@ -11,7 +11,11 @@ public class Antitoxin : MonoBehaviour
     }
     public void DeactivateAntitoxin()
     {
-        spawnerScript.StartWaitingForRespawn();
+        if (spawnerScript != null)
+        {
+			spawnerScript.StartWaitingForRespawn();
+		}
+       
         gameObject.SetActive(false);
     }
 
