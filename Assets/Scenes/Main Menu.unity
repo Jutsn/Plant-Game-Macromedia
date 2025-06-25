@@ -1198,6 +1198,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 40068308}
     - target: {fileID: 4368794500504051918, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+      propertyPath: powerPointsText
+      value: 
+      objectReference: {fileID: 40068308}
+    - target: {fileID: 4368794500504051918, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: branchPointsText
       value: 
       objectReference: {fileID: 1163472706}

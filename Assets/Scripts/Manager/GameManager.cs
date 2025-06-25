@@ -72,14 +72,14 @@ public class GameManager : MonoBehaviour
         if (scene.buildIndex == 0) //MainMenu
         {
             isMainMenu = true;
-            MainMenuUIManager.Instance.mainMenuPanel.SetActive(true);
+            MainMenuUIManager.Instance.ShowMainMenu();
             gameOver = true;
         }
 
         if (scene.buildIndex == 1) //Level 1
         {
             isMainMenu = false;
-            MainMenuUIManager.Instance.mainMenuPanel.SetActive(false);
+            MainMenuUIManager.Instance.HideMainMenu();
             gameOver = false;
             waveActive = true;
             spawnManagerScript = FindAnyObjectByType<SpawnManager>();
