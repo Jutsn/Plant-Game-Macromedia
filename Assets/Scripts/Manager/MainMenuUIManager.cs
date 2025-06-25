@@ -9,20 +9,16 @@ public class MainMenuUIManager : MonoBehaviour
     public GameObject upgradeUIPanel;
     public GameObject mainMenuPanel;
 
-	private void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
-            
+
     public void ShowUpgradeUI()
     {
         upgradeUIPanel.SetActive(true);
@@ -31,5 +27,14 @@ public class MainMenuUIManager : MonoBehaviour
     public void HideUpgradeUI()
     {
         upgradeUIPanel.SetActive(false);
+    }
+
+    public void ShowMainMenu()
+    {
+        mainMenuPanel.SetActive(true);
+    }
+    public void HideMainMenu()
+    {
+        mainMenuPanel.SetActive(false);
     }
 }

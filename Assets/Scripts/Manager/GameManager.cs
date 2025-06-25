@@ -71,12 +71,14 @@ public class GameManager : MonoBehaviour
         if (scene.buildIndex == 0) //MainMenu
         {
             isMainMenu = true;
-            MainMenuUIManager.Instance.mainMenuPanel.SetActive(true);
+            MainMenuUIManager.Instance.ShowMainMenu();
             gameOver = true;
         }
 
         if (scene.buildIndex == 1) //Level 1
         {
+            isMainMenu = false;
+            MainMenuUIManager.Instance.HideMainMenu();
 			UIManager.Instance.HidePauseMenu();
 			UIManager.Instance.HideGameOverMenu();
 			UIManager.Instance.HideWinMenu();
