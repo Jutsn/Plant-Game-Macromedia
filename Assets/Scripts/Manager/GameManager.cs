@@ -79,11 +79,9 @@ public class GameManager : MonoBehaviour
         {
             isMainMenu = false;
             MainMenuUIManager.Instance.HideMainMenu();
-			UIManager.Instance.HidePauseMenu();
+            UnpauseGame();
 			UIManager.Instance.HideGameOverMenu();
 			UIManager.Instance.HideWinMenu();
-			isMainMenu = false;
-            MainMenuUIManager.Instance.mainMenuPanel.SetActive(false);
             gameOver = false;
             waveActive = true;
             spawnManagerScript = FindAnyObjectByType<SpawnManager>();
@@ -91,7 +89,8 @@ public class GameManager : MonoBehaviour
         }
 		if (scene.buildIndex == 2) //Level 1
 		{
-			UIManager.Instance.HidePauseMenu();
+			MainMenuUIManager.Instance.HideMainMenu();
+			UnpauseGame();
 			UIManager.Instance.HideGameOverMenu();
 			UIManager.Instance.HideWinMenu();
 			isMainMenu = false;
