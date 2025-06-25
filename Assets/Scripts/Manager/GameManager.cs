@@ -56,10 +56,9 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        UIManager.Instance.HidePauseMenu();
-        UIManager.Instance.HideGameOverMenu();
+        
+        
         MainMenuUIManager.Instance.HideUpgradeUI();
-        UIManager.Instance.HideWinMenu();
         pauseMenu = false;
         skillMenu = false;
         wonGame = false;
@@ -78,7 +77,10 @@ public class GameManager : MonoBehaviour
 
         if (scene.buildIndex == 1) //Level 1
         {
-            isMainMenu = false;
+			UIManager.Instance.HidePauseMenu();
+			UIManager.Instance.HideGameOverMenu();
+			UIManager.Instance.HideWinMenu();
+			isMainMenu = false;
             MainMenuUIManager.Instance.mainMenuPanel.SetActive(false);
             gameOver = false;
             waveActive = true;
@@ -87,6 +89,9 @@ public class GameManager : MonoBehaviour
         }
 		if (scene.buildIndex == 2) //Level 1
 		{
+			UIManager.Instance.HidePauseMenu();
+			UIManager.Instance.HideGameOverMenu();
+			UIManager.Instance.HideWinMenu();
 			isMainMenu = false;
 			gameOver = false;
 			waveActive = true;

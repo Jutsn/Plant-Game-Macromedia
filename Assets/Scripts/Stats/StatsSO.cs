@@ -66,4 +66,8 @@ public class StatsSO : ScriptableObject
     public float tankFillRateInSeconds;
 	public float fireRate;
 	public int damage = 1;
+
+	[Header("WeaponStats")]
+	public bool shotgunUnlocked;
+	public bool beamUnlocked;
 }

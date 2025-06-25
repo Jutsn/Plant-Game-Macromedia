@@ -330,6 +330,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6915519401504916153, guid: 67f716418f7ba2146a845739c7782755, type: 3}
+      propertyPath: baseStats
+      value: 
+      objectReference: {fileID: 11400000, guid: d93ae459512da654babdbacace04991e, type: 2}
+    - target: {fileID: 6915519401504916153, guid: 67f716418f7ba2146a845739c7782755, type: 3}
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 682109228024716192}

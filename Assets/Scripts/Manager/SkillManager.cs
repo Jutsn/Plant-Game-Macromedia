@@ -107,8 +107,20 @@ public class SkillManager : MonoBehaviour
             case "JetPackFlight":
                 StatsManager.Instance.baseStats.flyingIsUnlocked = true;
                 break;
-            case "JetPackWaterLoss":
+            case "JetPackWaterLoss1":
+                StatsManager.Instance.baseStats.waterConsumptionFlying = 3;
+                break;
+            case "JetPackWaterLoss2":
+                StatsManager.Instance.baseStats.waterConsumptionFlying = 2;
+                break;
+            case "JetPackWaterLoss3":
                 StatsManager.Instance.baseStats.waterConsumptionFlying = 1;
+                break;
+            case "ShotgunUnlock":
+                StatsManager.Instance.baseStats.shotgunUnlocked = true;
+                break;
+            case "BeamUnlock":
+                StatsManager.Instance.baseStats.beamUnlocked = true;
                 break;
 
             default:

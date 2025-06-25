@@ -5,6 +5,8 @@ public class WeaponBehaviour : MonoBehaviour
 {
     public StandardWeaponMode standardWeaponMode;
 
+	public StatsSO baseStats;
+
 	public Transform firePoint; // Punkt, von dem der Strahl ausgeht
 	public ParticleSystem beamParticles; // Das Partikel-System
 	public GameObject muzzle;
@@ -27,8 +29,6 @@ public class WeaponBehaviour : MonoBehaviour
 	private bool ARFireReady;
 	float arTimer = 0;
 	
-	
-
 	private void Start()
 	{
 		standardWeaponMode = StandardWeaponMode.automaticRifle;
@@ -195,17 +195,20 @@ public class WeaponBehaviour : MonoBehaviour
 		{
 			beamParticles.Stop();
 			animator.SetTrigger("isSwitchingWeapon");
-			standardWeaponMode = StandardWeaponMode.shotgun;
+			standardWeaponMode = StandardWeaponMode.automaticRifle;
 		}
 		else if (standardWeaponMode == StandardWeaponMode.shotgun) //Wechsel zur AR
 		{
 			animator.SetTrigger("isSwitchingWeapon");
-			standardWeaponMode = StandardWeaponMode.automaticRifle;
+			if (!baseStats.beamUnlocked)
+				standardWeaponMode = StandardWeaponMode.automaticRifle;
+			else if (baseStats.beamUnlocked)
+				standardWeaponMode = StandardWeaponMode.beam;
 		}
-		else if (standardWeaponMode == StandardWeaponMode.automaticRifle) //Wechsel zum Beam
+		else if (standardWeaponMode == StandardWeaponMode.automaticRifle && baseStats.shotgunUnlocked) //Wechsel zum Beam
 		{
 			animator.SetTrigger("isSwitchingWeapon");
-			standardWeaponMode = StandardWeaponMode.beam;
+			standardWeaponMode = StandardWeaponMode.shotgun;
 		}
 	}
 }

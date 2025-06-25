@@ -42,13 +42,13 @@ MonoBehaviour:
   dashForce: 12
   timeUntilSpeedControlGetsActivatedAgain: 0.1
   waterConsumptionDash: 2
-  jumpCount: 5
+  jumpCount: 1
   extraJumpForce: 18
   waterConsumptionExtraJump: 2
-  flyingIsUnlocked: 1
+  flyingIsUnlocked: 0
   timeUntilFlyingAfterJump: 1.5
   jetpackFlyForce: 3
-  waterConsumptionFlying: 1
+  waterConsumptionFlying: 4
   waterConsumptionFlyingIntervallInSeconds: 0.5
   interactionRange: 10
   playerTankMaxWaterLevel: 200
@@ -57,3 +57,5 @@ MonoBehaviour:
   tankFillRateInSeconds: 0.5
   fireRate: 0
   damage: 1
+  shotgunUnlocked: 0
+  beamUnlocked: 0
