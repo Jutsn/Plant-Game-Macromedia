@@ -1,10 +1,6 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 
 public class PlayerMovement : MonoBehaviour
 {

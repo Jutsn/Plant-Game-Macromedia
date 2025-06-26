@@ -119,6 +119,23 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &153079387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1947984832679087487, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+  m_PrefabInstance: {fileID: 1474106298597452424}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &153079392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153079387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a13ff10dfd85a47ad7e62456f3148d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &209811189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -574,17 +591,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &2111512551 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8533955126564023129, guid: 5ae36b8ed2b24e448bdcb41f81d55a9d, type: 3}
-  m_PrefabInstance: {fileID: 255838398}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd521d9bdaca3b346a4a6f6621da509f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1474106298597452424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -648,7 +654,15 @@ PrefabInstance:
     - target: {fileID: 5646824401290978153, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2111512551}
+      objectReference: {fileID: 153079392}
+    - target: {fileID: 5646824401290978153, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5646824401290978153, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ExitGame, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8479667275005439987, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -656,7 +670,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1947984832679087487, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 153079392}
   m_SourcePrefab: {fileID: 100100000, guid: f967728cc0ec5f547915b9bc09fc5736, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

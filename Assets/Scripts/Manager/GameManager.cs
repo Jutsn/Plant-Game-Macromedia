@@ -1,7 +1,5 @@
-using NUnit.Framework.Internal;
 using System;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
