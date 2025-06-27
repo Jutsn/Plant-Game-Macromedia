@@ -16,13 +16,13 @@ MonoBehaviour:
   health: 50
   plantMaxWater: 50
   plantWater: 50
-  waterLoss: 1
+  waterLoss: 2
   waterLossRate: 1
   noWaterDamage: 1
-  poisonDamage: 2
+  poisonDamage: 1
   passiveHealthLossRate: 1
-  healthRegen: 1
-  healthRegenRate: 20
+  healthRegen: 3
+  healthRegenRate: 3
   automDetoxUnlocked: 0
   secondsUntilAutomaticDetoxification: 3
   moveSpeed: 9
@@ -42,10 +42,10 @@ MonoBehaviour:
   dashForce: 12
   timeUntilSpeedControlGetsActivatedAgain: 0.1
   waterConsumptionDash: 2
-  jumpCount: 2
+  jumpCount: 1
   extraJumpForce: 18
   waterConsumptionExtraJump: 2
-  flyingIsUnlocked: 1
+  flyingIsUnlocked: 0
   timeUntilFlyingAfterJump: 1.5
   jetpackFlyForce: 3
   waterConsumptionFlying: 4
@@ -57,5 +57,5 @@ MonoBehaviour:
   tankFillRateInSeconds: 0.2
   fireRate: 0
   damage: 1
-  shotgunUnlocked: 1
+  shotgunUnlocked: 0
   beamUnlocked: 0

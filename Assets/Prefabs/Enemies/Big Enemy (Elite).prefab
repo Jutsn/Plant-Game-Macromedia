@@ -162,7 +162,7 @@ MonoBehaviour:
   deathSmokeDuration: 2
   enemyAnimator: {fileID: 4988859866203254409}
   damageOnPlant: 4
-  health: 20
+  health: 30
 --- !u!195 &3367466754393868297
 NavMeshAgent:
   m_ObjectHideFlags: 0

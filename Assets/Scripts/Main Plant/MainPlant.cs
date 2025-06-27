@@ -131,7 +131,7 @@ public class MainPlant : MonoBehaviour
     {
 		while (!GameManager.Instance.gameOver) // Wiederhole, solange Spiel nicht GameOver ist
 		{
-			if (plantWater > plantMaxHealth / 100 * 75 && health < plantMaxHealth) //Wenn Wasser vorhanden und maxHealth nicht �berschritten
+			if (plantWater > plantMaxHealth / 100 * 50 && health < plantMaxHealth) //Wenn Wasser vorhanden und maxHealth nicht �berschritten
 			{
 				health += healthRegen; // Heile Leben
 				StatsManager.Instance.SetHealth(health);
