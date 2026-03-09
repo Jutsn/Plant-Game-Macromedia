@@ -7,9 +7,9 @@ With the exception of some environmental assets, all game systems, models, and a
 
 ## My Role
 
-Project Manager
-Lead Programmer
-Gameplay Programmer
+Project Manager   
+Lead Programmer   
+Gameplay Programmer   
 Game and Level Designer
 
 ## Features
