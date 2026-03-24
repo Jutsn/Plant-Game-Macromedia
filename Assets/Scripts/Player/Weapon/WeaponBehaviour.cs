@@ -32,7 +32,6 @@ public class WeaponBehaviour : MonoBehaviour
 	private void Start()
 	{
 		standardWeaponMode = StandardWeaponMode.automaticRifle;
-		
 	}
 	void Update()
 	{
@@ -69,11 +68,9 @@ public class WeaponBehaviour : MonoBehaviour
 		}
 		if (isFiringAR)
 		{
-			
-			ARTimer(); //Cooldown between bullets while holding
-			ShootAR(); //Shoot AR
+			ARTimer(); 
+			ShootAR(); 
 		}
-		
 	}
 	
 
@@ -102,9 +99,9 @@ public class WeaponBehaviour : MonoBehaviour
 			WaterTank.Instance.UseTankWater(waterConsumption);
 			yield return new WaitForSeconds(cooldownTimeAR);
 		}
-		
 	}
 
+	// Shoot 5 bullets with slight offset and trigger VFX
 	IEnumerator ShootShotgun()
 	{
 		animator.SetTrigger("isShooting");
@@ -157,15 +154,16 @@ public class WeaponBehaviour : MonoBehaviour
 		ps4.gameObject.SetActive(true);
 		ps4.Play();
 	}
+	//Start the ShootARBullet Coroutine only when there is firing cooldown
 	private void ShootAR()
 	{
-		
 		if (ARFireReady)
 		{
 			StartCoroutine(ShootARBullet());
 			ARFireReady = false;
 		}
 	}
+	//Cooldown between bullets while holding fire
 	private void ARTimer()
 	{
 		arTimer += Time.deltaTime;
@@ -176,12 +174,14 @@ public class WeaponBehaviour : MonoBehaviour
 			ARFireReady = true;
 		}
 	}
+	
+	//Instantiate 1 Bullet and trigger VFX
 	IEnumerator ShootARBullet()
 	{
 		animator.SetTrigger("isShooting");
 		yield return new WaitForSeconds(0.1f);
 		ParticleSystem ps5 = WaterBulletParticlePool.Instance.GetPooledARBullet(); //1.Kugel
-																				   // Richte das Partikelsystem in die Richtung des Treffers aus
+		// Richte das Partikelsystem in die Richtung des Treffers aus
 		ps5.transform.position = muzzle.transform.position;
 		ps5.transform.forward = muzzle.transform.forward;
 		// Partikel aktivieren
