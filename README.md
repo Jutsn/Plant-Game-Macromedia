@@ -15,6 +15,9 @@ This project is a small 3D Unity prototype where the player fights waves of enem
 - Roguelite Skill-Tree System
 - Roguelite Resource System
 
+## Documentation
+[GDD with TDD](https://github.com/Jutsn/Plant-Game-Macromedia/blob/main/Documentation/GDD%20Terraplantation.pdf)
+
 ## Git Strategy 
 
 - **Branching Model**
